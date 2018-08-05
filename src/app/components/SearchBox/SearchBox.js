@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 export default class SearchBox extends React.Component {
   render() {
-    const { searchText, subDocType, fullTextChecked, handleSearchClick, searchIn, docType } = this.props
+    const { searchText, subDocType, fullTextChecked, handleSearchClick, searchIn, docType } = this.props;
     
     return (
       <form
@@ -52,7 +52,7 @@ export default class SearchBox extends React.Component {
           
               <label htmlFor='docType'>
                 Doc Type:
-                <select id='docType' defaultValue={docType}>
+                <select id='docType' defa={docType}>
                   <option>A</option>
                   <option>B</option>
                 </select>
@@ -66,7 +66,7 @@ export default class SearchBox extends React.Component {
                   }
                 )}>
                 Subdoc type:
-                <select id='subDocType' defaultValue={subDocType}>
+                <select id='subDocType' value={subDocType}>
                   <option>A</option>
                   <option>B</option>
                 </select>
@@ -86,6 +86,6 @@ SearchBox.propTypes = {
   fullTextChecked: PropTypes.bool,
   searchIn: PropTypes.string.isRequired,
   docType: PropTypes.string.isRequired,
-  subDocType: PropTypes.string.isRequired,
+  subDocType: PropTypes.string.isRequired
   
 }

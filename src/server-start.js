@@ -8,6 +8,10 @@ import { isEnv } from 'app/utils'
 import { ROOT, SERVER, SOCKETS, STATIC } from 'config/paths'
 import { isomorphicTools, isomorphicPlugin } from 'server/isomorphic-tools'
 import app from 'server-instance'
+import bodyparser from 'koa-bodyparser'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const log = debug('app')
 
@@ -17,6 +21,8 @@ if (isEnv('development')) {
 } else {
   app.use(serve(STATIC))
 }
+
+app.use(bodyparser())
 
 isomorphicTools.server(ROOT, async () => {
   if (isEnv('development')) {

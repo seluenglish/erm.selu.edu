@@ -16,6 +16,18 @@ export function setApiRoutes() {
     .get('bar', '/bar', (ctx) => {
       ctx.response.body = { bar: [ 'lorem', 'ipsum', 'dolor', 'sit', 'amet' ] }
     })
+    .post('update_db', '/update_db', (ctx) => {
+      const password = ctx.request.body.password;
+      
+      const realPassword = process.env.DB_UPDATE_PASSWORD
+      
+      if (password === realPassword) {
+        ctx.response.body = { success: true }
+      } else {
+        ctx.response.status = 401
+        ctx.response.body = { error: 1, message: 'Wrong password!' }
+      }
+    })
     .all('not-found', '*', (ctx) => {
       ctx.response.status = 404
       ctx.response.body = { error: STATUS_CODES[ctx.response.status] }
