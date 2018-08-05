@@ -22,6 +22,13 @@ const LoadableHomeRoute = Loadable({
   modules: [ '../../routes/HomeRoute/HomeRoute' ],
 })
 
+const LoadableSearchRoute = Loadable({
+  loader: () => import('../../routes/SearchRoute/SearchRoute'),
+  loading: Loading,
+  webpack: () => [ require.resolveWeak('../../routes/SearchRoute/SearchRoute') ],
+  modules: [ '../../routes/SearchRoute/SearchRoute' ],
+})
+
 const LoadableBarRoute = Loadable({
   loader: () => import('../../routes/BarRoute/BarRoute'),
   loading: Loading,
@@ -71,6 +78,11 @@ class App extends React.Component {
               exact
               path='/'
               component={LoadableHomeRoute}
+            />
+            <Route
+              exact
+              path='/search'
+              component={LoadableSearchRoute}
             />
             <Route
               path='/bar'

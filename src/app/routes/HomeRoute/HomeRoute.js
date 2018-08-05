@@ -1,7 +1,14 @@
 import DocumentMeta from 'react-helmet'
 import { hot } from 'react-hot-loader'
+import { replace } from 'react-router-redux'
+import { connect } from 'react-redux'
 
+@connect(null, {replace})
 class HomeRoute extends React.Component {
+  constructor(props) {
+    props.replace('/search')
+    super(props)
+  }
   render() {
     return (
       <section className='HomeRoute'>
