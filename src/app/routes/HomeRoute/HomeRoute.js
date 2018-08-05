@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader'
 import { replace } from 'react-router-redux'
 import { connect } from 'react-redux'
 
-@connect(null, {replace})
+@connect(null, { replace })
 class HomeRoute extends React.Component {
   constructor(props) {
     props.replace('/search')

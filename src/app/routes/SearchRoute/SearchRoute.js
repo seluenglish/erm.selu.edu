@@ -1,5 +1,5 @@
 import DocumentMeta from 'react-helmet'
-import {hot} from 'react-hot-loader'
+import { hot } from 'react-hot-loader'
 
 class SearchRoute extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class SearchRoute extends React.Component {
     return (
       <section className='SearchRoute'>
         <DocumentMeta>
-          <title/>
+          <title />
         </DocumentMeta>
         Searching...
 
@@ -29,11 +29,12 @@ class SearchRoute extends React.Component {
                   <input
                     type='checkbox'
                     name='fullText'
-                    id='fullTextCheckbox' />
+                    id='fullTextCheckbox'
+                  />
                   Search full text of documents</label>
               </div>
               <div className='secondBox'>
-                <button>Search</button>
+                <button type='button'>Search</button>
               </div>
               <div className='thirdBox'>
                 <label htmlFor='searchIn'>
