@@ -6,6 +6,7 @@ import { app as appCopy } from 'app/copy'
 import HeadNavigation from 'app/components/HeadNavigation/HeadNavigation'
 import FlashMessages from 'app/components/@FlashMessages/FlashMessages'
 import PrivateRoute from 'app/routes/PrivateRoute/PrivateRoute'
+import UpdateDbRoute from 'app/routes/UpdateDbRoute/UpdateDbRoute'
 import avatarPath from 'assets/avatar.jpeg'
 import style from './App.module.scss'
 
@@ -94,6 +95,10 @@ class App extends React.Component {
             <Route
               path='/private'
               component={PrivateRoute}
+            />
+            <Route
+              path={'/update_db'}
+              component={UpdateDbRoute}
             />
             <Route
               component={LoadableNotFoundRoute}

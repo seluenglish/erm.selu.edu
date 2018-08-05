@@ -28,6 +28,10 @@ exports[`App Component Main renders routes inside Main 1`] = `
     />
     <Route
       component={[Function]}
+      path="/update_db"
+    />
+    <Route
+      component={[Function]}
     />
   </Switch>
 </main>
