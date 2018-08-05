@@ -12,6 +12,10 @@ exports[`App Component Main renders routes inside Main 1`] = `
     />
     <Route
       component={[Function]}
+      path="/search"
+    />
+    <Route
+      component={[Function]}
       path="/bar"
     />
     <Route

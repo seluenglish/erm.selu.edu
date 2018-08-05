@@ -26,5 +26,6 @@ describe(`Client Render`, function () {
     expect(this.wrapper.find('.NotFoundRoute')).not.to.be.present()
     expect(this.wrapper.find('.BarRoute')).not.to.be.present()
     expect(this.wrapper.find('.PrivateRoute')).not.to.be.present()
+    expect(this.wrapper.find('.SearchRoute')).not.to.be.present()
   })
 })

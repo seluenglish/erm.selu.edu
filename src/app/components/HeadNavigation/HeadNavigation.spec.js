@@ -30,8 +30,7 @@ describe(`Head Navigation Component`, function () {
   describe(`NavLinks`, () => {
     const links = [
       { to: '/', content: 'Home', exact: true },
-      { to: '/bar', content: 'Bar' },
-      { to: '/private', content: 'Private' },
+      { to: '/search', content: 'Search', exact: false},
     ]
 
     it(`only renders the necessary links`, () => {

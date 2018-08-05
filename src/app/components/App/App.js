@@ -80,7 +80,6 @@ class App extends React.Component {
               component={LoadableHomeRoute}
             />
             <Route
-              exact
               path='/search'
               component={LoadableSearchRoute}
             />
