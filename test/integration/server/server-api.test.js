@@ -46,7 +46,7 @@ describe(`Server API`, function () {
         .expect(404)
     })
     
-    it(`allows logging in using .env password`, () => {
+    it(`allows login using .env password`, () => {
       dotenv.config()
       
       supertest(app.callback())
