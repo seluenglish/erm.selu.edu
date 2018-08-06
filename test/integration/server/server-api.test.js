@@ -29,8 +29,6 @@ describe(`Server API`, function () {
   )
   
   describe('/update_db', () => {
-    
-  
     it(`do not allow get`, () => {
       supertest(app.callback())
         .get('/api/update_db')

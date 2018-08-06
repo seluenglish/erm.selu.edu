@@ -17,7 +17,7 @@ export function setApiRoutes() {
       ctx.response.body = { bar: [ 'lorem', 'ipsum', 'dolor', 'sit', 'amet' ] }
     })
     .post('update_db', '/update_db', (ctx) => {
-      const password = ctx.request.body.password;
+      const password = ctx.request.body.password
       
       const realPassword = process.env.DB_UPDATE_PASSWORD
       

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 export default class SearchBox extends React.Component {
   render() {
-    const { searchText, subDocType, fullTextChecked, handleSearchClick, searchIn, docType } = this.props;
+    const { searchText, subDocType, fullTextChecked, handleSearchClick, searchIn, docType } = this.props
     
     return (
       <form
@@ -86,6 +86,6 @@ SearchBox.propTypes = {
   fullTextChecked: PropTypes.bool,
   searchIn: PropTypes.string.isRequired,
   docType: PropTypes.string.isRequired,
-  subDocType: PropTypes.string.isRequired
+  subDocType: PropTypes.string.isRequired,
   
 }
