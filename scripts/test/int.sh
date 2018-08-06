@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-mocha \
+mocha --exit \
   'test/integration/**/*.test.js' $@

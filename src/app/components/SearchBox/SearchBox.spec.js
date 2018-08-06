@@ -5,7 +5,13 @@ describe(`Search Box Component`, function () {
   const shallowSB = props => shallow(<SearchBox {...props} />)
   
   beforeEach(() => {
-    this.wrapper = shallowSB()
+    this.wrapper = shallowSB({
+      handleSearchClick: () => {},
+      searchText: '',
+      searchIn: '',
+      docType: '',
+      subDocType: '',
+    })
   })
   
   it(`has class as className`, () => {

@@ -9,13 +9,22 @@ export default class UpdateDbForm extends React.Component {
     this.state = {
       password: '',
     }
+    
+    this.handlePasswordChange = this.handlePasswordChange.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
   
-  formSubmit() {
+  handleFormSubmit() {
     const { handleClick } = this.props
     const { password } = this.state
     
     return handleClick(password)
+  }
+  
+  handlePasswordChange({ target }) {
+    this.setState({
+      password: target.value,
+    })
   }
   
   render() {
@@ -30,14 +39,14 @@ export default class UpdateDbForm extends React.Component {
             <input
               type={'password'}
               name={'password'}
-              id={'searchText'}
+              id={'password'}
               value={password}
-              onChange={(evt) => this.setState({ password: evt.target.value })}
+              onChange={this.handlePasswordChange}
               placeholder={'Enter password...'}
             />
             <button
               type='button'
-              onClick={this.formSubmit.bind(this)}
+              onClick={this.handleFormSubmit}
               className={cx(
                 {
                   btn: true,
