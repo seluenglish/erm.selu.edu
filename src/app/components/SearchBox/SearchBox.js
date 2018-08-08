@@ -1,8 +1,31 @@
 import cx from 'classnames'
 import styles from './SearchBox.module.scss'
 import PropTypes from 'prop-types'
+import { FILE_TYPES } from 'helpers/document-helpers'
 
 export default class SearchBox extends React.Component {
+  constructor(props) {
+    super(props)
+    
+    this.state = {
+      fileTypes: ['witness', 'manuscript', 'gloss'],
+    }
+    
+  }
+  
+  getSubDocumentTypes() {
+  
+  }
+  
+  /**
+   *
+   * @param item: String
+   */
+  name(item) {
+    let ret = item.replace('_', ' ')
+    return ret
+  }
+  
   render() {
     const { searchText, subDocType, fullTextChecked, handleSearchClick, searchIn, docType } = this.props
     
@@ -45,14 +68,15 @@ export default class SearchBox extends React.Component {
               <label htmlFor='searchIn'>
                 Search in:
                 <select id='searchIn' defaultValue={searchIn}>
-                  <option>A</option>
-                  <option>B</option>
+                  {FILE_TYPES.map((type, i) => (
+                    <option value={type} key={i}>{ type }</option>
+                  ))}
                 </select>
               </label>
           
               <label htmlFor='docType'>
                 Doc Type:
-                <select id='docType' defa={docType}>
+                <select id='docType' defaultValue={docType}>
                   <option>A</option>
                   <option>B</option>
                 </select>
@@ -66,7 +90,7 @@ export default class SearchBox extends React.Component {
                   }
                 )}>
                 Subdoc type:
-                <select id='subDocType' value={subDocType}>
+                <select id='subDocType' defaultValue={subDocType}>
                   <option>A</option>
                   <option>B</option>
                 </select>

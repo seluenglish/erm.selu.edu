@@ -10,8 +10,11 @@ import { isomorphicTools, isomorphicPlugin } from 'server/isomorphic-tools'
 import app from 'server-instance'
 import bodyparser from 'koa-bodyparser'
 import dotenv from 'dotenv'
+import { DB_CONN_STRING } from './server/config'
+import mongoose from 'mongoose'
 
 dotenv.config()
+mongoose.connect(DB_CONN_STRING)
 
 const log = debug('app')
 

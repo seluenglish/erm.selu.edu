@@ -8,3 +8,27 @@ body {
   color: $body-colour;
   font-family: Arial;
 }
+
+.SearchItem{
+  background: #eee;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  margin: 16px;
+
+  .title>strong {
+    font-weight: bold;
+    font-size: 18px;
+    color: #609;
+  }
+
+  .docTypeContainer{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .text{
+    font-style: italic;
+  }
+}
