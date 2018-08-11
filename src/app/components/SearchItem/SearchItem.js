@@ -1,13 +1,11 @@
 import cx from 'classnames'
 import styles from './SearchItem.module.scss'
 import PropTypes from 'prop-types'
-import Document from "models/document"
+import Document from 'models/document'
 
 export default class SearchItem extends React.Component {
   render() {
-    const {document} = this.props
-    
-    console.log(styles);
+    const { document } = this.props
     
     return (
       <div className={cx('SearchItem', styles.SearchItem)}>
@@ -33,6 +31,6 @@ export default class SearchItem extends React.Component {
 }
 
 SearchItem.propTypes = {
-  document: PropTypes.instanceOf(Document)
+  document: PropTypes.object.isRequired
   
 }

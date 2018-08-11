@@ -18,6 +18,12 @@ export function setApiRoutes() {
       ctx.response.body = { bar: [ 'lorem', 'ipsum', 'dolor', 'sit', 'amet' ] }
     })
     .post('update_db', '/update_db', update_db)
+    .get('docTypes', '/docTypes', (ctx) => {
+      ctx.response.body = ['a', 'b', 'c']
+    })
+    .get('subDocTypes', '/subDocTypes', (ctx) => {
+      ctx.response.body = ['d', 'e', 'f']
+    })
     .all('not-found', '*', (ctx) => {
       ctx.response.status = 404
       ctx.response.body = { error: STATUS_CODES[ctx.response.status] }
