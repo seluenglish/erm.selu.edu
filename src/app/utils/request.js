@@ -1,15 +1,17 @@
 import 'isomorphic-fetch'
 import debug from 'debug'
+import ResponseError from 'helpers/response-error'
 
 const log = debug('utils.request')
 
 export const fetch = async (endpoint, options) => {
   log('requesting', endpoint)
   const response = await (global || window).fetch(endpoint, options)
-  log('respsonse', { endpoint, status: response.status })
+  log('response', { endpoint, status: response.status })
 
   if (response.status >= 400) {
-    throw new Error(`Response error: ${endpoint}`)
+    const json = await response.json()
+    throw new ResponseError(response, json, endpoint)
   }
 
   if (response.headers.has('content-length')

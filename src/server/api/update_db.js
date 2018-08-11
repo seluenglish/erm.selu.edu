@@ -1,21 +1,31 @@
-import { Document } from 'server/database/models'
+// import { Document } from 'server/database/models'
+import uuid from 'uuid'
+
+const registeredTokens = []
 
 export default function (ctx) {
   const password = ctx.request.body.password
   
   const realPassword = process.env.DB_UPDATE_PASSWORD
   
-  if (password === realPassword) {
-    ctx.response.body = {success: true}
-  } else {
+  if (password !== realPassword) {
     ctx.response.status = 401
-    ctx.response.body = {error: 1, message: 'Wrong password!'}
-    return
+    ctx.response.body = { error: 1, message: 'Wrong password!' }
   }
   
-  // const doc1 = new Document({
-  //   fileName: 'abcd.xml',
-  // })
-  //
-  // doc1.save().then(() => {console.log('document 1 saved')})
+  const token = uuid.v1()
+  
+  registeredTokens.push(token)
+  
+  // console.log(io.socket.clients())
+  // console.log(global.socketServer.clients.forEach(client => {
+    // client.dispatch({})
+    // console.log(client)
+  // }))
+  // global.socketServer.dispatch({type: 'hello'})
+  
+  const ret = {
+    token,
+  }
+  ctx.response.body = ret
 }

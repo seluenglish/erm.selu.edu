@@ -1,6 +1,6 @@
 import { PENDING, REJECTED, FULFILLED } from 'redux-promise-middleware'
 import { typeToReducer, get } from 'app/utils'
-import { API_FETCH_SUB_DOC_TYPES, API_FETCH_DOC_TYPES } from './search.constants'
+import { API_FETCH_SUB_DOC_TYPES, API_FETCH_DOC_TYPES, API_UPDATE_DB_AUTENTICATE } from './search.constants'
 import Document from 'models/document'
 
 const getDocTypes = get('payload')
@@ -25,6 +25,7 @@ const initialState = {
       new Document,
       new Document,
     ],
+    
   },
 }
 

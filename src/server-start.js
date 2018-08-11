@@ -4,7 +4,7 @@ import 'helpers/clean-asset-json'
 import http from 'http'
 import serve from 'koa-static'
 import hotReload from 'helpers/hot-reload'
-import { isEnv } from 'app/utils'
+import { isEnv, isBrowser } from 'app/utils'
 import { ROOT, SERVER, SOCKETS, STATIC } from 'config/paths'
 import { isomorphicTools, isomorphicPlugin } from 'server/isomorphic-tools'
 import app from 'server-instance'
@@ -13,8 +13,10 @@ import dotenv from 'dotenv'
 import { DB_CONN_STRING } from './server/config'
 import mongoose from 'mongoose'
 
-dotenv.config()
-mongoose.connect(DB_CONN_STRING)
+if (!isBrowser) {
+  dotenv.config()
+  mongoose.connect(DB_CONN_STRING)
+}
 
 const log = debug('app')
 

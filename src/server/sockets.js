@@ -13,12 +13,16 @@ export default function sockets(server) {
     {},
     [ ...middleware, outServerViaSocketIO(socketServer) ],
   )
-
+  
   socketServer.on('connection', socket => {
     log('New connection made with id', socket.id)
     socket.on('disconnect', () => {
       log('Disconnected', socket.id)
     })
+    socket.on('data', (d) => {
+      console.log('got data', d)
+    })
+    
   })
 
   inServerViaSocketIO(socketServer, (action, socket) => {

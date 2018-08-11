@@ -12,72 +12,75 @@ function itemName(item) {
   return ret
 }
 
-const InnerForm = (props) => {
-  const { fullTextChecked} = props.values
-  const { handleSubmit} = props
+class InnerForm extends React.Component{
+  render() {
   
-  return (
-    <Form className='SearchBox' style={styles}>
-      <fieldset>
-        <legend>Advanced Search</legend>
-        <div className='searchFields'>
-          <div className={'firstBox'}>
-            <Field type='text' name='searchText' />
-            <label htmlFor='fullTextChecked'>
-              <Field
-                type='checkbox'
-                name='fullTextChecked'
-                checked={fullTextChecked}
-              />
-              Search full text of documents</label>
-          </div>
-          <div className='secondBox'>
-            <button
-              type='submit'
-              className={cx(
-                {
-                  btn: true
-                }
-              )}>Search
-            </button>
-          </div>
-          <div className='thirdBox'>
-            <label htmlFor='searchIn'>
-              Search in:
-              <Field component='select' name='searchIn'>
-                {FILE_TYPES.map((type, i) => (
-                  <option value={type} key={i}>{type}</option>
-                ))}
-              </Field>
-            </label>
+    const {fullTextChecked} = this.props.values
+    const {handleSubmit} = this.props
+  
+    return (
+      <Form className='SearchBox' style={styles}>
+        <fieldset>
+          <legend>Advanced Search</legend>
+          <div className='searchFields'>
+            <div className={'firstBox'}>
+              <Field type='text' name='searchText' />
+              <label htmlFor='fullTextChecked'>
+                <Field
+                  type='checkbox'
+                  name='fullTextChecked'
+                  checked={fullTextChecked}
+                />
+                Search full text of documents</label>
+            </div>
+            <div className='secondBox'>
+              <button
+                type='submit'
+                className={cx(
+                  {
+                    btn: true
+                  }
+                )}>Search
+              </button>
+            </div>
+            <div className='thirdBox'>
+              <label htmlFor='searchIn'>
+                Search in:
+                <Field component='select' name='searchIn'>
+                  {FILE_TYPES.map((type, i) => (
+                    <option value={type} key={i}>{type}</option>
+                  ))}
+                </Field>
+              </label>
             
-            <label htmlFor='docType'>
-              Doc Type:
-              <Field component='select' name='docType'>
-                <option>A</option>
-                <option>B</option>
-              </Field>
-            </label>
+              <label htmlFor='docType'>
+                Doc Type:
+                <Field component='select' name='docType'>
+                  <option>A</option>
+                  <option>B</option>
+                </Field>
+              </label>
             
-            <label
-              htmlFor='subDocType'
-              className={cx(
-                {
-                  hidden: true
-                }
-              )}>
-              Subdoc type:
-              <Field component='select' name='subDocType'>
-                <option>A</option>
-                <option>B</option>
-              </Field>
-            </label>
+              <label
+                htmlFor='subDocType'
+                className={cx(
+                  {
+                    hidden: true
+                  }
+                )}>
+                Subdoc type:
+                <Field component='select' name='subDocType'>
+                  <option>A</option>
+                  <option>B</option>
+                </Field>
+              </label>
+            </div>
           </div>
-        </div>
-      </fieldset>
+        </fieldset>
     
-    </Form>
-  )
+      </Form>
+    )
+  }
 }
 
 
@@ -98,7 +101,6 @@ export default class SearchBox extends React.Component {
         initialValues={searchParams}
         render={InnerForm}
         onSubmit={handleSearchClick}
-        searchText='batman'
       />
     )
   }

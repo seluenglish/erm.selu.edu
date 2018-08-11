@@ -1,64 +1,45 @@
 import cx from 'classnames'
 import styles from './UpdateDbForm.scss'
 import PropTypes from 'prop-types'
+import {Formik, Field, Form} from 'formik'
 
+const InnerForm = (props) => {
+  return (<Form
+    className='UpdateDbForm'
+    style={styles}>
+    <fieldset>
+      <legend>Update Database</legend>
+      <div className='searchFields'>
+        <Field
+          type='password'
+          name='password'
+          placeholder='Enter password...'
+        />
+        <button
+          type='submit'
+          className={cx(
+            {
+              btn: true,
+            }
+          )}>Update
+        </button>
+      </div>
+    </fieldset>
+  
+  </Form>)
+}
 export default class UpdateDbForm extends React.Component {
-  constructor(...args) {
-    super(...args)
-    
-    this.state = {
-      password: '',
-    }
-    
-    this.handlePasswordChange = this.handlePasswordChange.bind(this)
-    this.handleFormSubmit = this.handleFormSubmit.bind(this)
-  }
-  
-  handleFormSubmit() {
-    const { handleClick } = this.props
-    const { password } = this.state
-    
-    return handleClick(password)
-  }
-  
-  handlePasswordChange({ target }) {
-    this.setState({
-      password: target.value,
-    })
-  }
-  
   render() {
-    const { password } = this.state
+    const {handleClick} = this.props
     return (
-      <form
-        className='UpdateDbForm'
-        style={styles}>
-        <fieldset>
-          <legend>Update Database</legend>
-          <div className='searchFields'>
-            <input
-              type={'password'}
-              name={'password'}
-              id={'password'}
-              value={password}
-              onChange={this.handlePasswordChange}
-              placeholder={'Enter password...'}
-            />
-            <button
-              type='button'
-              onClick={this.handleFormSubmit}
-              className={cx(
-                {
-                  btn: true,
-                }
-              )}>Update
-            </button>
-          </div>
-        </fieldset>
-      
-      </form>
+      <Formik
+        initialValues={{password: ''}}
+        render={InnerForm}
+        onSubmit={handleClick}
+      />
     )
   }
+  
 }
 
 UpdateDbForm.propTypes = {
