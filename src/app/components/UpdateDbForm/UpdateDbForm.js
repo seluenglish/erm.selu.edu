@@ -2,6 +2,7 @@ import cx from 'classnames'
 import styles from './UpdateDbForm.scss'
 import PropTypes from 'prop-types'
 import {Formik, Field, Form} from 'formik'
+import {hot} from 'react-hot-loader'
 
 const InnerForm = (props) => {
   return (<Form
@@ -28,7 +29,7 @@ const InnerForm = (props) => {
   
   </Form>)
 }
-export default class UpdateDbForm extends React.Component {
+export class UpdateDbForm extends React.Component {
   render() {
     const {handleClick} = this.props
     return (
@@ -45,3 +46,5 @@ export default class UpdateDbForm extends React.Component {
 UpdateDbForm.propTypes = {
   handleClick: PropTypes.func.isRequired,
 }
+
+export default hot(module)(UpdateDbForm)

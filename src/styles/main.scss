@@ -3,10 +3,20 @@
 @import '~tao-scss/index';
 
 $body-colour: #444;
+$link-active-color: #06c;
+$link-color: #036;
+$side-nav-width: 170px;
+$font-size: 13px;
 
 body {
   color: $body-colour;
-  font-family: Arial;
+  font-family: Andron, Arial, sans-serif;
+  font-size: $font-size;
+
+  a {
+    text-decoration-color: #aaaaaa;
+    text-decoration-style: dotted;
+  }
 }
 
 .SearchItem{
@@ -18,7 +28,7 @@ body {
 
   .title>strong {
     font-weight: bold;
-    font-size: 18px;
+    font-size: large;
     color: #609;
   }
 
@@ -31,4 +41,74 @@ body {
   .text{
     font-style: italic;
   }
+}
+
+.SideNavigation {
+  color: $link-color;
+  float: left;
+  font-size: smaller;
+
+  width: $side-nav-width;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+
+  padding: 0 1.5% 1.5% 1.5%;
+
+  .brand img {
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+  }
+
+  .navigationTitle {
+    font-size: 1.2em;
+  }
+
+  .navigationEditor {
+    margin-bottom: 2em;
+    margin-top: 1em;
+  }
+
+  .navigationTitle>.navigationDate, .navigationEditor, .navItems {
+
+  }
+
+  .navItems {
+    &>a{
+      display: block;
+      font-weight: bold;
+      line-height: 1.5em;
+    }
+
+    /* TODO fix active link colors */
+
+    &>a.active, &>a.active:link{
+      color: $link-active-color;
+    }
+    &>a:visited(.active), &>a:not(.active){
+      color: $link-color;
+    }
+    &>a.firstLevel{
+      font-weight: bold;
+    }
+  }
+
+}
+
+.QuickSearchBox {
+  .advancedSearchBox {
+    padding-left: 10px;
+  }
+
+  margin-bottom: 10px;
+}
+
+main {
+  margin-left: $side-nav-width;
+
 }

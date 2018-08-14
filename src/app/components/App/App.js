@@ -4,6 +4,7 @@ import Loadable from 'react-loadable'
 import { hot } from 'react-hot-loader'
 import { app as appCopy } from 'app/copy'
 import HeadNavigation from 'app/components/HeadNavigation/HeadNavigation'
+import SideNavigation from 'app/components/SideNavigation/SideNavigation'
 import FlashMessages from 'app/components/@FlashMessages/FlashMessages'
 import PrivateRoute from 'app/routes/PrivateRoute/PrivateRoute'
 import UpdateDbRoute from 'app/routes/UpdateDbRoute/UpdateDbRoute'
@@ -65,14 +66,9 @@ class App extends React.Component {
           <meta name='description' content={appCopy.meta.description} />
           <meta name='keywords' content={appCopy.meta.keywords} />
         </DocumentMeta>
-        <HeadNavigation />
+        {/*<HeadNavigation />*/}
         <FlashMessages />
-        <img
-          src={avatarPath}
-          alt='me'
-          width='70'
-        />
-        <h1>{appCopy.title}</h1>
+        <SideNavigation />
         <main className={style.content}>
           <Switch>
             <Route

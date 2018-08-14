@@ -13,6 +13,7 @@ export const nav = {
   bar: `Bar`,
   private: `Private`,
   search: `Search`,
+  indices: `Indices`,
 }
 
 export const privateRoute = {

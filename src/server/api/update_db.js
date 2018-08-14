@@ -5,7 +5,7 @@ import {
   resolveXmlFilePath,
   parseXmlFile,
   extractXmlData,
-  readMetaData
+  readMetaData,
 } from 'server/serverHelpers/xml-helper'
 import { Document, Name, Author } from 'server/database/models'
 import { getUrl } from 'helpers/url-helper'
