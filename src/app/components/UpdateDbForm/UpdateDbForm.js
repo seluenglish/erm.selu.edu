@@ -33,7 +33,7 @@ export default class UpdateDbForm extends React.Component {
     const {handleClick} = this.props
     return (
       <Formik
-        initialValues={{password: ''}}
+        initialValues={{password: 'batman'}}
         render={InnerForm}
         onSubmit={handleClick}
       />

@@ -21,7 +21,7 @@ class UpdateDbRoute extends React.Component {
     
   }
   
-  gotPasswordFromUser(data) {
+  gotPasswordFromUserSocket(data) {
     console.log('sending')
     const server = require('../../composition/socket').default
     server.emit('data', 'cat')
@@ -29,7 +29,7 @@ class UpdateDbRoute extends React.Component {
   
   }
   
-  gotPasswordFromUser1(formData) {
+  gotPasswordFromUser(formData) {
     this.handle = apiUpdateDbAuthenticate(formData)
     const payload = this.handle.payload
     const { addMessage } = this.props
@@ -53,6 +53,8 @@ class UpdateDbRoute extends React.Component {
         console.log('final', error)
         addMessage('Unknown error occured. Try again')
       })
+    
+    return false
   }
   
   render() {

@@ -7,6 +7,8 @@ const parseBody = koaBody()
 
 export const apiRouter = new Router({ prefix: '/api' })
 
+
+
 export function setApiRoutes() {
   apiRouter.stack.length = 0
 
@@ -25,6 +27,7 @@ export function setApiRoutes() {
       ctx.response.body = ['d', 'e', 'f']
     })
     .all('not-found', '*', (ctx) => {
+      ctx.set('Content-Type', 'text/html')
       ctx.response.status = 404
       ctx.response.body = { error: STATUS_CODES[ctx.response.status] }
     })
