@@ -1,17 +1,17 @@
 import { request } from 'app/utils'
-import { API_FETCH_DOC_TYPES, API_FETCH_SUB_DOC_TYPES, API_UPDATE_DB_AUTENTICATE } from './search.constants'
+import { API_FETCH_NAME_SUB_TYPES, API_FETCH_NAME_TYPES, API_UPDATE_DB_AUTENTICATE } from './search.constants'
 
-export const apiFetchDocTypes = () => ({
-  type: API_FETCH_DOC_TYPES,
+export const apiFetchNameTypes = () => ({
+  type: API_FETCH_NAME_TYPES,
   payload: {
-    promise: request.fetch('/api/docTypes'),
+    promise: request.fetch('/api/nameTypes'),
   },
 })
 
-export const apiFetchSubDocTypes = () => ({
-  type: API_FETCH_SUB_DOC_TYPES,
+export const apiFetchNameSubTypes = () => ({
+  type: API_FETCH_NAME_SUB_TYPES,
   payload: {
-    promise: request.fetch('/api/subDocTypes'),
+    promise: request.fetch('/api/nameSubTypes'),
   },
 })
 

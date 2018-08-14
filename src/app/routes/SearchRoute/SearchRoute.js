@@ -24,7 +24,7 @@ class SearchRoute extends React.Component {
   }
   
   render() {
-    const { searchItems, searchParams } = this.props.search
+    const { searchItems } = this.props.search
     
     return (
       <section className='SearchRoute'>

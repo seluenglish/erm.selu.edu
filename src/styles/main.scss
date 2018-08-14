@@ -46,7 +46,6 @@ body {
 .SideNavigation {
   color: $link-color;
   float: left;
-  font-size: smaller;
 
   width: $side-nav-width;
 
@@ -66,7 +65,11 @@ body {
   }
 
   .navigationTitle {
-    font-size: 1.2em;
+    font-size: 1.4em;
+
+    .navigationDate {
+      font-size: smaller;
+    }
   }
 
   .navigationEditor {
@@ -75,6 +78,7 @@ body {
   }
 
   .navigationTitle>.navigationDate, .navigationEditor, .navItems {
+
 
   }
 
@@ -101,6 +105,10 @@ body {
 }
 
 .QuickSearchBox {
+  input {
+    width: 50%;
+    margin-right: 10%;
+  }
   .advancedSearchBox {
     padding-left: 10px;
   }
@@ -108,6 +116,55 @@ body {
   margin-bottom: 10px;
 }
 
+.SearchBox {
+  $first-box-width: 35%;
+  $second-box-width: 20%;
+  $third-box-width: 45%;
+
+  .firstBox, .secondBox, .thirdBox {
+    height: 4em;
+  }
+
+  fieldset{
+    padding-left: 10%;
+    padding-right: 8%;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .firstBox {
+    background: aqua;
+
+    &>#searchText {
+      display: block;
+      width: 100%;
+    }
+    width: $first-box-width;
+    float: left;
+  }
+
+  .secondBox {
+    width: $second-box-width;
+    float: left;
+    background: #8e7f7f;
+    text-align: center;
+  }
+
+  .thirdBox {
+    width: $third-box-width;
+    background: greenyellow;
+    float: left;
+
+    label[for="searchIn"] {
+      display: block
+    }
+
+    label[for="docType"], label[for="subDocType"]{
+      display: inline-block;
+    }
+  }
+
+}
 main {
   margin-left: $side-nav-width;
 

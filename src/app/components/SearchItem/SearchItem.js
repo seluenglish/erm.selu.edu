@@ -10,7 +10,7 @@ export default class SearchItem extends React.Component {
     return (
       <div className={cx('SearchItem', styles.SearchItem)}>
         {document.title && <div className='title'>
-          Title: <strong>{document.title}</strong>
+          <strong>{document.title}</strong>
         </div>}
         
         

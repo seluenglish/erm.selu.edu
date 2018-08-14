@@ -1,10 +1,10 @@
 import { PENDING, REJECTED, FULFILLED } from 'redux-promise-middleware'
 import { typeToReducer, get } from 'app/utils'
-import { API_FETCH_SUB_DOC_TYPES, API_FETCH_DOC_TYPES, API_UPDATE_DB_AUTENTICATE } from './search.constants'
+import { API_FETCH_NAME_TYPES, API_FETCH_NAME_SUB_TYPES } from './search.constants'
 import Document from 'models/document'
 
-const getDocTypes = get('payload')
-const getSubDocTypes = get('payload')
+const getNameTypes = get('payload')
+const getNameSubTypes = get('payload')
 
 const initialState = {
   isPending: false,
@@ -14,11 +14,13 @@ const initialState = {
     subDocTypes: [ 'subdocs' ],
   
     searchParams: {
-      searchText: 'st',
+      searchText: '',
       fullTextChecked: true,
-      searchIn: '',
-      docType: 'b',
-      subDocType: 'b',
+      
+      searchIn: 'all',
+      
+      type: '',
+      subType: '',
     },
     
     searchItems: [
@@ -50,24 +52,24 @@ const pendingReducer = (state) => ({
 })
 
 export const searchReducers = typeToReducer({
-  [API_FETCH_DOC_TYPES]: {
+  [API_FETCH_NAME_TYPES]: {
     [PENDING]: pendingReducer,
     [REJECTED]: rejectedReducer,
     [FULFILLED]: (state, action) => ({
       ...state,
       data: {
         ...state.data,
-        docTypes: getDocTypes(action),
+        docTypes: getNameTypes(action),
       },
     }),
   },
-  [API_FETCH_SUB_DOC_TYPES]: {
+  [API_FETCH_NAME_SUB_TYPES]: {
     [PENDING]: pendingReducer,
     [REJECTED]: rejectedReducer,
     [FULFILLED]: (state, action) => ({
       ...state,
       data: { ...state.data,
-        subDocTypes: getSubDocTypes(action),
+        subDocTypes: getNameSubTypes(action),
       },
     }),
   },

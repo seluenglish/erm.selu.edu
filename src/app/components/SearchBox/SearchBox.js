@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import cx from 'classnames'
 import styles from './SearchBox.module.scss'
 import PropTypes from 'prop-types'
-import { FILE_TYPES } from 'helpers/document-helpers'
+import { getSearchOptions } from 'helpers/document-helpers'
 import { getSearch } from 'app/modules/search/search.selectors'
-import { apiFetchDocTypes, apiFetchSubDocTypes } from 'app/modules/search/search.actions'
+import { apiFetchNameSubTypes, apiFetchNameTypes} from 'app/modules/search/search.actions'
 import { Formik, Field, Form } from 'formik'
 
 function itemName(item) {
@@ -16,17 +16,27 @@ const InnerForm = (props) => {
   
   const { fullTextChecked } = props
   
+  const textPlaceHolder = `Search for ${fullTextChecked ? 'phrase...' : 'a keyword...'}`
+  
+  const searchOptions = getSearchOptions()
+  
   return (
     <Form className='SearchBox' style={styles}>
       <fieldset>
         <legend>Advanced Search</legend>
         <div className='searchFields'>
           <div className={'firstBox'}>
-            <Field type='text' name='searchText' />
+            <Field
+              type='text'
+              name='searchText'
+              id='searchText'
+              placeholder={textPlaceHolder}
+            />
             <label htmlFor='fullTextChecked'>
               <Field
                 type='checkbox'
                 name='fullTextChecked'
+                id='fullTextChecked'
                 checked={fullTextChecked}
               />
               Search full text of documents</label>
@@ -44,30 +54,41 @@ const InnerForm = (props) => {
           <div className='thirdBox'>
             <label htmlFor='searchIn'>
               Search in:
-              <Field component='select' name='searchIn'>
-                {FILE_TYPES.map((type, i) => (
-                  <option value={type} key={i}>{type}</option>
+              <Field
+                component='select'
+                name='searchIn'
+                id='searchIn'>
+                <option value='all'>All</option>
+                
+                {searchOptions.map((option, i) => (
+                  <option value={option.value} key={i}>{option.label}</option>
                 ))}
               </Field>
             </label>
             
-            <label htmlFor='docType'>
-              Doc Type:
-              <Field component='select' name='docType'>
+            <label htmlFor='type'>
+              Show:
+              <Field
+                component='select'
+                name='type'
+                id='type'>
                 <option>A</option>
                 <option>B</option>
               </Field>
             </label>
             
             <label
-              htmlFor='subDocType'
+              htmlFor='subType'
               className={cx(
                 {
                   hidden: true
                 }
               )}>
               Subdoc type:
-              <Field component='select' name='subDocType'>
+              <Field
+                component='select'
+                name='subType'
+                id='subType'>
                 <option>A</option>
                 <option>B</option>
               </Field>
@@ -84,8 +105,8 @@ const InnerForm = (props) => {
 @connect(state => ({
   search: getSearch(state)
 }), {
-  apiFetchDocTypes,
-  apiFetchSubDocTypes
+  apiFetchNameTypes,
+  apiFetchNameSubTypes,
 })
 export default class SearchBox extends React.Component {
   render() {

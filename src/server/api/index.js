@@ -20,10 +20,10 @@ export function setApiRoutes() {
       ctx.response.body = { bar: [ 'lorem', 'ipsum', 'dolor', 'sit', 'amet' ] }
     })
     .post('update_db', '/update_db', update_db)
-    .get('docTypes', '/docTypes', (ctx) => {
+    .get('nameTypes', '/nameTypes', (ctx) => {
       ctx.response.body = ['a', 'b', 'c']
     })
-    .get('subDocTypes', '/subDocTypes', (ctx) => {
+    .get('nameSubTypes', '/nameSubTypes', (ctx) => {
       ctx.response.body = ['d', 'e', 'f']
     })
     .all('not-found', '*', (ctx) => {
