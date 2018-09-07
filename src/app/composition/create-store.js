@@ -5,7 +5,7 @@ import { middleware } from 'app/composition/middleware'
 
 const log = debug('create-store')
 
-export default (initialState, mware=middleware) => {
+export default (initialState, mware=middleware, browserMode=false) => {
   const store = createStore(
     rootReducer,
     initialState,

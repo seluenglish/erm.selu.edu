@@ -3,6 +3,8 @@ import styles from './UpdateDbForm.scss'
 import PropTypes from 'prop-types'
 import {Formik, Field, Form} from 'formik'
 import {hot} from 'react-hot-loader'
+import { getSearch } from 'app/modules/search/search.selectors'
+import { connect } from 'react-redux'
 
 const InnerForm = (props) => {
   return (<Form
@@ -29,15 +31,29 @@ const InnerForm = (props) => {
   
   </Form>)
 }
+
+@connect(state => ({
+  search: getSearch(state),
+}), {
+})
 export class UpdateDbForm extends React.Component {
   render() {
     const {handleClick} = this.props
+    const { dbUpdateMessages } = this.props.search
     return (
-      <Formik
-        initialValues={{password: 'batman'}}
-        render={InnerForm}
-        onSubmit={handleClick}
-      />
+      <div>
+        <Formik
+          initialValues={{password: 'batman'}}
+          render={InnerForm}
+          onSubmit={handleClick}
+        />
+      
+        <h1>Log</h1>
+        {dbUpdateMessages.map((message, i) => (
+          <div key={i}>{ message } </div>
+        ))}
+      </div>
+      
     )
   }
   

@@ -7,7 +7,7 @@ import {apiUpdateDbAuthenticate} from 'app/modules/search/search.actions'
 import { addMessage } from 'app/modules/flash/flash.actions'
 import ResponseError from 'helpers/response-error'
 
-@connect(null, { addMessage })
+@connect(null, { addMessage, apiUpdateDbAuthenticate })
 class UpdateDbRoute extends React.Component {
   constructor(props) {
     super(props)
@@ -30,6 +30,10 @@ class UpdateDbRoute extends React.Component {
   }
   
   gotPasswordFromUser(formData) {
+    console.log('authenticating')
+    this.props.apiUpdateDbAuthenticate(formData)
+  }
+  gotPasswordFromUser1(formData) {
     this.handle = apiUpdateDbAuthenticate(formData)
     const payload = this.handle.payload
     const { addMessage } = this.props

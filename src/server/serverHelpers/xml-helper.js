@@ -10,14 +10,18 @@ export const findXmlsInDirs = async (dirPaths) => {
     dirPaths = [ dirPaths ]
   }
   
-  const passXmlOnly = (name) => path.extname(name) !== '.xml'
+  const passXmlOnly = (name, stats) => {
+    const ext = path.extname(name)
+    
+    if (stats.isDirectory()) return false
+    
+    return ext !== '.xml'
+  }
   
   let result = await Promise.all(dirPaths.map(async (dirPath) => {
     const resolvedDirPath = path.resolve(dirPath)
     
     const thisR = await recursive(dirPath, [ passXmlOnly ])
-    
-    // console.log(dirPath, 'resolved to', resolvedDirPath)
     
     return thisR
       .map(x => path.resolve(x))
@@ -55,17 +59,20 @@ export function extractXmlData($) {
   
   const teiHeader = $('teiHeader')
   const title = teiHeader.find('titleStmt').find('title[type="main"]').text()
-  const docType = teiHeader.attr('type')
-  const subDocType = $('body>div[type]').attr('type')
+  const type = teiHeader.attr('type')
+  const subType = $('body>div[type]').attr('type')
   
   const fullBody = $('body')
   
-  const corresps = $('[corresp]').map((_, elem) => {
+  const corresps = $('body [corresp]').map((_, elem) => {
     const $elem = $(elem)
     const corresp = $elem.attr('corresp')
     const text = $elem.text()
     
-    const { tagName, type, subType } = resolveTagTypes($elem, $)
+    const tagData = resolveTagTypes($elem, $)
+    if (tagData === undefined) return tagData
+    
+    const { tagName, type, subType } = tagData
     
     return {
       corresp,
@@ -75,7 +82,7 @@ export function extractXmlData($) {
       subType,
       keywords: getKeywordsForText(text, corresp),
     }
-  }).get()
+  }).filter(x => x).get()
   
   const fullText = fullBody.text()
   
@@ -83,8 +90,8 @@ export function extractXmlData($) {
     fileId,
     corresps,
     title,
-    docType,
-    subDocType,
+    type,
+    subType,
     fullBody,
     fullText,
     keywords: getKeywordsForText(fullText),
@@ -108,6 +115,24 @@ function resolveTagTypes($tag, $) {
       type = 'handNote'
       subType = $tag.attr('scribe')
       break
+    case 'GEOGNAME':
+      type = 'place'
+      subType = 'geographical'
+      break
+    case 'TITLE':
+      type = $tag.attr('type')
+      subType = $tag.attr('subtype')
+      break
+    case 'ORGNAME':
+      type = 'place'
+      subType = 'organization'
+      break
+    case 'REF':
+      type = $tag.attr('type')
+      subType = $tag.attr('subtype')
+      break
+    case 'HANDSHIFT':
+      break
     case 'NAME':
       type = $tag.attr('type')
       subType = $tag.attr('subType')
@@ -116,11 +141,12 @@ function resolveTagTypes($tag, $) {
       throw new Error(`Could not resolve tag types: ${$.html($tag)}`)
   }
   
-  return { tagName, type, subType }
+  if (type === undefined) return undefined
   
+  return { tagName, type, subType }
 }
 
-export function readMetaData($){
+export function readMetaData($) {
   const authors = $('authors').find('author').map((_, elem) => {
     const $elem = $(elem)
     const name = $elem.attr('name')

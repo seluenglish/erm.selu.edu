@@ -2,23 +2,19 @@ import { connect } from 'react-redux'
 import cx from 'classnames'
 import styles from './SearchBox.module.scss'
 import PropTypes from 'prop-types'
-import { getSearchOptions } from 'helpers/document-helpers'
+import { getFileTypeSearchOptions, getNameSubTypeSearchOptions, getNameTypeSearchOptions } from 'helpers/document-helpers'
 import { getSearch } from 'app/modules/search/search.selectors'
 import { apiFetchNameSubTypes, apiFetchNameTypes} from 'app/modules/search/search.actions'
 import { Formik, Field, Form } from 'formik'
-
-function itemName(item) {
-  let ret = item.replace('_', ' ')
-  return ret
-}
 
 const InnerForm = (props) => {
   
   const { fullTextChecked } = props
   
-  const textPlaceHolder = `Search for ${fullTextChecked ? 'phrase...' : 'a keyword...'}`
+  const textPlaceHolder = `Search for ${fullTextChecked ? 'a phrase...' : 'a keyword...'}`
   
-  const searchOptions = getSearchOptions()
+  const fileTypeSearchOptions = getFileTypeSearchOptions()
+  const nameTypeSearchOptions = getNameTypeSearchOptions()
   
   return (
     <Form className='SearchBox' style={styles}>
@@ -60,7 +56,7 @@ const InnerForm = (props) => {
                 id='searchIn'>
                 <option value='all'>All</option>
                 
-                {searchOptions.map((option, i) => (
+                {fileTypeSearchOptions.map((option, i) => (
                   <option value={option.value} key={i}>{option.label}</option>
                 ))}
               </Field>
@@ -72,8 +68,10 @@ const InnerForm = (props) => {
                 component='select'
                 name='type'
                 id='type'>
-                <option>A</option>
-                <option>B</option>
+                <option value='all'>All</option>
+                {nameTypeSearchOptions.map((option, i) => (
+                  <option value={option.value} key={i}>{option.label}</option>
+                ))}
               </Field>
             </label>
             
@@ -103,7 +101,7 @@ const InnerForm = (props) => {
 
 
 @connect(state => ({
-  search: getSearch(state)
+  search: getSearch(state),
 }), {
   apiFetchNameTypes,
   apiFetchNameSubTypes,
@@ -124,5 +122,5 @@ export default class SearchBox extends React.Component {
 }
 
 SearchBox.propTypes = {
-  handleSearchClick: PropTypes.func.isRequired
+  handleSearchClick: PropTypes.func.isRequired,
 }

@@ -1,10 +1,10 @@
 
 export const app = {
   loading: `Loading...`,
-  title: `Breko Hub`,
+  title: `ERM`,
   meta: {
-    description: `Breko Hub, a minimal boilerplate for building universal react applications`,
-    keywords: `react,redux,react-router,koa,universal,babel,es7,hmr,webpack`,
+    description: `Early Ruskin Manuscripts (ERM).`,
+    keywords: `manuscript,ruskin,johnruskin,john,jr`,
   },
 }
 

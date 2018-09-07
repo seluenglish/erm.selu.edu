@@ -18,7 +18,6 @@ export class SideNavigation extends React.Component {
   }
   
   render() {
-    const homeUrl = getUrl('')
     const logoUrl = getUrl('images/ruskin_logo.jpg')
     
     return (
@@ -49,8 +48,7 @@ export class SideNavigation extends React.Component {
           </a>
         </div>
         
-        <QuickSearchBox
-          handleSearchClick={this.onQuickSearch} />
+        <QuickSearchBox />
         
         
         <div className='navItems'>

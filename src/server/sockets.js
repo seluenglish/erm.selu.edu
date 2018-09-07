@@ -2,6 +2,7 @@ import Socket from 'socket.io'
 import { inServerViaSocketIO, outServerViaSocketIO } from 'redux-via-socket.io'
 import { middleware } from 'app/composition/middleware'
 import createStore from 'app/composition/create-store'
+import { applyIncomingSocketHooks } from 'server/socket-hooks'
 
 const log = debug('sockets-server')
 
@@ -14,15 +15,13 @@ export default function sockets(server) {
     [ ...middleware, outServerViaSocketIO(socketServer) ],
   )
   
+  global.store = socketsStore
+  
   socketServer.on('connection', socket => {
     log('New connection made with id', socket.id)
     socket.on('disconnect', () => {
       log('Disconnected', socket.id)
     })
-    socket.on('data', (d) => {
-      console.log('got data', d)
-    })
-    
   })
 
   inServerViaSocketIO(socketServer, (action, socket) => {
@@ -30,7 +29,14 @@ export default function sockets(server) {
       socket: socket.id,
       ...action,
     })
-    socketsStore.dispatch(action)
+    
+    applyIncomingSocketHooks(action, socket).then((res) => {
+      console.log('result', res)
+    }).catch((err) => {
+      console.log('error', err)
+    })
+    
+    // socketsStore.dispatch(action)
   })
 
   return socketServer

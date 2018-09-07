@@ -1,20 +1,26 @@
 import { PENDING, REJECTED, FULFILLED } from 'redux-promise-middleware'
-import { typeToReducer, get } from 'app/utils'
-import { API_FETCH_NAME_TYPES, API_FETCH_NAME_SUB_TYPES } from './search.constants'
-import Document from 'models/document'
+import { typeToReducer, get, isBrowser } from 'app/utils'
+import {
+  API_FETCH_NAME_TYPES,
+  API_FETCH_NAME_SUB_TYPES,
+  API_SEARCH,
+  UPDATE_SEARCH_PARAMS,
+  ADD_DB_UPDATE_MESSAGE,
+  SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES,
+} from './search.constants'
+import update from 'immutability-helper'
 
 const getNameTypes = get('payload')
 const getNameSubTypes = get('payload')
+const getSearchResults = get('payload')
+const getSearchParams = get('data')
 
 const initialState = {
   isPending: false,
   error: false,
   data: {
-    docTypes: [ 'docs' ],
-    subDocTypes: [ 'subdocs' ],
-  
     searchParams: {
-      searchText: '',
+      searchText: 'calais',
       fullTextChecked: true,
       
       searchIn: 'all',
@@ -23,32 +29,21 @@ const initialState = {
       subType: '',
     },
     
-    searchItems: [
-      new Document,
-      new Document,
-    ],
+    searchResults: null,
     
+    dbUpdateMessages: [],
   },
 }
 
-initialState.data.searchItems[0].title = '"Cadenabbia" [poem]'
-initialState.data.searchItems[0].docType = 'poem'
-initialState.data.searchItems[0].subDocType = 'Fiction'
-initialState.data.searchItems[0].text = '"...Cadenabbia Oh love coolly came on Comos lake The lovely beams of morning mild, That oer the Lecco mountains break, And red their summits piled,1420 That high above their dim shore, Their weary winter garments bore, The broad boat lay along the tide The ligh..."'
-
-initialState.data.searchItems[1].title = '[EVENING AT CHAMOUNI]'
-initialState.data.searchItems[1].docType = 'poem'
-initialState.data.searchItems[1].subDocType = 'non-fiction'
-initialState.data.searchItems[1].text = '"...[EVENING AT CHAMOUNI] NOT such the night whose stormy might Heroic Balmat braved, When, darkening on the Goûtéʼs height, The tempest howled and raved. Upon the mighty hill, forlorn, He stood alone amid the storm; Watching the last day gleams decay, Sup..."'
 
 const rejectedReducer = (state, action) => ({
   ...state,
-  error: action.payload,
+  error: action.payload
 })
 
 const pendingReducer = (state) => ({
   ...state,
-  isPending: true,
+  isPending: true
 })
 
 export const searchReducers = typeToReducer({
@@ -68,10 +63,63 @@ export const searchReducers = typeToReducer({
     [REJECTED]: rejectedReducer,
     [FULFILLED]: (state, action) => ({
       ...state,
-      data: { ...state.data,
+      data: {
+        ...state.data,
         subDocTypes: getNameSubTypes(action),
       },
     }),
+  },
+  [API_SEARCH]: {
+    [PENDING]: pendingReducer,
+    [REJECTED]: rejectedReducer,
+    [FULFILLED]: (state, action) => ({
+      ...state,
+      data: {
+        ...state.data,
+        searchResults: getSearchResults(action),
+      },
+      
+    }),
+  },
+  [UPDATE_SEARCH_PARAMS]: (state, action) => ({
+    ...state,
+    data: {
+      ...state.data,
+      searchParams: getSearchParams(action),
+      searchResults: null,
+    },
+  }),
+  [ADD_DB_UPDATE_MESSAGE]: (state, action) => {
+    if (isBrowser)
+      console.log('[INFO]: ', action.payload)
+    // return {
+    //   ...state,
+    //   data: {
+    //     ...state.data,
+    //     dbUpdateMessages: [ ...state.data.dbUpdateMessages, action.payload],
+    //   },
+    // }
+    return state
+  },
+  [SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES]: (state, action) => {
+    
+    if (!state.data.searchResults) return state
+    
+    const { documentId, newToggleState } = action.payload
+    
+    const documentIndex = state.data.searchResults.listItems.findIndex(x => x.id === documentId)
+    
+    return update(state, {
+      data: {
+        searchResults: {
+          listItems: {
+            [documentIndex]: {
+              showingAllMatches: { $set: newToggleState },
+            },
+          },
+        },
+      },
+    })
   },
   
 }, initialState)

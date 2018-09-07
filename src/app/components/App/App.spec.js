@@ -3,7 +3,6 @@ import HeadNavigation from 'app/components/HeadNavigation/HeadNavigation'
 import FlashMessages from 'app/components/@FlashMessages/FlashMessages'
 import App from './App'
 import styles from './App.module.scss'
-import avatarPath from 'assets/avatar.jpeg'
 
 describe(`App Component`, function () {
   helpers.setupSnapshots(__filename)
