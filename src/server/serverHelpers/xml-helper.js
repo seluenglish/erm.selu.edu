@@ -59,8 +59,15 @@ export function extractXmlData($) {
   
   const teiHeader = $('teiHeader')
   const title = teiHeader.find('titleStmt').find('title[type="main"]').text()
-  const type = teiHeader.attr('type')
-  const subType = $('body>div[type]').attr('type')
+  let type = teiHeader.attr('type')
+  
+  const type2 = $('body>div[type]').attr('type')
+  let subType = undefined
+  
+  if (type2) {
+    type = type2
+    subType = $('body>div[type]').attr('subtype')
+  }
   
   const fullBody = $('body')
   

@@ -21,7 +21,7 @@ const initialState = {
   data: {
     searchParams: {
       searchText: 'calais',
-      fullTextChecked: true,
+      fullTextChecked: false,
       
       searchIn: 'all',
       

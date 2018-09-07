@@ -41,22 +41,22 @@ export class QuickSearchBox extends React.Component {
   handleSearchClick(params) {
     const { updateSearchParams, apiSearch, replace } = this.props
     updateSearchParams(params)
-    apiSearch()
+    apiSearch(params)
     replace('/search')
   }
   
   render() {
-    if(!this.props.search) return <div>Error</div>
+    if (!this.props.search) return <div>Error</div>
     
     const { searchParams } = this.props.search
     
     return (
       <div className='QuickSearchBox'>
-        {/*<Formik*/}
-          {/*initialValues={searchParams}*/}
-          {/*render={InnerForm}*/}
-          {/*onSubmit={this.handleSearchClick}*/}
-        {/*/>*/}
+        <Formik
+          initialValues={searchParams}
+          render={InnerForm}
+          onSubmit={this.handleSearchClick}
+        />
         <div className='advancedSearchBox'>
           <Link to='/search' >Advanced Search</Link>
         </div>

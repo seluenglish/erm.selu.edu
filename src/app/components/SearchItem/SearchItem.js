@@ -5,20 +5,51 @@ import { Link } from 'react-router-dom'
 import { hot } from 'react-hot-loader'
 import { connect } from "react-redux"
 import { showHideSearchItemAllMatches } from 'app/modules/search/search.actions'
+import { getDocumentUrl } from 'helpers/document-helpers'
+import { animateScroll } from 'react-scroll'
+import { uuid } from 'helpers/id-helper'
 
 @connect(null, { showHideSearchItemAllMatches } )
 export class SearchItem extends React.Component {
-  render() {
+  constructor(props) {
+    super(props)
+    
+    this.handleToggleMoreMatches = this.handleToggleMoreMatches.bind(this)
+    
+    this.ref = React.createRef()
+  }
+  
+  handleToggleMoreMatches() {
     const { document, showHideSearchItemAllMatches } = this.props
+    const showingAllMatches = document.showingAllMatches
+    const newState = !showingAllMatches
+    
+    
+    if(newState === false) {
+      const top = this.ref.current.offsetTop
+      animateScroll.scrollTo(top, {
+        duration: 500,
+        smooth: 'easeOutExpo',
+      })
+    }
+    
+    showHideSearchItemAllMatches(document.id, newState)
+  }
+  
+  render() {
+    const { document} = this.props
     const defaultShowMatches = 2
+    
+    const { uuid } = this
     
     const showingAllMatches = document.showingAllMatches
     const showinMatches = showingAllMatches?document.matches:document.matches.slice(0, defaultShowMatches)
     
     return (
-      <div className={cx('SearchItem', styles.SearchItem)}>
+      <div className={cx('SearchItem', styles.SearchItem)} ref={this.ref}>
+        <a  />
         {document.title && <div className='title'>
-          <a href={`http://ruskin.local:8080/src/witnesses/${document.fileId}.php`} target='_blank'>
+          <a href={getDocumentUrl(document)} target='_blank'>
             <strong>{document.title}</strong>
           </a>
         </div>}
@@ -50,7 +81,7 @@ export class SearchItem extends React.Component {
           <button
             type='button'
             className='showAllItems'
-            onClick={() => showHideSearchItemAllMatches(document.id, !showingAllMatches)}>
+            onClick={this.handleToggleMoreMatches}>
             
             {showingAllMatches && ('Less')}
             {!showingAllMatches && (

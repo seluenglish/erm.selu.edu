@@ -16,6 +16,10 @@ const InnerForm = (props) => {
   const fileTypeSearchOptions = getFileTypeSearchOptions()
   const nameTypeSearchOptions = getNameTypeSearchOptions()
   
+  const nameType = props.values.type;
+  const nameSubTypeSearchOptions = (nameType && nameType !== 'all')?getNameSubTypeSearchOptions(nameType):undefined
+  const showSubType = (nameSubTypeSearchOptions && nameSubTypeSearchOptions.length>0)
+  
   return (
     <Form className='SearchBox' style={styles}>
       <fieldset>
@@ -75,22 +79,25 @@ const InnerForm = (props) => {
               </Field>
             </label>
             
-            <label
-              htmlFor='subType'
-              className={cx(
-                {
-                  hidden: true
-                }
-              )}>
-              Subdoc type:
-              <Field
-                component='select'
-                name='subType'
-                id='subType'>
-                <option>A</option>
-                <option>B</option>
-              </Field>
-            </label>
+            {showSubType && (
+              <label
+                htmlFor='subType'
+                className={cx(
+                  {
+                    hidden: true
+                  }
+                )}>
+                <Field
+                  component='select'
+                  name='subType'
+                  id='subType'>
+                  <option>All</option>
+                  {nameSubTypeSearchOptions.map((option, i) => (
+                    <option value={option.value} key={i}>{option.label}</option>
+                  ))}
+                </Field>
+              </label>
+            )}
           </div>
         </div>
       </fieldset>

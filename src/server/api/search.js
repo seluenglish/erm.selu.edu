@@ -1,4 +1,4 @@
-import { Document } from 'server/database/models'
+import { Document, Name } from 'server/database/models'
 import { getMatchingSearches } from 'server/serverHelpers/search'
 import _ from 'lodash'
 
@@ -23,6 +23,12 @@ export default async function (ctx) {
   
   if (fullTextChecked) {
     query = query.find({ fullText: filter })
+  } else {
+  
+  }
+  
+  if (searchIn !== 'all') {
+    query = query.find({ type: searchIn })
   }
   
   const resultDocuments = await query
@@ -48,6 +54,38 @@ export default async function (ctx) {
     return ret
   })
   result = _.sortBy(result, x => -x.weight)
+  
+  // const names = await Name.find({})
+  // let nResult = []
+  // names.forEach(name => {
+  //   let nItem = nResult.find( x => x.type === name.type)
+  //
+  //   if (!nItem) {
+  //     nItem = {
+  //       type: name.type,
+  //       subTypes: [],
+  //     }
+  //
+  //     nResult.push(nItem)
+  //   }
+  //
+  //   if (name.subType) {
+  //     let subType = nItem.subTypes.find(x => x.type === name.subType)
+  //
+  //     if(!subType) {
+  //       subType = {
+  //         type: name.subType,
+  //       }
+  //
+  //       nItem.subTypes.push(subType)
+  //     }
+  //   }
+  //
+  // })
+  //
+  // nResult = _.sortBy(nResult, x => x.type)
+  // console.log(JSON.stringify(nResult, null, 2))
+  //
   
   ctx.response.body = {
     totalHits: _.sum(result.map(x => x.matches.length)), // total results
