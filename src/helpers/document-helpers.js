@@ -55,15 +55,6 @@ const FILE_TYPES = [
 
 const NAME_TYPES = [
   {
-    type: 'place',
-    subTypes: [
-      { type: 'building'},
-      { type: 'fictional'},
-      { type: 'scriptural'},
-      { type: 'architecture'},
-    ],
-  },
-  {
     'type': 'ana',
     'subTypes': []
   },
@@ -290,13 +281,13 @@ const NAME_TYPES = [
   {
     'type': 'place',
     'subTypes': [
-      { type: 'building'},
-      { type: 'fictional'},
-      { type: 'scriptural'},
-      { type: 'architecture'},
-      { 'type': 'geographical' },
-      { 'type': 'organization' },
-    ]
+      { type: 'building' },
+      { type: 'fictional' },
+      { type: 'scriptural' },
+      { type: 'architecture' },
+      { type: 'geographical' },
+      { type: 'organization' },
+    ],
   },
   {
     'type': 'poem',
@@ -410,6 +401,7 @@ export function getNameSubTypeSearchOptions(nameType) {
 }
 
 export function getDocumentUrl(document) {
+  if (!document.type) return ''
   // console.log(document.type)
   const fileType = FILE_TYPES.find(x => x.type === document.type)
   

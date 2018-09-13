@@ -21,7 +21,7 @@ export class SideNavigation extends React.Component {
     const logoUrl = getUrl('images/ruskin_logo.jpg')
     
     return (
-      <nav className='SideNavigation'>
+      <nav className='SideNavigation no-print'>
         
         <Link
           to='/'

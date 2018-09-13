@@ -56,12 +56,14 @@ export class SearchItem extends React.Component {
         
         
         <div className='docTypeContainer'>
-          Document: <strong className='docType'> {document.type}
+          Document type: <strong className='docType'> {document.type}
             {document.subType && (
               <span className='subType'>
             &nbsp;({document.subType})</span>
             )}
           </strong>
+          <br />
+          File ID: <strong className='docType'> {document.fileId} </strong>
         </div>
         
         <div className='text'>

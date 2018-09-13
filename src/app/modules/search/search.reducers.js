@@ -86,21 +86,9 @@ export const searchReducers = typeToReducer({
     data: {
       ...state.data,
       searchParams: getSearchParams(action),
-      searchResults: null,
     },
   }),
-  [ADD_DB_UPDATE_MESSAGE]: (state, action) => {
-    if (isBrowser)
-      console.log('[INFO]: ', action.payload)
-    // return {
-    //   ...state,
-    //   data: {
-    //     ...state.data,
-    //     dbUpdateMessages: [ ...state.data.dbUpdateMessages, action.payload],
-    //   },
-    // }
-    return state
-  },
+  
   [SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES]: (state, action) => {
     
     if (!state.data.searchResults) return state

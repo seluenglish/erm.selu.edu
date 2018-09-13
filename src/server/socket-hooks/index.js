@@ -1,4 +1,4 @@
-import { SET_CLIENT_ID } from 'app/modules/server-update-db/server-update-db.constants'
+import { START_CONNECTION } from 'app/modules/server-update-db/server-update-db.constants'
 import updateDb from './update-db'
 
 function timeout(ms) {
@@ -10,7 +10,7 @@ export async function applyIncomingSocketHooks(action, socket) {
   const clientId = action.meta.client
   
   switch (action.type) {
-    case SET_CLIENT_ID: {
+    case START_CONNECTION: {
       await updateDb(action.payload, clientId)
       
       break

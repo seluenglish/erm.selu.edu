@@ -1,4 +1,4 @@
-import { ADD_DB_UPDATE_MESSAGE } from 'app/modules/search/search.constants'
+import { ADD_MESSAGE } from 'app/modules/server-update-db/server-update-db.constants'
 import { isPasswordCorrect } from 'server/serverHelpers/authenticator'
 import {
   findXmlsInDirs,
@@ -15,20 +15,31 @@ import _ from 'lodash'
 
 const ObjectId = mongoose.Types.ObjectId
 
-export default async function updateDb(payload, clientId) {
+const LOG_INFO = 'INFO'
+const LOG_WARNING = 'WARNING'
+const LOG_ERROR = 'ERROR'
+const LOG_FATAL = 'FATAL'
+const LOG_LEVELS = [ LOG_INFO, LOG_WARNING, LOG_ERROR, LOG_FATAL ]
+
+export default async function updateDb(payload, client) {
   const store = global.store
   
   const log = (message) => {
-    console.log('[INFO] ', message)
+    let level = LOG_INFO
+    
+    if (Array.isArray(message) ) {
+      [ level, message ] = message
+    }
+    
+    console.log(`${level} `, message)
     
     store.dispatch({
-      type: ADD_DB_UPDATE_MESSAGE,
-      meta: { clientId },
-      payload: message,
+      type: ADD_MESSAGE,
+      meta: { client },
+      payload: { level, message },
     })
   }
   
-
   const clientPassword = payload.password
   
   if (!isPasswordCorrect(clientPassword)) {
@@ -36,32 +47,39 @@ export default async function updateDb(payload, clientId) {
   } else {
     log('updating db')
   
-    log(`removing existing names`)
-    await Name.remove({})
-  
-    log(`removing existing documents`)
-    await Document.remove({})
-  
     const allNames = []
     const allDocs = []
   
     const dirPath = [ path.join(XML_PATH, '_Completed/') ]
-    log('discovering XML files')
+    log('locating XML files')
     let xmls = await findXmlsInDirs(dirPath)
-    log('XML files discovered')
+    log(`${xmls.length} XML files discovered`)
   
     // xmls = [ 'witnesses/saltzburg_fo.xml', 'witnesses/saltzburg_msviii.xml' ]
     // xmls = [ 'glosses/andernacht_glosses_contextual.xml' ]
+    // xmls = [ 'corpuses/account_of_a_tour_on_the_continent_le_corpus_therhine.xml' ]
     
-    const processFile = (xmlFileName, docIndex) => {
-      log(`processing ${xmlFileName}`)
+    const validateDoc = (xmlData, doc) => {
+      if (!xmlData) log([ LOG_ERROR, 'XML data could not be parsed.' ])
+      if (!doc) log([ LOG_ERROR, 'database document could not be created.' ])
+      
+      if (!doc.title)
+        log( [ LOG_WARNING, 'document has no title.' ])
+      
+      if (!doc.type)
+        log( [ LOG_WARNING, 'document type not found.' ])
+    }
+    
+    const processFile = async (xmlFileName, docIndex) => {
+      log()
+      log(`processing ${docIndex+1}. ${xmlFileName}`)
       const resolved = resolveXmlFilePath(xmlFileName, dirPath)
       log(`resolved to ${resolved}`)
   
       const xml = parseXmlFile(resolved)
   
       try {
-        log(`extracing data afrom XML`)
+        log(`extracing data from XML`)
         const data = extractXmlData(xml)
     
         log(`converting xml data to db rows`)
@@ -80,7 +98,9 @@ export default async function updateDb(payload, clientId) {
         })
         allDocs.push(doc)
     
-        log(`document ${docIndex+1}. ${xmlFileName} saved`)
+        log(`validating...`)
+        validateDoc(data, doc)
+        log(`validated.`)
     
         if (data.corresps.length) {
           const namesInThisDoc = data.corresps
@@ -107,29 +127,39 @@ export default async function updateDb(payload, clientId) {
           doc.names = uniqueNamesInThisDoc
       
           log(`found ${uniqueNamesInThisDoc.length} unique names in document ${xmlFileName}: `)
-          log(namesInThisDoc.map((name, i) => {
+          log(uniqueNamesInThisDoc.map((name, i) => {
             return `${i+1}: ${name.text}`
           }).join('\t'))
         } else {
           log(`no names in this document.`)
         }
       } catch (e) {
-        log(`unable to process ${xmlFileName}`)
-        log(e)
+        log([ LOG_ERROR, `unable to process ${xmlFileName}` ])
+        log([ LOG_ERROR, e.message ])
+        log([ LOG_ERROR, e.stack ])
       }
     }
   
-    xmls.forEach(processFile)
+    await xmls.forEach(processFile)
     
     log(`total documents Length: ${allDocs.length}`)
     log(`total names Length: ${allNames.length}`)
   
-    log(`Saving names`)
+    log(`removing existing names`)
+    await Name.remove({})
+  
+    log(`removing existing documents`)
+    await Document.remove({})
+  
+    log(`Saving new names`)
     await Name.insertMany(allNames)
     log(`Names saved`)
     
-    log(`Saving documents`)
+    log(`Saving new documents`)
     await Document.insertMany(allDocs)
     log(`Documents saved`)
+    log()
+    log()
+    log(`All done.`)
   }
 }

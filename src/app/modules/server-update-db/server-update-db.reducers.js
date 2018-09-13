@@ -1,38 +1,57 @@
-import { PENDING, REJECTED, FULFILLED } from 'redux-promise-middleware'
 import { isBrowser, typeToReducer, get } from 'app/utils'
-import { END_CONNECTION, ADD_MESSAGE, SET_CLIENT_ID } from './server-update-db.constants'
-
-const getClientId = get('meta.client')
+import { END_CONNECTION, ADD_MESSAGE, START_CONNECTION, UPDATE_LOGGER_DIV_ID } from './server-update-db.constants'
+import update from 'immutability-helper';
+import ReactDOM from 'react-dom'
+import cx from 'classnames'
 
 const initialState = {
   data: {
-    clientId: undefined,
+    div: undefined,
   },
 }
-
-const error = () => {
-  throw new Error('Add message action can not be dispatched to server itself.')
-}
-
 
 export const serverUpdateDbReducers = typeToReducer({
-  [SET_CLIENT_ID]: (state, action) => {
-    console.log('setting client id', state, action, isBrowser)
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        clientId: getClientId(action),
-      },
-    }
+  [START_CONNECTION]: (state, action) => {
+    return state
   },
-  [ADD_MESSAGE]: error,
-  [END_CONNECTION]: (state) => ({
-    ...state,
-    data: {
-      ...state.data,
-      clientId: undefined
-    },
-  }),
+  [ADD_MESSAGE]: (state, action) => {
+    if (isBrowser) {
+      const { level, message } = action.payload
+      const div = state.data.div
+      if (div) {
+        const container = div.current
+        
+        const htmlDiv = document.createElement('div')
+        
+        const lineNumber = container.children.length + 1
+        
+        ReactDOM.render((
+          <div className={cx('level-'+level, 'logger-row')}>
+            {lineNumber}. [{level}] {message}
+          </div>
+        ), htmlDiv)
+        
+        container.append(htmlDiv)
+      }
+      
+    }
+    return state
+  },
+  [UPDATE_LOGGER_DIV_ID]: (state, action) => {
+    if (isBrowser) {
+      const myNode = action.data.current
+      while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild)
+      }
+      
+      return update(state, {
+        data: {
+          div: { $set: action.data },
+        },
+      })
+      
+    }
+    return state
+  },
   
 }, initialState)

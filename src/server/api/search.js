@@ -1,6 +1,9 @@
 import { Document, Name } from 'server/database/models'
 import { getMatchingSearches } from 'server/serverHelpers/search'
 import _ from 'lodash'
+import mongoose from 'mongoose'
+
+const ObjectId = mongoose.Types.ObjectId
 
 export default async function (ctx) {
   const searchParams = ctx.request.body
@@ -8,27 +11,48 @@ export default async function (ctx) {
   
   let { searchText, beginAt, endAt, fullTextChecked, searchIn, type, subType } = searchParams
   
-  // TODO remove default values
-  fullTextChecked = true
-  // searchText = 'saltzburg'
-  
-  if(beginAt === undefined) beginAt = 0
+  if (beginAt === undefined) beginAt = 0
   
   if (typeof beginAt !== 'number')
     throw new Error('beginAt must be a number')
   
   const filter = new RegExp(searchText, 'i')
   
-  let query = Document
+  let query
   
   if (fullTextChecked) {
-    query = query.find({ fullText: filter })
+    query = Document.find({ fullText: filter })
+  } else if (!type || type === 'all') {
+    query = Document.find({ title: filter })
   } else {
-  
+    let names
+    
+    if (subType && subType !== 'all') {
+      names = await Name.find({ text: filter, type, subType })
+      
+    } else {
+      names = await Name.find({ text: filter, type })
+    }
+    
+    if (!names.length) names = [ ObjectId() ]
+    
+    const nameIds = names.map(x => x._id.toString())
+    
+    query = Document.find({
+      names: {
+        $in: nameIds,
+      },
+    })
+    
   }
   
   if (searchIn !== 'all') {
-    query = query.find({ type: searchIn })
+    const [ type, subType ] = searchIn.split('.')
+    if (subType) {
+      query = query.find({ type, subType })
+    }else{
+      query = query.find({ type })
+    }
   }
   
   const resultDocuments = await query

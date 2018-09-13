@@ -38,20 +38,16 @@ const InnerForm = (props) => {
 })
 export class UpdateDbForm extends React.Component {
   render() {
-    const {handleClick} = this.props
-    const { dbUpdateMessages } = this.props.search
+    const { handleClick } = this.props
     return (
-      <div>
+      <div className='UpdateDbForm no-print'>
         <Formik
-          initialValues={{password: 'batman'}}
+          initialValues={{ password: 'batman' }}
           render={InnerForm}
           onSubmit={handleClick}
         />
       
-        <h1>Log</h1>
-        {dbUpdateMessages.map((message, i) => (
-          <div key={i}>{ message } </div>
-        ))}
+        
       </div>
       
     )

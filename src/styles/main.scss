@@ -181,6 +181,30 @@ body {
   }
 
 }
+
+.UpdateDbRoute {
+  .logs-holder :nth-child(even) {
+    background: #ececec;
+  }
+  .logger-row {
+    padding: 2px;
+
+    &.level-WARNING {
+      color: orange;
+    }
+    &.level-INFO {
+      color: blue;
+    }
+    &.level-ERROR {
+      color: red;
+    }
+    &.level-FATAL {
+      font-weight: bold;
+      color: red;
+
+    }
+  }
+}
 main {
   margin-left: $side-nav-width;
 
@@ -188,4 +212,12 @@ main {
   padding-right: 10em;
   padding-top: 3em;
 
+}
+
+@media print
+{
+  .no-print, .no-print *
+  {
+    display: none !important;
+  }
 }

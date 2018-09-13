@@ -123,16 +123,16 @@ function resolveTagTypes($tag, $) {
       subType = $tag.attr('scribe')
       break
     case 'GEOGNAME':
-      type = 'place'
-      subType = 'geographical'
+      type = 'geographical'
+      subType = $tag.attr('subType')
       break
     case 'TITLE':
       type = $tag.attr('type')
       subType = $tag.attr('subtype')
       break
     case 'ORGNAME':
-      type = 'place'
-      subType = 'organization'
+      type = 'organization'
+      subType = $tag.attr('subtype')
       break
     case 'REF':
       type = $tag.attr('type')

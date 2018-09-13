@@ -7,7 +7,7 @@ import {
   UPDATE_SEARCH_PARAMS,
   SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES,
 } from './search.constants'
-import { SET_CLIENT_ID } from 'app/modules/server-update-db/server-update-db.constants'
+import { START_CONNECTION } from 'app/modules/server-update-db/server-update-db.constants'
 
 export const apiFetchNameTypes = () => ({
   type: API_FETCH_NAME_TYPES,
@@ -37,8 +37,8 @@ export const apiUpdateDbAuthenticate1 = (formData) => ({
 })
 
 export const apiUpdateDbAuthenticate = (formData) => ({
-  type: SET_CLIENT_ID,
-  meta: { server: true, next: false },
+  type: START_CONNECTION,
+  meta: { server: true, next: true },
   payload: formData,
 })
 
@@ -58,12 +58,6 @@ export const apiSearch = (formData) => ({
 export const updateSearchParams = (formData) => ({
   type: UPDATE_SEARCH_PARAMS,
   data: formData,
-})
-
-export const testSocket = () => ({
-  type: 'server-update-db/SET_CLIENT_ID',
-  meta: {server: true, next: false},
-  payload: { a: 1 },
 })
 
 export const showHideSearchItemAllMatches = (documentId, newToggleState) => ({

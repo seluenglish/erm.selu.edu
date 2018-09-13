@@ -91,7 +91,7 @@ const InnerForm = (props) => {
                   component='select'
                   name='subType'
                   id='subType'>
-                  <option>All</option>
+                  <option value='all'>All</option>
                   {nameSubTypeSearchOptions.map((option, i) => (
                     <option value={option.value} key={i}>{option.label}</option>
                   ))}
