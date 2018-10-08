@@ -1,0 +1,236 @@
+[
+  {
+    "type": "animal",
+    "subTypes": []
+  },
+  {
+    "type": "date",
+    "subTypes": []
+  },
+  {
+    "type": "apparatus",
+    "subTypes": []
+  },
+  {
+    "type": "artwork",
+    "subTypes": []
+  },
+  {
+    "type": "astronomical",
+    "subTypes": []
+  },
+  {
+    "type": "book",
+    "subTypes": []
+  },
+  {
+    "type": "botanical",
+    "subTypes": []
+  },
+  {
+    "type": "building",
+    "subTypes": []
+  },
+  {
+    "type": "fictional",
+    "subTypes": []
+  },
+  {
+    "type": "figure",
+    "subTypes": []
+  },
+  {
+    "type": "geographical",
+    "subTypes": []
+  },
+  {
+    "type": "geological",
+    "subTypes": []
+  },
+  {
+    "type": "organization",
+    "subTypes": []
+  },
+  {
+    "type": "person",
+    "subTypes": [
+      {
+        "type": "fictional"
+      },
+      {
+        "type": "pseudonym"
+      },
+      {
+        "type": "scriptural"
+      }
+    ]
+  },
+  {
+    "type": "place",
+    "subTypes": [
+      {
+        "type": "architecture"
+      },
+      {
+        "type": "building"
+      },
+      {
+        "type": "fictional"
+      },
+      {
+        "type": "scriptural"
+      }
+    ]
+  },
+  {
+    "type": "title",
+    "subTypes": [
+      {
+        "type": "ana"
+      },
+      {
+        "type": "annual"
+      },
+      {
+        "type": "anthology"
+      },
+      {
+        "type": "archive"
+      },
+      {
+        "type": "artwork"
+      },
+      {
+        "type": "bibliography"
+      },
+      {
+        "type": "bibliography_text"
+      },
+      {
+        "type": "biography"
+      },
+      {
+        "type": "book"
+      },
+      {
+        "type": "building"
+      },
+      {
+        "type": "catalog_auction"
+      },
+      {
+        "type": "catalogue_auction"
+      },
+      {
+        "type": "collected_art"
+      },
+      {
+        "type": "collected_letters"
+      },
+      {
+        "type": "collected_poems"
+      },
+      {
+        "type": "collected_sketches"
+      },
+      {
+        "type": "composite"
+      },
+      {
+        "type": "dictionary"
+      },
+      {
+        "type": "dictionary_entry"
+      },
+      {
+        "type": "drama"
+      },
+      {
+        "type": "engraving"
+      },
+      {
+        "type": "essay"
+      },
+      {
+        "type": "gloss"
+      },
+      {
+        "type": "guidebook"
+      },
+      {
+        "type": "law"
+      },
+      {
+        "type": "lesson"
+      },
+      {
+        "type": "letter"
+      },
+      {
+        "type": "magazine"
+      },
+      {
+        "type": "manual_guide"
+      },
+      {
+        "type": "manuscript"
+      },
+      {
+        "type": "map"
+      },
+      {
+        "type": "novel"
+      },
+      {
+        "type": "opera"
+      },
+      {
+        "type": "periodical"
+      },
+      {
+        "type": "person"
+      },
+      {
+        "type": "poem"
+      },
+      {
+        "type": "pome"
+      },
+      {
+        "type": "program"
+      },
+      {
+        "type": "prose"
+      },
+      {
+        "type": "reference"
+      },
+      {
+        "type": "scripture"
+      },
+      {
+        "type": "series"
+      },
+      {
+        "type": "sermon"
+      },
+      {
+        "type": "sketch"
+      },
+      {
+        "type": "story"
+      },
+      {
+        "type": "tale"
+      }
+    ]
+  },
+  {
+    "type": "vessel",
+    "subTypes": []
+  },
+  {
+    "type": "witness",
+    "subTypes": []
+  }
+]
