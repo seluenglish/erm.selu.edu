@@ -14,9 +14,9 @@ export default function sockets(server) {
     {},
     [ ...middleware, outServerViaSocketIO(socketServer) ],
   )
-  
+
   global.store = socketsStore
-  
+
   socketServer.on('connection', socket => {
     log('New connection made with id', socket.id)
     socket.on('disconnect', () => {
@@ -29,13 +29,12 @@ export default function sockets(server) {
       socket: socket.id,
       ...action,
     })
-    
+
     applyIncomingSocketHooks(action, socket).then((res) => {
-      console.log('result', res)
     }).catch((err) => {
       console.log('error', err)
     })
-    
+
     // socketsStore.dispatch(action)
   })
 
