@@ -18,5 +18,13 @@ export const Document = mongoose.model('Document', {
   url: String,
   keywords: [ { type: String } ],
   names: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Name' } ],
+  dates: [ { type: mongoose.Schema.Types.ObjectId, ref:'DateModel' } ]
 }, null, { cache: false })
 
+
+export const DateModel = mongoose.model('DateModel', {
+  when: { type: Date, required: false },
+  notBefore: { type: Date, required: false },
+  notAfter: { type:Date, required: false },
+  content: String,
+}, null, { cache: false })
