@@ -93,8 +93,7 @@ const extractDates = ($) => {
       ret.notBefore = new Date(elem.attribs['notBefore'])
       ret.notAfter = new Date(elem.attribs['notAfter'])
     } else {
-      console.log('invalid date', $(elem).html())
-      throw new Error('invalid')
+      throw new Error('invalid date' + $(elem).html())
     }
 
     return ret
@@ -120,9 +119,7 @@ export function extractXmlData($) {
   const fullBody = $('body')
 
   const corresps = extractCorresps($)
-  console.log('extracting dates')
   const dates = extractDates($)
-  console.log(dates)
 
   const fullText = fullBody.text()
 
