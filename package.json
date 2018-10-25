@@ -106,6 +106,7 @@
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.10",
     "mini-css-extract-plugin": "^0.4.0",
+    "moment": "^2.22.2",
     "mongoose": "^5.2.7",
     "node-env-file": "~0.1.8",
     "node-prune": "^1.0.2",

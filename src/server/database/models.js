@@ -23,8 +23,7 @@ export const Document = mongoose.model('Document', {
 
 
 export const DateModel = mongoose.model('DateModel', {
-  when: { type: Date, required: false },
-  notBefore: { type: Date, required: false },
-  notAfter: { type:Date, required: false },
+  notBefore: { type: Date, required: true },
+  notAfter: { type: Date, required: true },
   content: String,
 }, null, { cache: false })

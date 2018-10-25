@@ -10,8 +10,6 @@ import { Formik, Field, Form } from 'formik'
 const InnerForm = (form) => {
   const { fullTextChecked } = form.values
 
-  console.log(fullTextChecked)
-
   const fileTypeSearchOptions = getFileTypeSearchOptions()
   const nameTypeSearchOptions = getNameTypeSearchOptions()
 
@@ -28,7 +26,7 @@ const InnerForm = (form) => {
     }
 
     if (nameType === 'date') {
-      return 'Search for a date in MMDDYYY format...'
+      return 'Search for a date in MMDDYYYY format...'
     }
 
     if (showSubType && form.values.subType && form.values.subType !== 'all') {

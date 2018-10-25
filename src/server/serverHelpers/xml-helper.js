@@ -4,6 +4,8 @@ import path from 'path'
 import fs from 'fs'
 import cheerio from 'cheerio'
 import { getKeywordsForText } from 'helpers/keyword-helper'
+import { parseDate } from './date-helper'
+import moment from 'moment'
 
 export const findXmlsInDirs = async (dirPaths) => {
   if (_.isString(dirPaths)) {
@@ -82,22 +84,18 @@ const extractDates = ($) => {
 
     ret.content = $(elem).html()
     if (elem.attribs['when']) {
-      ret.when = new Date(elem.attribs['when'])
-      if (ret.when === undefined) {
-        throw new Error('invalid when date')
-      }
-    } else if (elem.attribs['notBefore']){
+      [ ret.notBefore, ret.notAfter ] = parseDate(elem.attribs['when'])
+    } else if (elem.attribs['notBefore']) {
       if (elem.attribs['notAfter'] === undefined) {
         throw new Error('notAfter is needed')
       }
-      ret.notBefore = new Date(elem.attribs['notBefore'])
-      ret.notAfter = new Date(elem.attribs['notAfter'])
+      ret.notBefore = parseDate(elem.attribs['notBefore'])[0]
+      ret.notAfter = parseDate(elem.attribs['notAfter'])[1]
     } else {
       throw new Error('invalid date' + $(elem).html())
     }
 
     return ret
-
   }).get()
 }
 

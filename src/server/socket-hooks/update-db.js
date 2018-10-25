@@ -31,7 +31,11 @@ export default async function updateDb(payload, client) {
       [ level, message ] = message
     }
 
-    console.log(`${level} `, message)
+    if (message) {
+      console.log(`${level} `, message)
+    }
+    else
+      console.log()
 
     store.dispatch({
       type: ADD_MESSAGE,
@@ -57,7 +61,7 @@ export default async function updateDb(payload, client) {
     log(`${xmls.length} XML files discovered`)
 
     // xmls = [ 'witnesses/saltzburg_fo.xml' ]
-    // xmls = [ 'glosses/andernacht_glosses_contextual.xml' ]
+    xmls = [ 'glosses/andernacht_glosses_contextual.xml' ]
     // xmls = [ 'corpuses/account_of_a_tour_on_the_continent_le_corpus_therhine.xml' ]
 
     const validateDoc = (xmlData, doc) => {
@@ -167,7 +171,7 @@ export default async function updateDb(payload, client) {
     log(`Names saved`)
 
     log(`Saving dates`)
-    await DateModel.insertMany(allNames)
+    await DateModel.insertMany(allDates)
     log(`Dates saved.`)
 
     log(`Saving new documents`)
