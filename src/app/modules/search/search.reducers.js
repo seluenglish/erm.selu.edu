@@ -37,9 +37,18 @@ const initialState = {
 
 
 const rejectedReducer = (state, action) => {
-  return {
-    ...state,
-    error: action.payload.json.error,
+  if (action.payload && action.payload.json) {
+
+    return {
+      ...state,
+      error: action.payload.json.error,
+    }
+  }
+  else {
+    return {
+      ...state,
+      error: 'An unknown error occurred. Please try again.',
+    }
   }
 }
 
@@ -54,6 +63,7 @@ export const searchReducers = typeToReducer({
     [REJECTED]: rejectedReducer,
     [FULFILLED]: (state, action) => ({
       ...state,
+      error: '',
       data: {
         ...state.data,
         docTypes: getNameTypes(action),
@@ -76,6 +86,7 @@ export const searchReducers = typeToReducer({
     [REJECTED]: rejectedReducer,
     [FULFILLED]: (state, action) => ({
       ...state,
+      error: '',
       data: {
         ...state.data,
         searchResults: getSearchResults(action),

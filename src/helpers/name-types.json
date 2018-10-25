@@ -4,10 +4,6 @@
     "subTypes": []
   },
   {
-    "type": "date",
-    "subTypes": []
-  },
-  {
     "type": "apparatus",
     "subTypes": []
   },
@@ -29,6 +25,10 @@
   },
   {
     "type": "building",
+    "subTypes": []
+  },
+  {
+    "type": "date",
     "subTypes": []
   },
   {

@@ -16,7 +16,7 @@ export default async function (ctx) {
   if (beginAt === undefined) beginAt = 0
 
   if (typeof beginAt !== 'number')
-    throw new CustomError(`beginAt must be a number`)
+    throw new CustomError(`beginAt must be a number.`)
 
   const filter = new RegExp(searchText, 'i')
 
@@ -29,8 +29,6 @@ export default async function (ctx) {
   } else if (type === 'date') {
     let [ beginDate, endDate ] = parseDate(searchText, 'YYYYMMDD')
 
-    // console.log('ranges: ', beginDate, endDate)
-
     let dates = await DateModel.find({
       $and: [
         { notBefore: { $lte: beginDate.toISOString() } },
@@ -38,19 +36,15 @@ export default async function (ctx) {
       ],
     })
 
-    // console.log(dates)
     if (!dates.length) dates = [ ObjectId() ]
 
     const dateIds = dates.map(x => x._id.toString())
-
-    // console.log(dateIds)
 
     query = Document.find({
       dates: {
         $in: dateIds,
       },
     })
-
   } else {
     let names
 
@@ -103,38 +97,6 @@ export default async function (ctx) {
     return ret
   })
   result = _.sortBy(result, x => -x.weight)
-
-  // const names = await Name.find({})
-  // let nResult = []
-  // names.forEach(name => {
-  //   let nItem = nResult.find( x => x.type === name.type)
-  //
-  //   if (!nItem) {
-  //     nItem = {
-  //       type: name.type,
-  //       subTypes: [],
-  //     }
-  //
-  //     nResult.push(nItem)
-  //   }
-  //
-  //   if (name.subType) {
-  //     let subType = nItem.subTypes.find(x => x.type === name.subType)
-  //
-  //     if(!subType) {
-  //       subType = {
-  //         type: name.subType,
-  //       }
-  //
-  //       nItem.subTypes.push(subType)
-  //     }
-  //   }
-  //
-  // })
-  //
-  // nResult = _.sortBy(nResult, x => x.type)
-  // console.log(JSON.stringify(nResult, null, 2))
-  //
 
   ctx.response.body = {
     totalHits: _.sum(result.map(x => x.matches.length)), // total results

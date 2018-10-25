@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { CustomError } from './error-handler'
 
 export const parseDate = (dateStr, format) => {
   let beginDate, endDate
@@ -32,6 +33,10 @@ export const parseDate = (dateStr, format) => {
       beginDate = moment(dateStr)
       endDate = beginDate.clone()
     }
+  }
+
+  if (!beginDate.isValid() || !endDate.isValid()) {
+    throw new CustomError('Invalid date supplied.')
   }
 
   return [ beginDate.toDate(), endDate.toDate() ]

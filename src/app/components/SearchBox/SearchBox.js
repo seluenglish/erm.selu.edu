@@ -28,7 +28,7 @@ const InnerForm = (form) => {
     }
 
     if (nameType === 'date') {
-      return 'Search for a date in MMDDYYYY format...'
+      return 'YYYYMMDD or YYYYMM or YYYYMMDD format'
     }
 
     if (showSubType && form.values.subType && form.values.subType !== 'all') {
@@ -55,8 +55,6 @@ const InnerForm = (form) => {
   }
 
   const handleNameTypeChange = (e) => {
-    console.log('name type change')
-
     form.handleChange(e)
 
     return true
