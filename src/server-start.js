@@ -12,7 +12,8 @@ import bodyparser from 'koa-bodyparser'
 import dotenv from 'dotenv'
 import { DB_CONN_STRING } from './server/config'
 import mongoose from 'mongoose'
-import { apiRouter } from "./server/api"
+import { apiRouter } from './server/api'
+import errorHandler from './server/serverHelpers/error-handler'
 
 if (!isBrowser) {
   dotenv.config()
@@ -29,15 +30,7 @@ if (isEnv('development')) {
 }
 
 app.use(bodyparser())
-app.use(async (ctx, next) => {
-  try {
-    await next();
-  } catch (err) {
-    ctx.status = err.status || 500;
-    ctx.body = err.message;
-    ctx.app.emit('error', err, ctx);
-  }
-});
+app.use(errorHandler)
 
 isomorphicTools.server(ROOT, async () => {
   if (isEnv('development')) {
