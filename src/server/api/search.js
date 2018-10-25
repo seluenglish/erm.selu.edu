@@ -3,6 +3,7 @@ import { getMatchingSearches } from 'server/serverHelpers/search'
 import _ from 'lodash'
 import mongoose from 'mongoose'
 import { parseDate } from 'server/serverHelpers/date-helper'
+import { CustomError } from 'server/serverHelpers/error-handler'
 
 const ObjectId = mongoose.Types.ObjectId
 
@@ -15,7 +16,7 @@ export default async function (ctx) {
   if (beginAt === undefined) beginAt = 0
 
   if (typeof beginAt !== 'number')
-    throw new Error('beginAt must be a number')
+    throw new CustomError(`beginAt must be a number`)
 
   const filter = new RegExp(searchText, 'i')
 

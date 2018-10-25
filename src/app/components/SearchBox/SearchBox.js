@@ -3,7 +3,7 @@ import cx from 'classnames'
 import styles from './SearchBox.module.scss'
 import PropTypes from 'prop-types'
 import { getFileTypeSearchOptions, getNameSubTypeSearchOptions, getNameTypeSearchOptions } from 'helpers/document-helpers'
-import { getSearch } from 'app/modules/search/search.selectors'
+import { getSearch, getSearchError } from 'app/modules/search/search.selectors'
 import { apiFetchNameSubTypes, apiFetchNameTypes} from 'app/modules/search/search.actions'
 import { Formik, Field, Form } from 'formik'
 
@@ -17,8 +17,10 @@ const InnerForm = (form) => {
   const nameSubTypeSearchOptions = (nameType && nameType !== 'all')?getNameSubTypeSearchOptions(nameType):undefined
   const showSubType = (nameSubTypeSearchOptions && nameSubTypeSearchOptions.length>0)
 
-  let error = Object.values(form.errors)
-  if (error.length) error = error[0]
+  const { customErrorMessage } = form
+
+  let errorMsg = Object.values(form.errors)
+  if (errorMsg.length) errorMsg = errorMsg[0]
 
   const textPlaceHolderGenerator = () => {
     if (fullTextChecked) {
@@ -78,8 +80,10 @@ const InnerForm = (form) => {
         <legend>Advanced Search</legend>
         <div className='searchFields'>
           <div className={'firstBox'}>
-            <div className={'error'} style={{ visibility: error?'visible':'hidden' }}>
-              {error}&nbsp;
+            <div className={'error'} style={{ visibility: (errorMsg||customErrorMessage)?'visible':'hidden' }}>
+              {errorMsg && errorMsg.length>0 && errorMsg}
+              {errorMsg && errorMsg.length>0 && customErrorMessage && <br />}
+              {customErrorMessage && customErrorMessage}
             </div>
 
 
@@ -171,6 +175,7 @@ const InnerForm = (form) => {
 
 @connect(state => ({
   search: getSearch(state),
+  error: getSearchError(state),
 }), {
   apiFetchNameTypes,
   apiFetchNameSubTypes,
@@ -187,7 +192,7 @@ export default class SearchBox extends React.Component {
 
     if (!values.searchText) {
       errors.searchText = 'Search phrase required'
-    }else if(values.searchText.length < 2) {
+    } else if (values.searchText.length < 2) {
       errors.searchText = 'Enter at least 2 characters'
     }
 
@@ -195,13 +200,13 @@ export default class SearchBox extends React.Component {
   }
 
   render() {
-    const { handleSearchClick } = this.props
+    const { handleSearchClick, error } = this.props
     const { searchParams } = this.props.search
 
     return (
       <Formik
         initialValues={searchParams}
-        render={InnerForm}
+        render={(formicProps) => <InnerForm {...formicProps} customErrorMessage={error} />}
         validate={this.validate}
         onSubmit={handleSearchClick}
       />

@@ -17,29 +17,31 @@ const getSearchParams = get('data')
 
 const initialState = {
   isPending: false,
-  error: false,
+  error: '',
   data: {
     searchParams: {
-      searchText: 'calais',
+      searchText: '',
       fullTextChecked: false,
-      
+
       searchIn: 'all',
-      
+
       type: '',
       subType: '',
     },
-    
+
     searchResults: null,
-    
+
     dbUpdateMessages: [],
   },
 }
 
 
-const rejectedReducer = (state, action) => ({
-  ...state,
-  error: action.payload
-})
+const rejectedReducer = (state, action) => {
+  return {
+    ...state,
+    error: action.payload.json.error,
+  }
+}
 
 const pendingReducer = (state) => ({
   ...state,
@@ -78,7 +80,7 @@ export const searchReducers = typeToReducer({
         ...state.data,
         searchResults: getSearchResults(action),
       },
-      
+
     }),
   },
   [UPDATE_SEARCH_PARAMS]: (state, action) => ({
@@ -88,15 +90,15 @@ export const searchReducers = typeToReducer({
       searchParams: getSearchParams(action),
     },
   }),
-  
+
   [SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES]: (state, action) => {
-    
+
     if (!state.data.searchResults) return state
-    
+
     const { documentId, newToggleState } = action.payload
-    
+
     const documentIndex = state.data.searchResults.listItems.findIndex(x => x.id === documentId)
-    
+
     return update(state, {
       data: {
         searchResults: {
@@ -109,5 +111,5 @@ export const searchReducers = typeToReducer({
       },
     })
   },
-  
+
 }, initialState)
