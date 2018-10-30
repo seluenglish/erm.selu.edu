@@ -12,8 +12,10 @@ import bodyparser from 'koa-bodyparser'
 import dotenv from 'dotenv'
 import { DB_CONN_STRING } from './server/config'
 import mongoose from 'mongoose'
-import { apiRouter } from './server/api'
 import errorHandler from './server/serverHelpers/error-handler'
+import momenttz from 'moment-timezone'
+
+momenttz.tz.setDefault(`UTC`)
 
 if (!isBrowser) {
   dotenv.config()

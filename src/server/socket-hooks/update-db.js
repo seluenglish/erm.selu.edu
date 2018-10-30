@@ -60,8 +60,8 @@ export default async function updateDb(payload, client) {
     let xmls = await findXmlsInDirs(dirPath)
     log(`${xmls.length} XML files discovered`)
 
-    // xmls = [ 'witnesses/saltzburg_fo.xml' ]
-    xmls = [ 'glosses/andernacht_glosses_contextual.xml' ]
+    // xmls = [ 'witnesses/lille_poem_le.xml' ]
+    // xmls = [ 'glosses/andernacht_glosses_contextual.xml' ]
     // xmls = [ 'corpuses/account_of_a_tour_on_the_continent_le_corpus_therhine.xml' ]
 
     const validateDoc = (xmlData, doc) => {

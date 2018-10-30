@@ -7,6 +7,9 @@ import { getKeywordsForText } from 'helpers/keyword-helper'
 import { parseDate } from './date-helper'
 import moment from 'moment'
 
+const dateStringBeforeLength = 30
+const dateStringAfterLength = 30
+
 export const findXmlsInDirs = async (dirPaths) => {
   if (_.isString(dirPaths)) {
     dirPaths = [ dirPaths ]
@@ -81,8 +84,18 @@ const extractCorresps = ($) => {
 const extractDates = ($) => {
   return $('body date').map((_, elem) => {
     const ret = {}
+    let beforeStr='', afterStr=''
 
     ret.content = $(elem).html()
+
+    if (elem.previousSibling && elem.previousSibling.nodeValue) {
+      beforeStr = elem.previousSibling.nodeValue.substr(elem.previousSibling.nodeValue.length- dateStringBeforeLength)
+    }
+
+    if (elem.nextSibling && elem.nextSibling.nodeValue) {
+      afterStr = elem.nextSibling.nodeValue.substr(0, dateStringAfterLength)
+    }
+
     if (elem.attribs['when']) {
       [ ret.notBefore, ret.notAfter ] = parseDate(elem.attribs['when'])
     } else if (elem.attribs['notBefore']) {
@@ -94,6 +107,11 @@ const extractDates = ($) => {
     } else {
       throw new Error('invalid date' + $(elem).html())
     }
+
+    if (beforeStr.trim()) beforeStr = `...${beforeStr}`
+    if (afterStr.trim()) afterStr = `${afterStr}...`
+
+    ret.searchText = `${beforeStr.trim()} <mark>${ret.content.trim()}</mark> ${afterStr.trim()}`
 
     return ret
   }).get()

@@ -12,6 +12,7 @@ export default async function (ctx) {
   // TODO validate search params
 
   let { searchText, beginAt, endAt, fullTextChecked, searchIn, type, subType } = searchParams
+  let beginDate, endDate
 
   if (beginAt === undefined) beginAt = 0
 
@@ -20,16 +21,16 @@ export default async function (ctx) {
 
   const filter = new RegExp(searchText, 'i')
 
-  let query
+  let query, dates
 
   if (fullTextChecked) {
     query = Document.find({ fullText: filter })
   } else if (!type || type === 'all') {
     query = Document.find({ title: filter })
   } else if (type === 'date') {
-    let [ beginDate, endDate ] = parseDate(searchText, 'YYYYMMDD')
+    [ beginDate, endDate ] = parseDate(searchText, 'YYYYMMDD')
 
-    let dates = await DateModel.find({
+    dates = await DateModel.find({
       $and: [
         { notBefore: { $lte: beginDate.toISOString() } },
         { notAfter: { $gte: endDate.toISOString() } },
@@ -80,7 +81,18 @@ export default async function (ctx) {
   console.log('result count: ', count)
 
   let result = resultDocuments.map(doc => {
-    const matches = getMatchingSearches(doc.fullText, searchText)
+
+    let matches
+    if (type === 'date') {
+      const thisDates = dates.filter(x => doc.dates.indexOf(x._id) >= 0)
+      matches = thisDates.map(x => ({
+        showText: x.searchText,
+      }))
+
+      matches = _.uniqBy(matches, 'showText')
+    } else {
+      matches = getMatchingSearches(doc.fullText, { searchText })
+    }
     const ret = {
       fileId: doc.fileId,
       title: doc.title,

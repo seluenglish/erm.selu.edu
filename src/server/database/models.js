@@ -26,4 +26,5 @@ export const DateModel = mongoose.model('DateModel', {
   notBefore: { type: Date, required: true },
   notAfter: { type: Date, required: true },
   content: String,
+  searchText: String,
 }, null, { cache: false })
