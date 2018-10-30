@@ -8,21 +8,21 @@ import { hot } from 'react-hot-loader'
 export class SideNavigation extends React.Component {
   constructor(props) {
     super(props)
-    
+
     this.onQuickSearch = this.onQuickSearch.bind(this)
   }
-  
+
   onQuickSearch(searchParams) {
     console.log('searching', searchParams)
-    
+
   }
-  
+
   render() {
     const logoUrl = getUrl('images/ruskin_logo.jpg')
-    
+
     return (
       <nav className='SideNavigation no-print'>
-        
+
         <Link
           to='/'
           className={'brand'}>
@@ -31,7 +31,7 @@ export class SideNavigation extends React.Component {
             alt='Ruskin logo'
           />
         </Link>
-        
+
         <div className='navigationTitle'>
           The <br />
           Early <br />
@@ -39,18 +39,18 @@ export class SideNavigation extends React.Component {
           Manuscripts <br />
           <div className='navigationDate'>1826&#x2013;1842</div>
         </div>
-        
+
         <hr />
-  
+
         <div className='navigationEditor'>
           <a href='mailto:ruskinproject@selu.edu'>
             David C. Hanson, Editor
           </a>
         </div>
-        
+
         <QuickSearchBox />
-        
-        
+
+
         <div className='navItems'>
           <NavLink
             exact
@@ -58,31 +58,36 @@ export class SideNavigation extends React.Component {
             to='/'>
             {navCopy.home}
           </NavLink>
-          
+
           <NavLink
             activeClassName={'active'}
             to='/search'>
             {navCopy.search}
           </NavLink>
-          
+
           <NavLink
             activeClassName={'active'}
-            to='/indices'>
+            to='/essays/indices_essay'>
             Indices
           </NavLink>
-          
+
           <NavLink
             activeClassName={'active'}
             to='/indices/worksomething'>
             WorkSomething
           </NavLink>
-          
+
           <NavLink
             activeClassName={'active'}
             to='/indices/essay'>
             Essay
           </NavLink>
-        
+
+          <NavLink
+            activeClassName={'active'}
+            to='/update_db'>
+            Update DB
+          </NavLink>
         </div>
       </nav>
     )

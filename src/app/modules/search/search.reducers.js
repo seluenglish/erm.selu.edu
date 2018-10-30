@@ -20,6 +20,8 @@ const initialState = {
   error: '',
   data: {
     searchParams: {
+      neverLoaded: true,
+
       searchText: '',
       fullTextChecked: false,
 
@@ -101,7 +103,6 @@ export const searchReducers = typeToReducer({
       searchParams: getSearchParams(action),
     },
   }),
-
   [SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES]: (state, action) => {
 
     if (!state.data.searchResults) return state
