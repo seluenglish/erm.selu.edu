@@ -4,8 +4,9 @@ import styles from './SearchBox.module.scss'
 import PropTypes from 'prop-types'
 import { getFileTypeSearchOptions, getNameSubTypeSearchOptions, getNameTypeSearchOptions } from 'helpers/document-helpers'
 import { getSearch, getSearchError } from 'app/modules/search/search.selectors'
-import { apiFetchNameSubTypes, apiFetchNameTypes} from 'app/modules/search/search.actions'
+import { apiFetchNameSubTypes, apiFetchNameTypes, updateSearchParams } from 'app/modules/search/search.actions'
 import { Formik, Field, Form } from 'formik'
+import update from 'immutability-helper'
 
 const InnerForm = (form) => {
   const { fullTextChecked } = form.values
@@ -177,12 +178,39 @@ const InnerForm = (form) => {
 }), {
   apiFetchNameTypes,
   apiFetchNameSubTypes,
+  updateSearchParams,
 })
 export default class SearchBox extends React.Component {
   constructor(props){
     super(props)
 
     this.validate = this.validate.bind(this)
+  }
+
+  loadSearchParamsFromURL() {
+    const queryString = this.props.queryString
+
+    const parser = new URLSearchParams(queryString)
+
+    const params = update(this.props.search.searchParams, {
+      neverLoaded: { $set: false },
+    })
+
+    const text = parser.get('text')
+
+    if (text) {
+      params.searchText = text
+    }
+
+    this.props.updateSearchParams(params)
+
+  }
+
+  componentWillMount() {
+
+    if (this.props.search && this.props.search.searchParams && this.props.search.searchParams.neverLoaded) {
+      this.loadSearchParamsFromURL()
+    }
   }
 
   validate(values) {
@@ -214,4 +242,5 @@ export default class SearchBox extends React.Component {
 
 SearchBox.propTypes = {
   handleSearchClick: PropTypes.func.isRequired,
+  queryString: PropTypes.string,
 }
