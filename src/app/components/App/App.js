@@ -71,27 +71,27 @@ class App extends React.Component {
         <SideNavigation />
         <main className={style.content}>
           <Switch>
-            <Route
-              exact
-              path='/'
-              component={LoadableHomeRoute}
-            />
+            {/*<Route*/}
+              {/*exact*/}
+              {/*path='/'*/}
+              {/*component={LoadableHomeRoute}*/}
+            {/*/>*/}
             <Route
               path='/search'
               component={LoadableSearchRoute}
             />
-            <Route
-              path='/bar'
-              component={LoadableBarRoute}
-            />
-            <Route
-              path='/oops'
-              component={LoadableOopsRoute}
-            />
-            <Route
-              path='/private'
-              component={PrivateRoute}
-            />
+            {/*<Route*/}
+              {/*path='/bar'*/}
+              {/*component={LoadableBarRoute}*/}
+            {/*/>*/}
+            {/*<Route*/}
+              {/*path='/oops'*/}
+              {/*component={LoadableOopsRoute}*/}
+            {/*/>*/}
+            {/*<Route*/}
+              {/*path='/private'*/}
+              {/*component={PrivateRoute}*/}
+            {/*/>*/}
             <Route
               path={'/update_db'}
               component={UpdateDbRoute}
