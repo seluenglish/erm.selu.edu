@@ -23,10 +23,7 @@ export function setApiRoutes() {
     .post('update_db', '/update_db', update_db)
     .post('search', '/search', search)
     .get('nameTypes', '/nameTypes', (ctx) => {
-      ctx.response.body = ['a', 'b', 'c']
-    })
-    .get('nameSubTypes', '/nameSubTypes', (ctx) => {
-      ctx.response.body = ['d', 'e', 'f']
+      ctx.response.body = [ 'a', 'b', 'c' ]
     })
     .all('not-found', '*', (ctx) => {
       ctx.set('Content-Type', 'text/html')
