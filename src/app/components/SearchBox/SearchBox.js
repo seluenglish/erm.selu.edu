@@ -29,7 +29,7 @@ const InnerForm = (form) => {
     }
 
     if (nameType === 'date') {
-      return 'YYYYMMDD or YYYYMM or YYYYMMDD format'
+      return 'YYYYMMDD or YYYYMM or YYYY format'
     }
 
     if (showSubType && form.values.subType && form.values.subType !== 'all') {
