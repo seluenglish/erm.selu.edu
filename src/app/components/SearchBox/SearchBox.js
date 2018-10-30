@@ -116,7 +116,7 @@ const InnerForm = (form) => {
           </div>
           <div className='thirdBox'>
             <label htmlFor='searchIn'>
-              Search in:
+              Search in: &nbsp;
               <Field
                 component='select'
                 name='searchIn'
@@ -130,7 +130,7 @@ const InnerForm = (form) => {
             </label>
 
             <label htmlFor='type'>
-              Show:
+              Of name type: &nbsp;
               <Field
                 component='select'
                 name='type'
@@ -207,7 +207,6 @@ export default class SearchBox extends React.Component {
   }
 
   componentWillMount() {
-
     if (this.props.search && this.props.search.searchParams && this.props.search.searchParams.neverLoaded) {
       this.loadSearchParamsFromURL()
     }

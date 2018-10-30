@@ -1,22 +1,57 @@
 import { getUrl } from './url-helper'
 import NAME_TYPES from './name-types.json'
+import { firstLetterCapital } from './case-helper'
 import _ from 'lodash'
 
-const FILE_TYPES = _.sortBy([
+const FILE_TYPES = [
+  {
+    type: 'apparatus',
+    locatedAt: 'apparatuses',
+    showInSearch: true,
+    subTypes: [
+      { type: 'manuscript', showInSearch: true },
+      { type: 'work', showInSearch: true },
+    ],
+  },
+  {
+    type: 'gloss',
+    locatedAt: 'glosses',
+    showInSearch: true,
+    subTypes: [
+      { type: 'contextual', showInSearch: true },
+      { type: 'textual', showInSearch: true },
+    ],
+  },
+  {
+    type: 'note',
+    locatedAt: 'notes',
+    showInSearch: true,
+    subTypes: [
+      { type: 'bibliographical', showInSearch: true },
+      { type: 'biographical', showInSearch: true },
+      { type: 'contextual', showInSearch: true },
+      { type: 'geographical', showInSearch: true },
+    ],
+  },
+  {
+    type: 'figure',
+    locatedAt: 'figures',
+    showInSearch: true,
+    subTypes: [
+      { type: 'drawing', showInSearch: false },
+    ],
+  },
   {
     type: 'witness',
     showInSearch: true,
     locatedAt: 'witnesses',
     subTypes: [
+      { type: 'anthology', showInSearch: true },
+      { type: 'drama', showInSearch: true },
       { type: 'essay', showInSearch: true },
       { type: 'poem', showInSearch: true },
-      { type: 'prose', showInSearch: false },
+      { type: 'gloss', showInSearch: true },
     ],
-  },
-  {
-    type: 'apparatus',
-    locatedAt: 'apparatuses',
-    showInSearch: true,
   },
   {
     type: 'bibliography',
@@ -24,41 +59,26 @@ const FILE_TYPES = _.sortBy([
     showInSearch: true,
   },
   {
-    type: 'glosses',
-    locatedAt: 'glosses',
+    type: 'corpus',
+    locatedAt: 'corpuses',
     showInSearch: true,
   },
   {
     type: 'essay',
     locatedAt: 'essays',
-    showInSearch: true,
-  },
-  {
-    type: 'figure',
-    locatedAt: 'witnesses',
-    showInSearch: true,
-  },
-  {
-    type: 'drawing',
-    locatedAt: 'witnesses',
-    showInSearch: true,
-  },
-  {
-    type: 'note',
-    locatedAt: 'notes',
-    showInSearch: true,
+    showInSearch: false,
   },
   {
     type: 'webpage',
     locatedAt: 'webpages',
-    showInSearch: true,
+    showInSearch: false,
   },
   {
     type: 'title',
     locatedAt: 'witnesses',
-    showInSearch: true,
+    showInSearch: false,
   },
-], x => x.type)
+]
 
 const searchNameTypeOptions = []
 const searchNameSubTypeOptions = {}
@@ -68,14 +88,14 @@ export function getFileTypeSearchOptions() {
   if (!searchFileTypeOptions.length) {
     FILE_TYPES.forEach(fileType => {
       if (fileType.showInSearch)
-        searchFileTypeOptions.push({ value: fileType.type, label: fileType.type })
+        searchFileTypeOptions.push({ value: fileType.type, label: firstLetterCapital(fileType.type) })
 
       if (fileType.subTypes) {
         fileType.subTypes.forEach(subType => {
           if (!subType.showInSearch) return
 
           const value = `${fileType.type}.${subType.type}`
-          const label = `${fileType.type} -> ${subType.type}`
+          const label = `　${firstLetterCapital(subType.type)}`
           searchFileTypeOptions.push({ value, label })
         })
       }
@@ -88,7 +108,7 @@ export function getFileTypeSearchOptions() {
 export function getNameTypeSearchOptions() {
   if(!searchNameTypeOptions.length){
     NAME_TYPES.forEach(nameType => {
-      searchNameTypeOptions.push({value: nameType.type, label: nameType.type})
+      searchNameTypeOptions.push({value: nameType.type, label: firstLetterCapital(nameType.type)})
     })
   }
 
@@ -102,7 +122,7 @@ export function getNameSubTypeSearchOptions(nameType) {
 
     const item = NAME_TYPES.find(x => x.type === nameType)
     item.subTypes.forEach(nameSubType => {
-      searchNameSubTypeOptions[nameType].push({value: nameSubType.type, label: nameSubType.type})
+      searchNameSubTypeOptions[nameType].push({value: nameSubType.type, label: firstLetterCapital(nameSubType.type)})
     })
   }
 
