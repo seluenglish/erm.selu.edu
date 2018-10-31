@@ -81,7 +81,6 @@ export default async function (ctx) {
   console.log('result count: ', count)
 
   let result = resultDocuments.map(doc => {
-
     let matches
     if (type === 'date') {
       const thisDates = dates.filter(x => doc.dates.indexOf(x._id) >= 0)
@@ -89,7 +88,6 @@ export default async function (ctx) {
         showText: x.searchText,
       }))
 
-      matches = _.uniqBy(matches, 'showText')
     } else {
       matches = getMatchingSearches(doc.fullText, { searchText })
     }
@@ -103,7 +101,7 @@ export default async function (ctx) {
       url: doc._url,
 
       weight: matches.length,
-      matches,
+      matches: _.uniqBy(matches, 'showText'),
     }
 
     return ret
