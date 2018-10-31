@@ -14,7 +14,7 @@ const FILE_TYPES = [
     ],
   },
   {
-    type: 'gloss',
+    type: 'glosses',
     locatedAt: 'glosses',
     showInSearch: true,
     subTypes: [
@@ -131,7 +131,6 @@ export function getNameSubTypeSearchOptions(nameType) {
 
 export function getDocumentUrl(document) {
   if (!document.type) return ''
-  // console.log(document.type)
   const fileType = FILE_TYPES.find(x => x.type === document.type)
 
   return getUrl(`${fileType.locatedAt}/${document.fileId}.php`)

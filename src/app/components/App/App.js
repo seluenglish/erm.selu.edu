@@ -10,6 +10,7 @@ import PrivateRoute from 'app/routes/PrivateRoute/PrivateRoute'
 import UpdateDbRoute from 'app/routes/UpdateDbRoute/UpdateDbRoute'
 import avatarPath from 'assets/avatar.jpeg'
 import style from './App.module.scss'
+import { isBrowser } from 'app/utils'
 
 const log = debug('App.js')
 
@@ -54,7 +55,6 @@ const LoadableNotFoundRoute = Loadable({
 
 class App extends React.Component {
   render() {
-    log('render')
     return (
       <div className={style.app}>
         <DocumentMeta
@@ -68,7 +68,7 @@ class App extends React.Component {
         </DocumentMeta>
         {/*<HeadNavigation />*/}
         <FlashMessages />
-        <SideNavigation />
+        {/*<SideNavigation />*/}
         <main className={style.content}>
           <Switch>
             {/*<Route*/}
