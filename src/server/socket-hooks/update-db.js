@@ -8,7 +8,6 @@ import {
 } from 'server/serverHelpers/xml-helper'
 import { getUrl } from 'helpers/url-helper'
 import { Document, Name, DateModel } from 'server/database/models'
-import { XML_PATH } from 'server/config'
 import path from 'path'
 import mongoose from 'mongoose'
 import _ from 'lodash'
@@ -55,7 +54,7 @@ export default async function updateDb(payload, client) {
     const allDocs = []
     let allDates = []
 
-    const dirPath = [ path.join(XML_PATH, '_Completed/') ]
+    const dirPath = [ path.join(process.env.XML_PATH, '_Completed/') ]
     log('locating XML files')
     let xmls = await findXmlsInDirs(dirPath)
     log(`${xmls.length} XML files discovered`)
