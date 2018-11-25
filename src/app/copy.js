@@ -14,6 +14,18 @@ export const nav = {
   private: `Private`,
   search: `Search`,
   indices: `Indices`,
+  works: 'Works',
+  manuscripts: 'Manuscripts',
+  corpora: 'Corpora',
+  workByOthers: 'WorkByOthers',
+  commentary: 'Commentary',
+  essays: 'Essays',
+  drawings: 'Drawings',
+  xml: 'XML',
+  bibliography: 'Bibliography',
+  staffAndSupport: 'Staff and Support',
+  legal: 'Legal',
+
 }
 
 export const privateRoute = {

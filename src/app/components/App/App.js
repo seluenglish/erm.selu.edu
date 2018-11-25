@@ -8,7 +8,6 @@ import SideNavigation from 'app/components/SideNavigation/SideNavigation'
 import FlashMessages from 'app/components/@FlashMessages/FlashMessages'
 import PrivateRoute from 'app/routes/PrivateRoute/PrivateRoute'
 import UpdateDbRoute from 'app/routes/UpdateDbRoute/UpdateDbRoute'
-import avatarPath from 'assets/avatar.jpeg'
 import style from './App.module.scss'
 import { isBrowser } from 'app/utils'
 
@@ -66,16 +65,16 @@ class App extends React.Component {
           <meta name='description' content={appCopy.meta.description} />
           <meta name='keywords' content={appCopy.meta.keywords} />
         </DocumentMeta>
-        {/*<HeadNavigation />*/}
+        <HeadNavigation />
         <FlashMessages />
         {/*<SideNavigation />*/}
         <main className={style.content}>
           <Switch>
-            {/*<Route*/}
-              {/*exact*/}
-              {/*path='/'*/}
-              {/*component={LoadableHomeRoute}*/}
-            {/*/>*/}
+            <Route
+              exact
+              path='/'
+              component={LoadableHomeRoute}
+            />
             <Route
               path='/search'
               component={LoadableSearchRoute}

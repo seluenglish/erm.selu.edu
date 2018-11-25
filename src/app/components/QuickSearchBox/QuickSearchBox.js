@@ -11,19 +11,17 @@ import { replace } from 'react-router-redux'
 
 const InnerForm = () => {
   return (
-    <Form className='QuickSearchBox' style={styles}>
+    <Form className='QuickSearchBox form-inline my-2 my-lg-0' style={styles}>
       <Field
         type='text'
         name='searchText'
         placeholder='Search...'
+        className='form-control mr-sm-2'
       />
       <button
         type='submit'
-        className={cx(
-          {
-            btn: true,
-          }
-        )}>Go
+        className='btn btn-outline-success my-2 my-sm-0'>
+        Search
       </button>
     </Form>
   )
@@ -35,7 +33,7 @@ const InnerForm = () => {
 export class QuickSearchBox extends React.Component {
   constructor(props) {
     super(props)
-    
+
     this.handleSearchClick = this.handleSearchClick.bind(this)
   }
   handleSearchClick(params) {
@@ -44,12 +42,12 @@ export class QuickSearchBox extends React.Component {
     apiSearch(params)
     replace('/search')
   }
-  
+
   render() {
     if (!this.props.search) return <div>Error</div>
-    
+
     const { searchParams } = this.props.search
-    
+
     return (
       <div className='QuickSearchBox'>
         <Formik

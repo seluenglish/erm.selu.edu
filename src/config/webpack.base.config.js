@@ -61,6 +61,12 @@ export default {
     new ReactLoadablePlugin({
       filename: LOADABLE_FILE,
     }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Popper: [ 'popper.js', 'default' ],
+    }),
   ],
   module: {
     rules: [

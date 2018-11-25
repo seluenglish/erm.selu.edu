@@ -16,7 +16,7 @@ class NotFoundRoute extends React.Component {
     if (!a.pathname.endsWith('/')) {
       a.pathname += '.php'
     }
-    window.location = a.href
+    // window.location = a.href
   }
 
   render() {

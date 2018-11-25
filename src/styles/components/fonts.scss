@@ -1,0 +1,19 @@
+/* Used by IE8 */
+@font-face {
+  font-family: Andron;
+  src: url('//english.selu.edu/fonts/andron_scriptor_web_3_1.eot');
+}
+
+/* Used by Other Web Browsers */
+@font-face {
+  font-family: Andron;
+  src: url('//english.selu.edu/fonts/andron_scriptor_web_3_1.woff');
+}
+
+body{
+  font-family: Andron, Arial, sans-serif;
+// font-family: Arial;
+  font-size: 12pt;
+  line-height: 1.5em;
+}
+
