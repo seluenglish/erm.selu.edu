@@ -72,26 +72,26 @@ export default class HeadNavigation extends React.Component {
                   className='dropdown-menu'
                   aria-labelledby='dropdown01'
                   aria-expanded='false'>
-                  <NavLink to='/indices/works' className='dropdown-menu'>{navCopy.works}</NavLink>
-                  <NavLink to='/indices/manuscripts' className='dropdown-menu'>{navCopy.manuscripts}</NavLink>
-                  <NavLink to='/indices/corpora' className='dropdown-menu'>{navCopy.corpora}</NavLink>
-                  <NavLink to='/indices/workByOthers' className='dropdown-menu'>{navCopy.workByOthers}</NavLink>
-                  <NavLink to='/indices/commentary' className='dropdown-menu'>{navCopy.commentary}</NavLink>
-                  <NavLink to='/indices/essays' className='dropdown-menu'>{navCopy.essays}</NavLink>
-                  <NavLink to='/indices/drawings' className='dropdown-menu'>{navCopy.drawings}</NavLink>
+                  <NavLink to='/indices/works' className='dropdown-item'>{navCopy.works}</NavLink>
+                  <NavLink to='/indices/manuscripts' className='dropdown-item'>{navCopy.manuscripts}</NavLink>
+                  <NavLink to='/indices/corpora' className='dropdown-item'>{navCopy.corpora}</NavLink>
+                  <NavLink to='/indices/workByOthers' className='dropdown-item'>{navCopy.workByOthers}</NavLink>
+                  <NavLink to='/indices/commentary' className='dropdown-item'>{navCopy.commentary}</NavLink>
+                  <NavLink to='/indices/essays' className='dropdown-item'>{navCopy.essays}</NavLink>
+                  <NavLink to='/indices/drawings' className='dropdown-item'>{navCopy.drawings}</NavLink>
                 </div>
               </li>
               <li className='nav-item'>
                 <NavLink to='/xml' className='nav-link'>{navCopy.xml}</NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/bibliography' className='nav-link'>{navCopy.bibliography}</NavLink>
+                <NavLink to='/notes/bibliography' className='nav-link'>{navCopy.bibliography}</NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/staffAndSupport' className='nav-link'>{navCopy.staffAndSupport}</NavLink>
+                <NavLink to='/webpages/staff' className='nav-link'>{navCopy.staffAndSupport}</NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/legal' className='nav-link'>{navCopy.legal}</NavLink>
+                <NavLink to='/webpages/legal' className='nav-link'>{navCopy.legal}</NavLink>
               </li>
               <li className='nav-item'>
                 <NavLink to='/search' className='nav-link'>{navCopy.search}</NavLink>

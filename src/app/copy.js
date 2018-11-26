@@ -17,7 +17,7 @@ export const nav = {
   works: 'Works',
   manuscripts: 'Manuscripts',
   corpora: 'Corpora',
-  workByOthers: 'WorkByOthers',
+  workByOthers: 'Work By Others',
   commentary: 'Commentary',
   essays: 'Essays',
   drawings: 'Drawings',

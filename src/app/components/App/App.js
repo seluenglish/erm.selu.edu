@@ -31,25 +31,11 @@ const LoadableSearchRoute = Loadable({
   modules: [ '../../routes/SearchRoute/SearchRoute' ],
 })
 
-const LoadableBarRoute = Loadable({
-  loader: () => import('../../routes/BarRoute/BarRoute'),
+const LoadableSearchDocumentRoute = Loadable({
+  loader: () => import('../../routes/SearchDocumentRoute/SearchDocumentRoute'),
   loading: Loading,
-  webpack: () => [ require.resolveWeak('../../routes/BarRoute/BarRoute') ],
-  modules: [ '../../routes/BarRoute/BarRoute' ],
-})
-
-const LoadableOopsRoute = Loadable({
-  loader: () => import('../../routes/OopsRoute/OopsRoute'),
-  loading: Loading,
-  webpack: () => [ require.resolveWeak('../../routes/OopsRoute/OopsRoute') ],
-  modules: [ '../../routes/OopsRoute/OopsRoute' ],
-})
-
-const LoadableNotFoundRoute = Loadable({
-  loader: () => import('../../routes/NotFoundRoute/NotFoundRoute'),
-  loading: Loading,
-  webpack: () => [ require.resolveWeak('../../routes/NotFoundRoute/NotFoundRoute') ],
-  modules: [ '../../routes/NotFoundRoute/NotFoundRoute' ],
+  webpack: () => [ require.resolveWeak('../../routes/SearchDocumentRoute/SearchDocumentRoute') ],
+  modules: [ '../../routes/SearchDocumentRoute/SearchDocumentRoute' ],
 })
 
 class App extends React.Component {
@@ -80,10 +66,6 @@ class App extends React.Component {
               component={LoadableSearchRoute}
             />
             {/*<Route*/}
-              {/*path='/bar'*/}
-              {/*component={LoadableBarRoute}*/}
-            {/*/>*/}
-            {/*<Route*/}
               {/*path='/oops'*/}
               {/*component={LoadableOopsRoute}*/}
             {/*/>*/}
@@ -96,7 +78,7 @@ class App extends React.Component {
               component={UpdateDbRoute}
             />
             <Route
-              component={LoadableNotFoundRoute}
+              component={LoadableSearchDocumentRoute}
             />
           </Switch>
         </main>

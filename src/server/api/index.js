@@ -25,6 +25,10 @@ export function setApiRoutes() {
     .get('nameTypes', '/nameTypes', (ctx) => {
       ctx.response.body = [ 'a', 'b', 'c' ]
     })
+    .get('page', '*', (ctx) => {
+      ctx.set('Content-Type', 'text/html')
+      ctx.response.body = '<html>cat</html>'
+    })
     .all('not-found', '*', (ctx) => {
       ctx.set('Content-Type', 'text/html')
       ctx.response.status = 404

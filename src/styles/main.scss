@@ -230,10 +230,9 @@ div.QuickSearchBox {
 }
 main {
   //margin-left: $side-nav-width;
-
   padding-left: 10em;
   padding-right: 10em;
-  padding-top: 3em;
+  padding-top: 5em;
 
 }
 
@@ -249,6 +248,8 @@ main {
   .navbar-brand {
     img {
       height: 3em;
+      padding: 0;
+      margin: 0;
     }
   }
 
