@@ -107,12 +107,7 @@ const InnerForm = (form) => {
           <div className='secondBox'>
             <button
               type='submit'
-              className={cx(
-                {
-                  btn: true
-                }
-              )}>Search
-            </button>
+              className='btn btn-secondary' >Search</button>
           </div>
           <div className='thirdBox'>
             <label htmlFor='searchIn'>

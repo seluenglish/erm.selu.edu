@@ -7,9 +7,7 @@ import update from 'immutability-helper'
 
 
 const parseData = (data) => {
-  const doc = new DOMParser().parseFromString(data, 'text/xml')
-
-  console.log({doc})
+  const doc = new DOMParser().parseFromString(data, 'text/html')
 
   return {
     body: doc.querySelector('#mainBody').innerHTML,
@@ -45,7 +43,6 @@ export const searchDocumentReducers = typeToReducer({
     [REJECTED]: rejectedReducer,
     [FULFILLED]: (state, action) => {
       const meta = parseData(get('payload')(action))
-      console.log('meta is', meta)
       return ({
         ...state,
         error: false,

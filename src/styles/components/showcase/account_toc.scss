@@ -1,0 +1,63 @@
+// Styles specific to the MS VIII Account table of contents
+
+#account_of_a_tour_on_the_continent_toc_msviii_main{
+	margin-left: -3em;
+}
+
+#account_toc_msviii_addictional_sections_table, 
+#account_toc_msviii_table_2,
+#account_toc_msviii_table_bottom {
+		table {
+			border-collapse: collapse;
+			min-width: 430px;
+	}
+}
+#account_toc_msviii_addictional_sections_table{
+	td:nth-child(1){
+		width: 5em;
+	}
+	td:nth-child(2){
+		width: 8em;
+	}
+	td:nth-child(3){
+
+	}
+}
+#account_toc_msviii_table_2{
+	table {
+		white-space: nowrap;
+		min-width: 500px;
+	}
+	td:nth-child(1){
+		width: 6em;
+	}
+	td:nth-child(2){
+		width: 8.3em;
+	}
+	td:nth-child(3){
+
+	}
+	td:nth-child(4){
+		width: 5.5em;
+	}
+}
+#account_toc_msviii_table_bottom{
+	table {
+		
+	}
+	td:nth-child(1){
+		width: 15%;
+	}
+	td:nth-child(2){
+		width: 15%;
+	}
+	td:nth-child(3){
+		width: 15%;
+	}
+	td:nth-child(4){
+		width: 15%;
+	}
+	td:nth-child(5){
+		width: 15%;
+	}
+}

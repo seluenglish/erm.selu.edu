@@ -133,5 +133,5 @@ export function getDocumentUrl(document) {
   if (!document.type) return ''
   const fileType = FILE_TYPES.find(x => x.type === document.type)
 
-  return getUrl(`${fileType.locatedAt}/${document.fileId}.php`)
+  return getUrl(`${fileType.locatedAt}/${document.fileId}`)
 }

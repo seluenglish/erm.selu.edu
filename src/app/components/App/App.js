@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import { hot } from 'react-hot-loader'
 import { app as appCopy } from 'app/copy'
+import Footer from 'app/components/Footer/Footer'
 import HeadNavigation from 'app/components/HeadNavigation/HeadNavigation'
 import SideNavigation from 'app/components/SideNavigation/SideNavigation'
 import FlashMessages from 'app/components/@FlashMessages/FlashMessages'
@@ -82,6 +83,8 @@ class App extends React.Component {
             />
           </Switch>
         </main>
+
+        <Footer />
       </div>
     )
   }

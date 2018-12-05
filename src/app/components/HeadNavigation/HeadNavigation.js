@@ -55,8 +55,13 @@ export default class HeadNavigation extends React.Component {
 
           <div className='collapse navbar-collapse' id='navbarsExampleDefault'>
             <ul className='navbar-nav mr-auto'>
-              <li className='nav-item active'>
-                <NavLink to='/' className='nav-link'>{navCopy.home}</NavLink>
+              <li className='nav-item'>
+                <NavLink
+                  exact
+                  to='/'
+                  className='nav-link'>
+                  {navCopy.home}
+                </NavLink>
               </li>
               <li className='nav-item dropdown'>
                 <NavLink
@@ -72,34 +77,53 @@ export default class HeadNavigation extends React.Component {
                   className='dropdown-menu'
                   aria-labelledby='dropdown01'
                   aria-expanded='false'>
-                  <NavLink to='/indices/works' className='dropdown-item'>{navCopy.works}</NavLink>
-                  <NavLink to='/indices/manuscripts' className='dropdown-item'>{navCopy.manuscripts}</NavLink>
-                  <NavLink to='/indices/corpora' className='dropdown-item'>{navCopy.corpora}</NavLink>
-                  <NavLink to='/indices/workByOthers' className='dropdown-item'>{navCopy.workByOthers}</NavLink>
-                  <NavLink to='/indices/commentary' className='dropdown-item'>{navCopy.commentary}</NavLink>
-                  <NavLink to='/indices/essays' className='dropdown-item'>{navCopy.essays}</NavLink>
-                  <NavLink to='/indices/drawings' className='dropdown-item'>{navCopy.drawings}</NavLink>
+                  <NavLink to='/essays/indices_essay#WORKS' className='dropdown-item'>{navCopy.works}</NavLink>
+                  <NavLink to='/essays/indices_essay#MANUSCRIPTS' className='dropdown-item'>{navCopy.manuscripts}</NavLink>
+                  <NavLink to='/essays/indices_essay#CORPORA' className='dropdown-item'>{navCopy.corpora}</NavLink>
+                  <NavLink to='/essays/indices_essay#WORKSBYOTHERS' className='dropdown-item'>{navCopy.workByOthers}</NavLink>
+                  <NavLink to='/essays/indices_essay#COMMENTARY' className='dropdown-item'>{navCopy.commentary}</NavLink>
+                  <NavLink to='/essays/indices_essay#ESSAYS' className='dropdown-item'>{navCopy.essays}</NavLink>
+                  <NavLink to='/essays/indices_essay#DRAWINGS' className='dropdown-item'>{navCopy.drawings}</NavLink>
                 </div>
               </li>
               <li className='nav-item'>
-                <NavLink to='/xml' className='nav-link'>{navCopy.xml}</NavLink>
+                <NavLink
+                  exact
+                  to='/xml'
+                  className='nav-link'>{navCopy.xml}</NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/notes/bibliography' className='nav-link'>{navCopy.bibliography}</NavLink>
+                <NavLink
+                  exact
+                  to='/notes/bibliography'
+                  className='nav-link'>{navCopy.bibliography}</NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/webpages/staff' className='nav-link'>{navCopy.staffAndSupport}</NavLink>
+                <NavLink
+                  exact
+                  to='/webpages/staff'
+                  className='nav-link'>{navCopy.staffAndSupport}</NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/webpages/legal' className='nav-link'>{navCopy.legal}</NavLink>
+                <NavLink
+                  exact
+                  to='/webpages/legal'
+                  className='nav-link'>{navCopy.legal}</NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/search' className='nav-link'>{navCopy.search}</NavLink>
+                <NavLink
+                  exact
+                  to='/search'
+                  className='nav-link'>{navCopy.search}</NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/update_db' className='nav-link'>Update db</NavLink>
+                <NavLink
+                  exact
+                  to='/update_db'
+                  className='nav-link'>Update db</NavLink>
               </li>
             </ul>
+
 
             <QuickSearchBox />
 

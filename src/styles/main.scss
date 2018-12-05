@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
-@import '~vars';
+@import 'vars';
 @import '~tao-scss/index';
-@import '~components/fonts';
+@import "components/fonts";
 
 $header-color: #fff;
 
@@ -58,71 +58,7 @@ body {
   }
 }
 
-//.SideNavigation {
-//  color: $link-color;
-//  float: left;
-//
-//  width: $side-nav-width;
-//
-//  position: fixed;
-//  top: 0;
-//  left: 0;
-//  height: 100%;
-//  overflow-y: scroll;
-//  overflow-x: hidden;
-//
-//  padding: 0.9% 1.5% 1.5% 1.5%;
-//
-//  .brand {
-//    img {
-//      width: 100%;
-//      margin-top: 1em;
-//      margin-bottom: 1em;
-//    }
-//
-//    width: 10em;
-//    float: left;
-//
-//  }
-//
-//  .navigationTitle {
-//    font-size: 1.4em;
-//    line-height: 1.1em;
-//
-//    .navigationDate {
-//      font-size: small;
-//    }
-//  }
-//
-//  .navigationEditor {
-//    margin-bottom: 2em;
-//    margin-top: 1em;
-//  }
-//
-//  .navigationTitle>.navigationDate, .navigationEditor, .navItems {
-//
-//
-//  }
-//
-//  .navItems {
-//    &>a{
-//      display: block;
-//      font-weight: bold;
-//      line-height: 1.5em;
-//    }
-//
-//    /* TODO fix active link colors */
-//
-//    &>a.firstLevel{
-//      font-weight: bold;
-//    }
-//  }
-//
-//}
-
 div.QuickSearchBox {
-  float: right;
-  width: 30%;
   display: block;
 
   input {
@@ -228,11 +164,12 @@ div.QuickSearchBox {
     }
   }
 }
-main {
+[data-reactroot]>main {
   //margin-left: $side-nav-width;
-  padding-left: 10em;
-  padding-right: 10em;
+  padding-left: 5em;
+  padding-right: 5em;
   padding-top: 5em;
+  min-height: 686px;
 
 }
 
@@ -253,4 +190,17 @@ main {
     }
   }
 
+}
+
+[data-reactroot]>main {
+  @import "styles_migrated";
+  @import "components/floating_text";
+  @import "components/mini_contents";
+}
+
+.footer {
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
 }

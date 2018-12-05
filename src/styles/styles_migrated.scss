@@ -1,0 +1,161 @@
+/* T E X T   F E A T U R E S */
+//body {
+//  text-align: justify;
+//}
+
+.page-title {
+  color: #036;
+  font-size: 18pt;
+  .title-text {
+    font-weight: bold;
+  }
+}
+
+.head-section {
+  color: #036;
+  font-size: 16pt;
+}
+.section {
+  padding-top: 20px;
+}
+.head-subsection {
+  color: #036;
+  font-size: 14pt;
+}
+.head-sub-subsection {
+  color: #036;
+  font-size: 14pt;
+  font-style: italic;
+}
+.subsection {
+  padding-top: 20px;
+}
+
+/* D e c o r a t i o n */
+
+.caps {
+  text-transform: uppercase;
+}
+.center {                                    /* x New 04/06/16 */
+  text-align: center;
+}
+.smallcaps {
+  font-size: 8pt;
+  text-transform: uppercase;
+}
+sub {
+  line-height: 0em;
+}
+sup {
+  line-height: 0em;
+}
+
+/* L i s t s */
+
+ul {
+  color: #000;
+  list-style-type: square;
+  padding-right: 30px;
+}
+
+/* T a b l e s */
+
+.tablespace {
+  position: relative;
+  overflow: auto;
+}
+.head-table {
+  color: #036;
+  font-size: 10pt;
+  text-align: left;
+}
+table {
+  border-collapse: collapse;
+  font-size: 8pt;
+  table-layout: fixed;
+  text-align: center;
+  width: 100%;
+}
+.label {
+  font-weight: bold;
+}
+td {
+  border: 1px solid #000;
+  padding: 0.5em;
+  width: 150px;
+}
+
+
+/* H Y P E R L I N K S */
+
+a:link {
+  color: #036;
+  text-decoration: none;
+}
+a:visited {
+  color: #036;
+  text-decoration: none;
+}
+a:hover {
+  color: #06C;
+  text-decoration: none;
+}
+a:active {
+  color: #036;
+  text-decoration: none;
+}
+
+
+/* D e c o r a t i o n */
+
+.caps {
+  text-transform: uppercase;
+}
+.smallcaps {
+  font-size: 8pt;
+  text-transform: uppercase;
+}
+
+/* T e x t   F e a t u r e s */
+
+.body-small {
+  font-size: 9pt;
+  margin: 0px;
+}
+.block_text {
+  padding-left: 25px;
+}
+.heading_1 {
+  color: #09F;
+  font-size: 16pt;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+.heading_2 {
+  color: #999;
+  font-size: 12pt;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+.heading_3 {
+  color: #09F;
+  font-size: 10pt;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+/* W e b a p p */
+.floating-text{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.bib-item{
+  padding-left: 22px;
+  text-indent: -22px;
+}
+
+//.webpage > title{
+//  color: #036;
+//  font-size: 14pt;
+//}

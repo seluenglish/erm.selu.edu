@@ -17,6 +17,31 @@ class SearchDocumentRoute extends React.Component {
     this.reload()
   }
 
+  componentWillReceiveProps(props, oldProps) {
+    if (!props) return
+
+    setTimeout(() => {
+      console.log('props received', props, props.location.hash)
+      let id = props.location.hash
+      if (id) {
+        id = id.replace('#', '')
+      }
+
+
+      const elem = window.document.getElementById(id)
+
+      if (elem) {
+        elem.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'start',
+        })
+        // window.scrollTo(0, elem.offsetTop - 80)
+      }
+
+    })
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
       this.reload()

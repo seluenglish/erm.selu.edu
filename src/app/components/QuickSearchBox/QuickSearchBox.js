@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import cx from 'classnames'
-import styles from './QuickSearchBox.module.scss'
 import { getSearch } from 'app/modules/search/search.selectors'
 import { updateSearchParams, apiSearch } from 'app/modules/search/search.actions'
 import { Formik, Field, Form } from 'formik'
@@ -11,12 +10,13 @@ import { replace } from 'react-router-redux'
 
 const InnerForm = () => {
   return (
-    <Form className='QuickSearchBox form-inline my-2 my-lg-0' style={styles}>
+    <Form className='QuickSearchBox form-inline my-2 my-lg-0'>
       <Field
-        type='text'
+        type='search'
         name='searchText'
         placeholder='Search...'
         className='form-control mr-sm-2'
+        aria-label='Search'
       />
       <button
         type='submit'
