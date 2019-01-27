@@ -89,6 +89,7 @@ const InnerForm = (form) => {
             <Field
               type='text'
               name='searchText'
+              className='form-control'
               id='searchText'
               placeholder={textPlaceHolder}
             />
@@ -107,7 +108,7 @@ const InnerForm = (form) => {
           <div className='secondBox'>
             <button
               type='submit'
-              className='btn btn-secondary' >Search</button>
+              className='btn btn-outline-dark' >Search</button>
           </div>
           <div className='thirdBox'>
             <label htmlFor='searchIn'>

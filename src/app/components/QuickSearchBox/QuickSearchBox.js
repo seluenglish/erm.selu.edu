@@ -20,7 +20,7 @@ const InnerForm = () => {
       />
       <button
         type='submit'
-        className='btn btn-outline-success my-2 my-sm-0'>
+        className='btn btn-outline-light my-2 my-sm-0'>
         Search
       </button>
     </Form>

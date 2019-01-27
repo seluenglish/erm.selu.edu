@@ -21,7 +21,6 @@ class SearchDocumentRoute extends React.Component {
     if (!props) return
 
     setTimeout(() => {
-      console.log('props received', props, props.location.hash)
       let id = props.location.hash
       if (id) {
         id = id.replace('#', '')
@@ -37,6 +36,8 @@ class SearchDocumentRoute extends React.Component {
           inline: 'start',
         })
         // window.scrollTo(0, elem.offsetTop - 80)
+      } else {
+        window.scrollTo(0, 0)
       }
 
     })
