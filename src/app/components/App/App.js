@@ -1,7 +1,6 @@
 import DocumentMeta from 'react-helmet'
 import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
-import { hot } from 'react-hot-loader'
 import { app as appCopy } from 'app/copy'
 import Footer from 'app/components/Footer/Footer'
 import HeadNavigation from 'app/components/HeadNavigation/HeadNavigation'
@@ -11,6 +10,7 @@ import PrivateRoute from 'app/routes/PrivateRoute/PrivateRoute'
 import UpdateDbRoute from 'app/routes/UpdateDbRoute/UpdateDbRoute'
 import style from './App.module.scss'
 import { isBrowser } from 'app/utils'
+import XmlRoute from 'app/routes/XmlRoute/XmlRoute'
 
 const log = debug('App.js')
 
@@ -39,7 +39,14 @@ const LoadableSearchDocumentRoute = Loadable({
   modules: [ '../../routes/SearchDocumentRoute/SearchDocumentRoute' ],
 })
 
-class App extends React.Component {
+const LoadableXmlRoute = Loadable({
+  loader: () => import('../../routes/XmlRoute/XmlRoute'),
+  loading: Loading,
+  webpack: () => [ require.resolveWeak('../../routes/XmlRoute/XmlRoute') ],
+  modules: [ '../../routes/XmlRoute/XmlRoute' ],
+})
+
+export default class App extends React.Component {
   render() {
     return (
       <div className={style.app}>
@@ -79,6 +86,10 @@ class App extends React.Component {
               component={UpdateDbRoute}
             />
             <Route
+              path={'/xml'}
+              component={LoadableXmlRoute}
+            />
+            <Route
               component={LoadableSearchDocumentRoute}
             />
           </Switch>
@@ -89,5 +100,3 @@ class App extends React.Component {
     )
   }
 }
-
-export default hot(module)(App)
