@@ -9,7 +9,7 @@ class XmlRoute extends React.Component {
 
   render() {
     return (
-      <section className='UpdateDbRoute'>
+      <section className='UpdateDbRoute container-fluid'>
         <DocumentMeta>
           <title>XML&quot;s</title>
         </DocumentMeta>

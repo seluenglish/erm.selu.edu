@@ -52,7 +52,6 @@ export class HeadNavigation extends React.Component {
           <NavLink
             to='/'
             className='navbar-brand'
-            onClick={this.handleMenuClick}
           >
             <img src={headerIcon} alt='Early Ruskin Manuscripts' />
           </NavLink>
@@ -172,7 +171,7 @@ export class HeadNavigation extends React.Component {
             </ul>
 
 
-            <QuickSearchBox />
+            <QuickSearchBox onClick={this.handleMenuClick} />
 
           </div>
         </nav>

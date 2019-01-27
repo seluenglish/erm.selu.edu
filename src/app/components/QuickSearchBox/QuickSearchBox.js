@@ -7,6 +7,7 @@ import { hot } from 'react-hot-loader'
 import { getUrl } from 'helpers/url-helper'
 import { Link } from 'react-router-dom'
 import { replace } from 'react-router-redux'
+import PropTypes from 'prop-types'
 
 const InnerForm = () => {
   return (
@@ -37,16 +38,21 @@ export class QuickSearchBox extends React.Component {
     this.handleSearchClick = this.handleSearchClick.bind(this)
   }
   handleSearchClick(params) {
-    const { updateSearchParams, apiSearch, replace } = this.props
+    const { updateSearchParams, apiSearch, replace, onClick } = this.props
+
     updateSearchParams(params)
     apiSearch(params)
     replace('/search')
+
+    if (onClick) onClick()
   }
 
   render() {
     if (!this.props.search) return <div>Error</div>
 
     const { searchParams } = this.props.search
+
+    const { onClick } = this.props
 
     return (
       <div className='QuickSearchBox'>
@@ -56,11 +62,19 @@ export class QuickSearchBox extends React.Component {
           onSubmit={this.handleSearchClick}
         />
         <div className='advancedSearchBox'>
-          <Link to='/search' >Advanced Search</Link>
+          <Link
+            to='/search'
+            onClick={onClick}
+          >
+          Advanced Search</Link>
         </div>
       </div>
     )
   }
+}
+
+QuickSearchBox.propTypes = {
+  onClick: PropTypes.func,
 }
 
 export default hot(module)(QuickSearchBox)

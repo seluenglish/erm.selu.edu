@@ -7,6 +7,7 @@ import { getSearch, getSearchError } from 'app/modules/search/search.selectors'
 import { apiFetchNameSubTypes, apiFetchNameTypes, updateSearchParams } from 'app/modules/search/search.actions'
 import { Formik, Field, Form } from 'formik'
 import update from 'immutability-helper'
+import { hot } from 'react-hot-loader'
 
 const InnerForm = (form) => {
   const { fullTextChecked } = form.values
@@ -74,91 +75,99 @@ const InnerForm = (form) => {
   }
 
   return (
-    <Form className='SearchBox' style={styles} onSubmit={handleSubmit}>
+    <Form className='' style={styles} onSubmit={handleSubmit}>
       <fieldset>
         <legend>Advanced Search</legend>
-        <div className='searchFields'>
-          <div className={'firstBox'}>
-            <div className={'error'} style={{ visibility: (errorMsg||customErrorMessage)?'visible':'hidden' }}>
-              {errorMsg && errorMsg.length>0 && errorMsg}
-              {errorMsg && errorMsg.length>0 && customErrorMessage && <br />}
-              {customErrorMessage && customErrorMessage}
-            </div>
+        <div className='container-fluid'>
+          <div className='row align-items-baseline'>
+
+            <div className={'firstBox col-sm-4'}>
+              <div className={'error text-danger'} style={{visibility: (errorMsg || customErrorMessage) ? 'visible' : 'hidden'}}>
+                {errorMsg && errorMsg.length > 0 && errorMsg}
+                {errorMsg && errorMsg.length > 0 && customErrorMessage && <br/>}
+                {customErrorMessage && customErrorMessage}
+              </div>
 
 
-            <Field
-              type='text'
-              name='searchText'
-              className='form-control'
-              id='searchText'
-              placeholder={textPlaceHolder}
-            />
-            <label htmlFor='fullTextChecked'>
               <Field
-                type='checkbox'
-                name='fullTextChecked'
-                id='fullTextChecked'
-                checked={fullTextChecked}
-                onChange={handleFullTextCheckedStatusChange}
+                type='text'
+                name='searchText'
+                className='form-control'
+                id='searchText'
+                placeholder={textPlaceHolder}
               />
-              Search full text of documents</label>
-
-
-          </div>
-          <div className='secondBox'>
-            <button
-              type='submit'
-              className='btn btn-outline-dark' >Search</button>
-          </div>
-          <div className='thirdBox'>
-            <label htmlFor='searchIn'>
-              Search in: &nbsp;
-              <Field
-                component='select'
-                name='searchIn'
-                id='searchIn'>
-                <option value='all'>All</option>
-
-                {fileTypeSearchOptions.map((option, i) => (
-                  <option value={option.value} key={i}>{option.label}</option>
-                ))}
-              </Field>
-            </label>
-
-            <label htmlFor='type'>
-              Of name type: &nbsp;
-              <Field
-                component='select'
-                name='type'
-                id='type'
-                onChange={handleNameTypeChange}
-              >
-                <option value='all'>All</option>
-                {nameTypeSearchOptions.map((option, i) => (
-                  <option value={option.value} key={i}>{option.label}</option>
-                ))}
-              </Field>
-            </label>
-
-            {showSubType && (
-              <label
-                htmlFor='subType'
-                className={cx(
-                  {
-                    hidden: true,
-                  }
-                )}>
+              <label htmlFor='fullTextChecked'>
                 <Field
+                  type='checkbox'
+                  name='fullTextChecked'
+                  id='fullTextChecked'
+                  checked={fullTextChecked}
+                  onChange={handleFullTextCheckedStatusChange}
+                />
+                &nbsp;Search full text of documents</label>
+
+
+            </div>
+            <div className='secondBox col-sm-3'>
+              <button
+                type='submit'
+                className='btn btn-outline-dark'>Search
+              </button>
+            </div>
+            <div className='thirdBox col-sm-5'>
+              <label htmlFor='searchIn'>
+                Search in: &nbsp;
+                <Field
+                  className='form-control'
                   component='select'
-                  name='subType'
-                  id='subType'>
+                  name='searchIn'
+                  id='searchIn'>
                   <option value='all'>All</option>
-                  {nameSubTypeSearchOptions.map((option, i) => (
+
+                  {fileTypeSearchOptions.map((option, i) => (
                     <option value={option.value} key={i}>{option.label}</option>
                   ))}
                 </Field>
               </label>
-            )}
+              <br />
+
+              <label htmlFor='type'>
+                Of name type: &nbsp;
+                <Field
+                  className='form-control'
+                  component='select'
+                  name='type'
+                  id='type'
+                  onChange={handleNameTypeChange}
+                >
+                  <option value='all'>All</option>
+                  {nameTypeSearchOptions.map((option, i) => (
+                    <option value={option.value} key={i}>{option.label}</option>
+                  ))}
+                </Field>
+              </label>
+
+              {showSubType && (
+                <label
+                  htmlFor='subType'
+                  className={cx(
+                    {
+                      hidden: true,
+                    }
+                  )}>
+                  <Field
+                    className='form-control'
+                    component='select'
+                    name='subType'
+                    id='subType'>
+                    <option value='all'>All</option>
+                    {nameSubTypeSearchOptions.map((option, i) => (
+                      <option value={option.value} key={i}>{option.label}</option>
+                    ))}
+                  </Field>
+                </label>
+              )}
+            </div>
           </div>
         </div>
       </fieldset>
@@ -176,7 +185,7 @@ const InnerForm = (form) => {
   apiFetchNameSubTypes,
   updateSearchParams,
 })
-export default class SearchBox extends React.Component {
+export class SearchBox extends React.Component {
   constructor(props){
     super(props)
 
@@ -239,3 +248,5 @@ SearchBox.propTypes = {
   handleSearchClick: PropTypes.func.isRequired,
   queryString: PropTypes.string,
 }
+
+export default hot(module)(SearchBox)
