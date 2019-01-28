@@ -6,6 +6,7 @@ import { SERVER_ROOT } from '../../../helpers/url-helper'
 import { connect } from 'react-redux'
 import { getSearchDocument, getError, getIsPending } from 'app/modules/search-document/search-document.selectors'
 import { apiGetDocument } from 'app/modules/search-document/search-document.actions'
+import {RUSKIN_BASE_URL} from 'config/constants'
 
 @connect(state => ({
   searchDocument: getSearchDocument(state),
@@ -51,6 +52,10 @@ class SearchDocumentRoute extends React.Component {
 
   async reload() {
     const { pathname } = this.props.location
+
+    if (pathname.startsWith('/witnesses/')) {
+      window.location = `${RUSKIN_BASE_URL}${pathname}.php${window.location.hashname}`
+    }
 
     this.props.apiGetDocument(pathname)
   }
