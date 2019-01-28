@@ -14,10 +14,6 @@ CSS padding fix for anchor links
 
 .glosses {
   .textual,.contextual {
-    span[id] {
-      padding-top: 90px;
-      margin-top: -90px;
-    }
     
     .gloss-padding-fix {
       display: block;

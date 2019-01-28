@@ -7,6 +7,10 @@
 
 $header-color: #fff;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: $body-color;
   font-family: Andron, Arial, sans-serif;
@@ -32,6 +36,7 @@ body {
     font-weight: bold;
     padding: 3px;
   }
+  
 }
 
 .SearchItem{
@@ -202,7 +207,7 @@ div.QuickSearchBox {
   [data-reactroot] > main {
     padding-left: 5em;
     padding-right: 5em;
-    padding-top: 5em;
+    padding-top: 3em;
   }
 }
 @media all and (max-width: 500px)

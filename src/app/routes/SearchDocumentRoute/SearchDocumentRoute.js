@@ -32,9 +32,7 @@ class SearchDocumentRoute extends React.Component {
       const elem = window.document.getElementById(id)
 
       if (elem) {
-        console.log('elem found. class', elem.class)
         elem.classList.add('active')
-        console.log('after: class', elem.class)
 
         elem.scrollIntoView({
           behavior: 'smooth',

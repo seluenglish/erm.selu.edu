@@ -29,7 +29,7 @@ export class SearchItem extends React.Component {
       const top = this.ref.current.offsetTop
       animateScroll.scrollTo(top, {
         duration: 500,
-        smooth: 'easeOutExpo',
+        // smooth: 'easeOutExpo',
       })
     }
 

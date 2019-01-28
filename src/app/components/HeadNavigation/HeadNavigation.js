@@ -124,6 +124,11 @@ export class HeadNavigation extends React.Component {
                     className='dropdown-item'
                     onClick={this.handleMenuClick}
                   >{navCopy.drawings}</NavLink>
+                  <NavLink
+                    exact
+                    to='/update_db'
+                    onClick={this.handleMenuClick}
+                    className='dropdown-item'>Update db</NavLink>
                 </div>
               </li>
               <li className='nav-item'>
@@ -161,13 +166,7 @@ export class HeadNavigation extends React.Component {
                   onClick={this.handleMenuClick}
                   className='nav-link'>{navCopy.search}</NavLink>
               </li>
-              <li className='nav-item'>
-                <NavLink
-                  exact
-                  to='/update_db'
-                  onClick={this.handleMenuClick}
-                  className='nav-link'>Update db</NavLink>
-              </li>
+
             </ul>
 
 

@@ -83,11 +83,6 @@ export class SideNavigation extends React.Component {
             Essay
           </NavLink>
 
-          <NavLink
-            activeClassName={'active'}
-            to='/update_db'>
-            Update DB
-          </NavLink>
         </div>
       </nav>
     )
