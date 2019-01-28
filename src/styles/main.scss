@@ -69,10 +69,12 @@ div.QuickSearchBox {
     a{
       color: $header-color;
     }
-    padding-left: 10px;
-  }
 
-  margin-bottom: 10px;
+    float: right;
+    padding-left: 10px;
+    padding-top: 4px;
+    margin-right: 4em;
+  }
 }
 
 .SearchBox {
