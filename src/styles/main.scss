@@ -193,7 +193,9 @@ div.QuickSearchBox {
 
   @import "styles_migrated";
   @import "components/floating_text";
+  @import "components/glosses";
   @import "components/mini_contents";
+  @import "components/padding_fix";
 }
 
 @media all and (min-width: 501px) {

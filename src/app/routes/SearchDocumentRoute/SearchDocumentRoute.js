@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { getSearchDocument, getError, getIsPending } from 'app/modules/search-document/search-document.selectors'
 import { apiGetDocument } from 'app/modules/search-document/search-document.actions'
 import {RUSKIN_BASE_URL} from 'config/constants'
+import cx from 'classnames'
 
 @connect(state => ({
   searchDocument: getSearchDocument(state),
@@ -31,6 +32,10 @@ class SearchDocumentRoute extends React.Component {
       const elem = window.document.getElementById(id)
 
       if (elem) {
+        console.log('elem found. class', elem.class)
+        elem.classList.add('active')
+        console.log('after: class', elem.class)
+
         elem.scrollIntoView({
           behavior: 'smooth',
           block: 'start',

@@ -1,0 +1,29 @@
+/**
+CSS padding fix for anchor links
+**/
+
+.bib-item {
+  padding-top: 87px;
+  margin-top: -87px;
+}
+
+.section {
+  padding-top: 100px;
+  margin-top: -80px;
+}
+
+.glosses {
+  .textual,.contextual {
+    span[id] {
+      padding-top: 90px;
+      margin-top: -90px;
+    }
+    
+    .gloss-padding-fix {
+      display: block;
+      position: relative;
+      top: -100px;
+      visibility: hidden;
+    }
+  }
+}
