@@ -75,7 +75,11 @@ class SearchDocumentRoute extends React.Component {
           <title>{title}</title>
         </DocumentMeta>
 
-        {!error && <div dangerouslySetInnerHTML={body} />}
+        {!error && (
+          <div
+            className='mainBody'
+            dangerouslySetInnerHTML={body} />
+        )}
 
         {error && (<div>
           Oops! Page not found.

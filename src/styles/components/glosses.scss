@@ -1,43 +1,13 @@
 /* 
   Styles for glosses.
-
  */
 
-$activeGlossAlternateColor: rgba(58, 87, 133, 0.3);
-$activeGlossFinalColor: rgba(58, 87, 133, 0.2);
-
- @keyframes slideInFromLeft {
-   0% {
-     background: $activeGlossAlternateColor;
-   }
-   20% {
-     background: $activeGlossFinalColor;
-   }
-   40% {
-     background: $activeGlossAlternateColor;
-   }
-   60% {
-     background: $activeGlossFinalColor;
-   }
-   80% {
-     background: $activeGlossAlternateColor;
-   }
-   100% {
-     background: $activeGlossFinalColor;
-   }
- }
- 
 .glosses {
   a.anchor-control.active+span {
     display: block;
     
-    // background-color: green;
-    // transition: background-color linear 2s;
-    animation: 1s ease-out 0s 1 slideInFromLeft;
+    animation: 1s ease-out 0s 1 blinkActiveGloss;
     
-    
-    
-    // background-color: pink;
     background-color: $activeGlossFinalColor;
     border: 1px solid black;
     border-radius: 25px;
@@ -47,5 +17,6 @@ $activeGlossFinalColor: rgba(58, 87, 133, 0.2);
     padding-left: 10px;
     padding-right: 10px;
   }
+  
   
 }
