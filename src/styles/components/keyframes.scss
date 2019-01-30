@@ -1,0 +1,32 @@
+$activeGlossAlternateColor: rgba(58, 87, 133, 0.3);
+$activeGlossFinalColor: rgba(58, 87, 133, 0.2);
+
+@keyframes blinkActiveGloss {
+  0% {
+    background: $activeGlossAlternateColor;
+  }
+  20% {
+    background: $activeGlossFinalColor;
+  }
+  40% {
+    background: $activeGlossAlternateColor;
+  }
+  60% {
+    background: $activeGlossFinalColor;
+  }
+  80% {
+    background: $activeGlossAlternateColor;
+  }
+  100% {
+    background: $activeGlossFinalColor;
+  }
+}
+
+@keyframes fadeInPage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
