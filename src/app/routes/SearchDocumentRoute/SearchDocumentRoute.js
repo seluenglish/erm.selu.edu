@@ -55,9 +55,11 @@ class SearchDocumentRoute extends React.Component {
 
   async reload() {
     const { pathname } = this.props.location
+    let { hashname } = window.location
 
-    if (pathname.startsWith('/witnesses/')) {
-      window.location = `${RUSKIN_BASE_URL}${pathname}.php${window.location.hashname}`
+    if (pathname.startsWith('/witnesses/') || pathname.startsWith('/corpuses')) {
+      if(!hashname) hashname=''
+      window.location = `${RUSKIN_BASE_URL}${pathname}.php${hashname}`
     }
 
     this.props.apiGetDocument(pathname)
