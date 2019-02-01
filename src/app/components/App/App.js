@@ -11,6 +11,7 @@ import UpdateDbRoute from 'app/routes/UpdateDbRoute/UpdateDbRoute'
 import style from './App.module.scss'
 import { isBrowser } from 'app/utils'
 import XmlRoute from 'app/routes/XmlRoute/XmlRoute'
+import { initializeFontAwesome } from 'helpers/font-awesome'
 
 const log = debug('App.js')
 
@@ -45,6 +46,8 @@ const LoadableXmlRoute = Loadable({
   webpack: () => [ require.resolveWeak('../../routes/XmlRoute/XmlRoute') ],
   modules: [ '../../routes/XmlRoute/XmlRoute' ],
 })
+
+initializeFontAwesome()
 
 export default class App extends React.Component {
   render() {
