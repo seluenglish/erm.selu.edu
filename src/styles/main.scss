@@ -366,8 +366,8 @@ $margin-right-phone: 3%;
   }
   [data-reactroot] > main {
     padding-top: 35px;
-    padding-left: 5%;
-    padding-right: 3%;
+    padding-left: $margin-left-phone;
+    padding-right: $margin-right-phone;
     line-height: 128%;
   }
 
