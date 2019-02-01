@@ -78,6 +78,11 @@ const FILE_TYPES = [
     locatedAt: 'witnesses',
     showInSearch: false,
   },
+  {
+    type: 'manuscript',
+    locatedAt: 'corpuses',
+    showInSearch: false,
+  },
 ]
 
 const searchNameTypeOptions = []

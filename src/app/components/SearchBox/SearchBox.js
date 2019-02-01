@@ -82,11 +82,6 @@ const InnerForm = (form) => {
           <div className='row align-items-baseline'>
 
             <div className={'firstBox col-sm-4'}>
-              <div className={'error text-danger'} style={{visibility: (errorMsg || customErrorMessage) ? 'visible' : 'hidden'}}>
-                {errorMsg && errorMsg.length > 0 && errorMsg}
-                {errorMsg && errorMsg.length > 0 && customErrorMessage && <br/>}
-                {customErrorMessage && customErrorMessage}
-              </div>
 
 
               <Field
@@ -106,6 +101,11 @@ const InnerForm = (form) => {
                 />
                 &nbsp;Search full text of documents</label>
 
+              <div className={'error text-danger'} style={{visibility: (errorMsg || customErrorMessage) ? 'visible' : 'hidden' }}>
+                {errorMsg && errorMsg.length > 0 && errorMsg}
+                {errorMsg && errorMsg.length > 0 && customErrorMessage && <br />}
+                {customErrorMessage && customErrorMessage}
+              </div>
 
             </div>
             <div className='secondBox col-sm-3'>

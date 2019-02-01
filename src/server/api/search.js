@@ -4,6 +4,7 @@ import _ from 'lodash'
 import mongoose from 'mongoose'
 import { parseDate } from 'server/serverHelpers/date-helper'
 import { CustomError } from 'server/serverHelpers/error-handler'
+import { SEARCH_LIMIT } from 'server/config'
 
 const ObjectId = mongoose.Types.ObjectId
 
@@ -15,6 +16,12 @@ export default async function (ctx) {
   let beginDate, endDate
 
   if (beginAt === undefined) beginAt = 0
+  if (!endAt) endAt = beginAt + SEARCH_LIMIT
+
+  if (!(0 < endAt - beginAt <= SEARCH_LIMIT)) {
+    // invalid endAt time
+    endAt = beginAt + SEARCH_LIMIT
+  }
 
   if (typeof beginAt !== 'number')
     throw new CustomError(`beginAt must be a number.`)
@@ -75,12 +82,18 @@ export default async function (ctx) {
     }
   }
 
+  // console.log('begin at', beginAt, ', end at: ', endAt)
+  // beginAt = 1
+  // endAt = 3
+
+  query = query.skip(beginAt).limit(endAt)
   const resultDocuments = await query
+
   const count = resultDocuments.length
 
   console.log('result count: ', count)
 
-  let result = resultDocuments.map(doc => {
+  let result = resultDocuments.slice(0, 100).map(doc => {
     let matches
     if (type === 'date') {
       const thisDates = dates.filter(x => doc.dates.indexOf(x._id) >= 0)

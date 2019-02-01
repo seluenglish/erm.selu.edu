@@ -11,14 +11,11 @@ import { Document, Name, DateModel } from 'server/database/models'
 import path from 'path'
 import mongoose from 'mongoose'
 import _ from 'lodash'
+import {LOG_INFO, LOG_WARNING, LOG_ERROR, LOG_FATAL, LOG_LEVELS} from 'server/serverHelpers/logging'
+import {createValidator} from 'server/serverHelpers/xml-document-validator'
 
 const ObjectId = mongoose.Types.ObjectId
 
-const LOG_INFO = 'INFO'
-const LOG_WARNING = 'WARNING'
-const LOG_ERROR = 'ERROR'
-const LOG_FATAL = 'FATAL'
-const LOG_LEVELS = [ LOG_INFO, LOG_WARNING, LOG_ERROR, LOG_FATAL ]
 
 export default async function updateDb(payload, client) {
   const store = global.store
@@ -59,20 +56,11 @@ export default async function updateDb(payload, client) {
     let xmls = await findXmlsInDirs(dirPath)
     log(`${xmls.length} XML files discovered`)
 
+    const validateDoc = createValidator(log)
+
     // xmls = [ 'witnesses/lille_poem_le.xml' ]
     // xmls = [ 'glosses/andernacht_glosses_contextual.xml' ]
-    // xmls = [ 'corpuses/account_of_a_tour_on_the_continent_le_corpus_therhine.xml' ]
-
-    const validateDoc = (xmlData, doc) => {
-      if (!xmlData) log([ LOG_ERROR, 'XML data could not be parsed.' ])
-      if (!doc) log([ LOG_ERROR, 'database document could not be created.' ])
-
-      if (!doc.title)
-        log( [ LOG_WARNING, 'document has no title.' ])
-
-      if (!doc.type)
-        log( [ LOG_WARNING, 'document type not found.' ])
-    }
+    // xmls = [ 'corpuses/account_of_a_tour_on_the_continent_msia_g1_corpus.xml' ]
 
     const processFile = async (xmlFileName, docIndex) => {
       log()
@@ -85,6 +73,11 @@ export default async function updateDb(payload, client) {
       try {
         log(`extracing data from XML`)
         const data = extractXmlData(xml)
+
+        if (data.type === 'title') {
+          log(`Skipping title file...`)
+          return
+        }
 
         log(`converting xml data to db rows`)
 
@@ -100,10 +93,15 @@ export default async function updateDb(payload, client) {
           url: getUrl(`${data.docType}/${data.fileId}`),
           keywords: data.keywords,
         })
-        allDocs.push(doc)
 
         log(`validating...`)
-        validateDoc(data, doc)
+        if(!validateDoc(data, doc)) {
+          log(`invalid document.`)
+          return
+        }
+
+        allDocs.push(doc)
+
         log(`validated.`)
 
         if (data.dates.length) {
