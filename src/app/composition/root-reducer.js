@@ -9,8 +9,8 @@ import { isBrowser } from 'app/utils'
 
 /** todo move searchReducers to server-only **/
 
-if(isBrowser)
-  console.log('isbrowser: ')
+// if(isBrowser)
+  // console.log('is browser')
 
 let reducer
 if(isBrowser)

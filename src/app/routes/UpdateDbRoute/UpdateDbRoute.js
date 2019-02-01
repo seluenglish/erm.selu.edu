@@ -10,35 +10,35 @@ import { addMessage } from 'app/modules/flash/flash.actions'
 class UpdateDbRoute extends React.Component {
   constructor(props) {
     super(props)
-    
+
     this.gotPasswordFromUser = this.gotPasswordFromUser.bind(this)
-    
+
     this.loggerRef = React.createRef()
-    
+
   }
-  
+
   gotPasswordFromUser(formData) {
-    console.log('authenticating')
+    // console.log('authenticating')
     this.props.updateLoggerDivId(this.loggerRef)
     this.props.startConnection(formData)
   }
-  
+
   render() {
     return (
       <section className='UpdateDbRoute'>
         <DocumentMeta>
           <title />
         </DocumentMeta>
-        
+
         <UpdateDbForm
           handleClick={this.gotPasswordFromUser}
         />
-  
+
         <h1>Log</h1>
         <div ref={this.loggerRef} className='logs-holder' >
           <div>initial message</div>
         </div>
-      
+
       </section>
     )
   }
