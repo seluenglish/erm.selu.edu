@@ -23,7 +23,7 @@ export const nav = {
   drawings: 'Drawings',
   xml: 'XML',
   bibliography: 'Bibliography',
-  staffAndSupport: 'Staffs',
+  staffAndSupport: 'Staff',
   legal: 'Legal',
 
 }

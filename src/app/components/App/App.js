@@ -12,6 +12,8 @@ import style from './App.module.scss'
 import { isBrowser } from 'app/utils'
 import XmlRoute from 'app/routes/XmlRoute/XmlRoute'
 import { initializeFontAwesome } from 'helpers/font-awesome'
+import ScrollUp from 'app/components/ScrollToTopExtension/ScrollToTopExtension';
+import scrollIcon from 'assets/up_arrow_round.png'
 
 const log = debug('App.js')
 
@@ -76,14 +78,6 @@ export default class App extends React.Component {
               path='/search'
               component={LoadableSearchRoute}
             />
-            {/*<Route*/}
-              {/*path='/oops'*/}
-              {/*component={LoadableOopsRoute}*/}
-            {/*/>*/}
-            {/*<Route*/}
-              {/*path='/private'*/}
-              {/*component={PrivateRoute}*/}
-            {/*/>*/}
             <Route
               path={'/update_db'}
               component={UpdateDbRoute}
@@ -97,6 +91,21 @@ export default class App extends React.Component {
             />
           </Switch>
         </main>
+
+        <ScrollUp
+          showUnder={350}
+          duration={1}
+          style={{
+            transitionDuration: '0s',
+            transitionTimingFunction: 'linear',
+            transitionDelay: '0s',
+            bottom: '25px',
+            right: '25px',
+          }}
+        >
+          <img src={scrollIcon} alt='Back to top' />
+        </ScrollUp>
+
 
         <Footer />
       </div>

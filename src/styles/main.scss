@@ -41,7 +41,6 @@ body {
 }
 
 .mainBody > main {
-  padding-top: 1em;
   animation: 1s cubic-bezier(0.18, 0.4, 0.45, 0.93) 0s 1 fadeInPage;
 }
 
@@ -118,6 +117,7 @@ div.QuickSearchBox {
 
     .search_input {
       margin-right: auto;
+      margin-top: 4px;
       color: whitesmoke;
       border: 0;
       outline: 0;
@@ -140,6 +140,7 @@ div.QuickSearchBox {
     }
 
     .search_icon {
+      cursor: pointer;
       color: #343a3f;
       background: white;
       height: 40px;
@@ -324,6 +325,7 @@ div.QuickSearchBox {
   //margin-left: $side-nav-width;
   min-height: 686px;
   word-break: break-word;
+  margin-top: 1em;
 
   .p {
     margin: 1em 0.5em 1em 0.3em;
