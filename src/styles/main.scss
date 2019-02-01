@@ -41,6 +41,7 @@ body {
 }
 
 .mainBody > main {
+  padding-top: 1em;
   animation: 1s cubic-bezier(0.18, 0.4, 0.45, 0.93) 0s 1 fadeInPage;
 }
 
@@ -324,6 +325,10 @@ div.QuickSearchBox {
   min-height: 686px;
   word-break: break-word;
 
+  .p {
+    margin: 1em 0.5em 1em 0.3em;
+  }
+
   @import "styles_migrated";
   @import "components/floating_text";
   @import "components/glosses";
@@ -331,11 +336,24 @@ div.QuickSearchBox {
   @import "components/padding_fix";
 }
 
+$margin-left-phone: 5%;
+$margin-right-phone: 3%;
+
+#brand-image {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: -1em;
+}
+
 @media all and (min-width: 501px) {
   [data-reactroot] > main {
     padding-left: 5em;
     padding-right: 5em;
-    padding-top: 3em;
+    padding-top: 34px;
     max-width: 61em;
     margin-left: auto;
     margin-right: auto;
@@ -343,10 +361,13 @@ div.QuickSearchBox {
 }
 
 @media all and (max-width: 500px) {
+  #brand-image {
+    left: (50% - ($margin-left-phone - $margin-right-phone)/2);
+  }
   [data-reactroot] > main {
-    padding-top: 50px;
+    padding-top: 35px;
     padding-left: 5%;
-    padding-right: 5%;
+    padding-right: 3%;
     line-height: 128%;
   }
 

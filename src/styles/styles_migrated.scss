@@ -3,11 +3,25 @@
 //  text-align: justify;
 //}
 
+
 .page-title {
   color: #036;
   font-size: 18pt;
   .title-text {
     font-weight: bold;
+  }
+}
+
+.line-beginning {
+  display: inline-block;
+  color: #036;
+  font-size: x-large;
+  font-style: italic;
+  line-height: inherit;
+  margin-bottom: 0;
+
+  &:after{
+    content: ' '
   }
 }
 
