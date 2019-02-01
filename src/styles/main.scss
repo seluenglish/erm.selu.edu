@@ -24,11 +24,11 @@ body {
     text-decoration: none;
   }
 
-  a, a:link, a:visited{
+  a, a:link, a:visited {
     color: $link-color;
   }
 
-  a:hover, a.active:link{
+  a:hover, a.active:link {
     color: $link-active-color;
   }
 
@@ -37,14 +37,14 @@ body {
     font-weight: bold;
     padding: 3px;
   }
-  
+
 }
 
-.mainBody>main{
+.mainBody > main {
   animation: 1s cubic-bezier(0.18, 0.4, 0.45, 0.93) 0s 1 fadeInPage;
 }
 
-.SearchItem{
+.SearchItem {
   background: #eee;
   padding: 15px;
   border-radius: 8px;
@@ -57,13 +57,13 @@ body {
     color: #609;
   }
 
-  .docTypeContainer{
+  .docTypeContainer {
     margin-top: 10px;
     margin-bottom: 10px;
     display: block;
   }
 
-  .text{
+  .text {
     font-style: italic;
   }
 }
@@ -71,19 +71,131 @@ body {
 div.QuickSearchBox {
   display: block;
 
-  input {
-    width: 50%;
-    margin-right: 10%;
-  }
-  .advancedSearchBox {
-    a{
-      color: $header-color;
+  .searchbar {
+    width: 100%;
+    margin-bottom: auto;
+    margin-top: 0;
+    height: 48px;
+    background-color: #989c9e;
+    border-radius: 30px;
+    padding: 3px;
+
+
+    &:hover > .search_input {
+      @media (min-width: 768px) and (max-width: 199px) {
+        width: 100px;
+      }
+
+      @media (min-width: 800px) and (max-width: 860px) {
+        width: 140px;
+      }
+
+      @media (min-width: 861px) and (max-width: 910px) {
+        width: 200px;
+      }
+
+      @media (min-width: 911px) and (max-width: 959px) {
+        width: 250px;
+      }
+
+      @media (min-width: 960px) {
+        width: 300px;
+      }
+
+      caret-color: black;
+      transition: width 0.4s linear;
     }
 
-    float: right;
+    @media (max-width: 767px) {
+      .search_input{
+        width: 100% !important;
+      }
+      .search_icon{
+        margin-top: -38px;
+      }
+    }
+
+    .search_input {
+      margin-right: auto;
+      color: whitesmoke;
+      border: 0;
+      outline: 0;
+      background: none;
+      width: 100px;
+      padding: 3px 10px;
+      caret-color: transparent;
+      line-height: 40px;
+      transition: width 0.4s linear;
+
+      &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #f5f5f569;
+        opacity: 1; /* Firefox */
+      }
+
+      &:focus {
+        outline: 0;
+      }
+
+    }
+
+    .search_icon {
+      color: #343a3f;
+      background: white;
+      height: 40px;
+      width: 40px;
+      float: right;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+  }
+
+
+
+  @media (min-width: 1070px) {
+    .separatorBr {
+      display: initial;
+    }
+  }
+
+  @media (max-width: 1069px) {
+    .separatorBr {
+      display: none;
+    }
+
+  }
+
+  .advancedSearchHolder {
     padding-left: 10px;
-    padding-top: 4px;
-    margin-right: 4em;
+
+    //margin-right: 4em;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+
+    @media(min-width: 1070px) {
+      display: block;
+      float: right;
+    }
+
+    .advancedSearch {
+      color: $header-color;
+      font-size: smaller;
+      background: transparent;
+      border: none;
+      text-decoration: underline;
+      cursor: pointer;
+
+      &:focus {
+        outline: 0;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
 
@@ -96,7 +208,7 @@ div.QuickSearchBox {
     height: 4em;
   }
 
-  fieldset{
+  fieldset {
     padding-left: 10%;
     padding-right: 8%;
     padding-top: 18px;
@@ -106,7 +218,7 @@ div.QuickSearchBox {
   .firstBox {
     //background: aqua;
 
-    &>#searchText {
+    & > #searchText {
       display: block;
       width: 100%;
       margin-bottom: 5px;
@@ -140,7 +252,7 @@ div.QuickSearchBox {
       display: block
     }
 
-    label[for="type"], label[for="subType"]{
+    label[for="type"], label[for="subType"] {
       display: inline-block;
     }
   }
@@ -177,10 +289,8 @@ div.QuickSearchBox {
   }
 }
 
-@media print
-{
-  .no-print, .no-print *
-  {
+@media print {
+  .no-print, .no-print * {
     display: none !important;
   }
 }
@@ -209,7 +319,7 @@ div.QuickSearchBox {
 
 }
 
-[data-reactroot]>main {
+[data-reactroot] > main {
   //margin-left: $side-nav-width;
   min-height: 686px;
   word-break: break-word;
@@ -226,10 +336,13 @@ div.QuickSearchBox {
     padding-left: 5em;
     padding-right: 5em;
     padding-top: 3em;
+    max-width: 61em;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
-@media all and (max-width: 500px)
-{
+
+@media all and (max-width: 500px) {
   [data-reactroot] > main {
     padding-top: 50px;
     padding-left: 5%;

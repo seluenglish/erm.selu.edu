@@ -8,34 +8,38 @@ import { getUrl } from 'helpers/url-helper'
 import { Link } from 'react-router-dom'
 import { replace } from 'react-router-redux'
 import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const InnerForm = () => {
   return (
-    <Form className='QuickSearchBox form-inline my-2 my-lg-0'>
-      <Field
-        type='search'
-        name='searchText'
-        placeholder='Search...'
-        className='form-control mr-sm-2'
-        aria-label='Search'
-      />
-      <button
-        type='submit'
-        className='btn btn-outline-light my-2 my-sm-0'>
-        Search
-      </button>
+    <Form className='form-inline my-lg-0' role='form'>
+
+      <div className='searchbar'>
+        <Field
+          type='search'
+          name='searchText'
+          placeholder='Search...'
+          className='form-control search_input'
+          aria-label='Search'
+        />
+        <button className='search_icon' type='submit'>
+          <FontAwesomeIcon icon='search' />
+        </button>
+      </div>
+
     </Form>
   )
 }
 
 @connect(state => ({
-    search: getSearch(state),
+  search: getSearch(state),
 }), { updateSearchParams, apiSearch, replace })
 export class QuickSearchBox extends React.Component {
   constructor(props) {
     super(props)
 
     this.handleSearchClick = this.handleSearchClick.bind(this)
+    this.handleAdvancedClick = this.handleAdvancedClick.bind(this)
   }
   handleSearchClick(params) {
     const { updateSearchParams, apiSearch, replace, onClick } = this.props
@@ -47,12 +51,17 @@ export class QuickSearchBox extends React.Component {
     if (onClick) onClick()
   }
 
+  handleAdvancedClick(e) {
+    const { replace, onClick } = this.props
+
+    replace('/search')
+    if (onClick) onClick()
+  }
+
   render() {
     if (!this.props.search) return <div>Error</div>
 
     const { searchParams } = this.props.search
-
-    const { onClick } = this.props
 
     return (
       <div className='QuickSearchBox'>
@@ -61,13 +70,17 @@ export class QuickSearchBox extends React.Component {
           render={InnerForm}
           onSubmit={this.handleSearchClick}
         />
-        <div className='advancedSearchBox'>
-          <Link
-            to='/search'
-            onClick={onClick}
-          >
-          Advanced Search</Link>
+
+
+
+        <div className='advancedSearchHolder'>
+          <a
+            href=''
+            className='advancedSearch'
+            onClick={this.handleAdvancedClick}>
+            Advanced Search</a>
         </div>
+
       </div>
     )
   }
