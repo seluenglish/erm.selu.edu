@@ -139,6 +139,7 @@ const InnerForm = (form) => {
                   name='type'
                   id='type'
                   onChange={handleNameTypeChange}
+                  disabled={fullTextChecked}
                 >
                   <option value='all'>All</option>
                   {nameTypeSearchOptions.map((option, i) => (
