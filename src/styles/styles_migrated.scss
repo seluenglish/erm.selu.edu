@@ -13,12 +13,14 @@
 }
 
 .line-beginning {
-  display: inline-block;
+  display: inline;
   color: #036;
   font-size: x-large;
   font-style: italic;
   line-height: inherit;
   margin-bottom: 0;
+  font-weight: bold;
+
 
   &:after{
     content: ' '
@@ -37,9 +39,6 @@
   color: #036;
   font-size: 14pt;
   font-style: italic;
-}
-.subsection {
-  padding-top: 20px;
 }
 
 /* D e c o r a t i o n */
@@ -66,7 +65,7 @@ sup {
 ul {
   color: #000;
   list-style-type: square;
-  padding-right: 30px;
+  padding-left: 2em;
 }
 
 /* T a b l e s */
@@ -170,3 +169,4 @@ a:active {
 //  color: #036;
 //  font-size: 14pt;
 //}
+

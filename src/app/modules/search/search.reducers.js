@@ -8,7 +8,9 @@ import {
   ADD_DB_UPDATE_MESSAGE,
   SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES,
 } from './search.constants'
+import {pendingReducer, rejectedReducer} from 'app/utils/common-reducers'
 import update from 'immutability-helper'
+import ReactGA from 'react-ga'
 
 const getNameTypes = get('payload')
 const getNameSubTypes = get('payload')
@@ -18,6 +20,7 @@ const getSearchParams = get('data')
 const initialState = {
   isPending: false,
   error: '',
+  title: 'search',
   data: {
     searchParams: {
       neverLoaded: true,
@@ -37,27 +40,6 @@ const initialState = {
   },
 }
 
-
-const rejectedReducer = (state, action) => {
-  if (action.payload && action.payload.json) {
-
-    return {
-      ...state,
-      error: action.payload.json.error,
-    }
-  }
-  else {
-    return {
-      ...state,
-      error: 'An unknown error occurred. Please try again.',
-    }
-  }
-}
-
-const pendingReducer = (state) => ({
-  ...state,
-  isPending: true
-})
 
 export const searchReducers = typeToReducer({
   [API_FETCH_NAME_TYPES]: {
@@ -86,15 +68,21 @@ export const searchReducers = typeToReducer({
   [API_SEARCH]: {
     [PENDING]: pendingReducer,
     [REJECTED]: rejectedReducer,
-    [FULFILLED]: (state, action) => ({
-      ...state,
-      error: '',
-      data: {
-        ...state.data,
-        searchResults: getSearchResults(action),
-      },
+    [FULFILLED]: (state, action) => {
+      ReactGA.event({
+        category: 'search',
+        action: API_SEARCH,
+      })
+      return {
+        ...state,
+        error: '',
+        data: {
+          ...state.data,
+          searchResults: getSearchResults(action),
+        },
 
-    }),
+      }
+    },
   },
   [UPDATE_SEARCH_PARAMS]: (state, action) => ({
     ...state,
@@ -104,12 +92,18 @@ export const searchReducers = typeToReducer({
     },
   }),
   [SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES]: (state, action) => {
-
     if (!state.data.searchResults) return state
 
     const { documentId, newToggleState } = action.payload
 
     const documentIndex = state.data.searchResults.listItems.findIndex(x => x.id === documentId)
+
+    ReactGA.event({
+      category: 'search',
+      action: SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES,
+      value: newToggleState,
+    })
+
 
     return update(state, {
       data: {

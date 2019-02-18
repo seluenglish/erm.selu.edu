@@ -52,10 +52,12 @@ export class QuickSearchBox extends React.Component {
   }
 
   handleAdvancedClick(e) {
+    e.preventDefault()
+
     const { replace, onClick } = this.props
 
     replace('/search')
-    if (onClick) onClick()
+    if (onClick) onClick(e)
   }
 
   render() {

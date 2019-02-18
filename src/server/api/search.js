@@ -32,8 +32,6 @@ export default async function (ctx) {
 
   if (fullTextChecked) {
     query = Document.find({ fullText: filter })
-  } else if (!type || type === 'all') {
-    query = Document.find({ title: filter })
   } else if (type === 'date') {
     [ beginDate, endDate ] = parseDate(searchText, 'YYYYMMDD')
 
@@ -56,10 +54,15 @@ export default async function (ctx) {
   } else {
     let names
 
+    if (type === 'all') type=null
+    if (subType === 'all') subType = null
+
     if (subType && subType !== 'all') {
       names = await Name.find({ text: filter, type, subType })
-    } else {
+    } else if (type) {
       names = await Name.find({ text: filter, type })
+    } else {
+      names = await Name.find({text: filter})
     }
 
     if (!names.length) names = [ ObjectId() ]
@@ -73,18 +76,15 @@ export default async function (ctx) {
     })
   }
 
+
   if (searchIn !== 'all') {
-    const [ type, subType ] = searchIn.split('.')
+    let [ type, subType ] = searchIn.split('.')
     if (subType) {
       query = query.find({ type, subType })
     } else {
       query = query.find({ type })
     }
   }
-
-  // console.log('begin at', beginAt, ', end at: ', endAt)
-  // beginAt = 1
-  // endAt = 3
 
   query = query.skip(beginAt).limit(endAt)
   const resultDocuments = await query
