@@ -1,3 +1,4 @@
 
 export const CONTAINER_ELEMENT_ID = 'app-container'
-export const RUSKIN_BASE_URL = 'http://english.selu.edu/humanitiesonline/ruskin'
+export const GA_TRACKING_ID = 'UA-134616383-1'
+
