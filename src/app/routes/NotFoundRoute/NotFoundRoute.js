@@ -2,7 +2,7 @@ import DocumentMeta from 'react-helmet'
 import { hot } from 'react-hot-loader'
 import { notFoundRoute } from 'app/copy'
 import { Redirect } from 'react-router-dom'
-import { SERVER_ROOT } from '../../../helpers/url-helper'
+import { SERVER_SHOWCASE_DIRECTORY } from 'config/constants'
 
 class NotFoundRoute extends React.Component {
   // TODO remove this
@@ -11,7 +11,7 @@ class NotFoundRoute extends React.Component {
     const w = window
 
     const a = w.document.createElement('a')
-    a.href = `${SERVER_ROOT}${pathname}`
+    a.href = `${SERVER_SHOWCASE_DIRECTORY}${pathname}`
 
     if (!a.pathname.endsWith('/')) {
       a.pathname += '.php'

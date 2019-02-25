@@ -3,11 +3,10 @@ import { replace } from 'react-router-redux'
 import { hot } from 'react-hot-loader'
 import { notFoundRoute } from 'app/copy'
 import { Redirect } from 'react-router-dom'
-import { SERVER_ROOT } from '../../../helpers/url-helper'
 import { connect } from 'react-redux'
 import { getSearchDocument, getError, getIsPending } from 'app/modules/search-document/search-document.selectors'
 import { apiGetDocument } from 'app/modules/search-document/search-document.actions'
-import {RUSKIN_BASE_URL} from 'config/constants'
+import { SERVER_SHOWCASE_DIRECTORY } from 'config/constants'
 import cx from 'classnames'
 
 @connect(state => ({
@@ -95,7 +94,7 @@ class SearchDocumentRoute extends React.Component {
 
     if (pathname.startsWith('/witnesses/') || pathname.startsWith('/corpuses')) {
       if (!hash) hash=''
-      window.location.replace(`${RUSKIN_BASE_URL}${pathname}.php${hash}`)
+      window.location.replace(`${SERVER_SHOWCASE_DIRECTORY}${pathname}.php${hash}`)
     }
 
     this.props.apiGetDocument(pathname)

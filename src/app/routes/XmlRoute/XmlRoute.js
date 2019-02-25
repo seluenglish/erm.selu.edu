@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import DocumentMeta from 'react-helmet'
 import {hot} from 'react-hot-loader'
-import {RUSKIN_BASE_URL} from 'config/constants'
+import {SERVER_XML_DIRECTORY} from 'config/constants'
 
 
 @connect(null, {  })
@@ -16,7 +16,7 @@ class XmlRoute extends React.Component {
 
         <iframe
           title={'XML Listing'}
-          src={`${RUSKIN_BASE_URL}/xml`}
+          src={SERVER_XML_DIRECTORY}
           style={{
             width: '100%',
             height: '36rem',
