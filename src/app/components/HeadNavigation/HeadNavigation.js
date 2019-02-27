@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { nav as navCopy } from 'app/copy'
 import styles from './HeadNavigation.module.scss'
 import QuickSearchBox from '../QuickSearchBox/QuickSearchBox'
-import headerIcon from 'assets/ErmIcon.png'
+import headerIcon from 'assets/site_logo.png'
 import {hot} from 'react-hot-loader'
 import { isEnv } from 'app/utils'
 
