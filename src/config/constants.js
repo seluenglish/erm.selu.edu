@@ -1,6 +1,4 @@
 export const CONTAINER_ELEMENT_ID = 'app-container'
-// export const SERVER_ROOT = 'http://english.selu.edu/humanitiesonline/ruskin'
-// export const SERVER_ROOT = 'http://ruskin.local:8080/src'
 
 export const SERVER_ROOT = 'http://ruskin.english.selu.edu:8080'
 export const SERVER_XML_DIRECTORY = `${SERVER_ROOT}/web/xml`
