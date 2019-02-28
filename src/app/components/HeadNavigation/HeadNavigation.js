@@ -83,7 +83,7 @@ export class HeadNavigation extends React.Component {
               </li>
               <li className='nav-item dropdown'>
                 <NavLink
-                  to='/indices'
+                  to='/essays/indices_essay'
                   className='nav-link dropdown-toggle'
                   aria-expanded='false'
                   aria-haspopup='true'
