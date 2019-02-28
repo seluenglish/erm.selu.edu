@@ -1,5 +1,5 @@
 import DocumentMeta from 'react-helmet'
-import { replace } from 'react-router-redux'
+import { replace, push } from 'react-router-redux'
 import { hot } from 'react-hot-loader'
 import { notFoundRoute } from 'app/copy'
 import { Redirect } from 'react-router-dom'
@@ -13,7 +13,7 @@ import cx from 'classnames'
   searchDocument: getSearchDocument(state),
   error: getError(state),
   isPending: getIsPending(state),
-}), { replace, apiGetDocument })
+}), { push, apiGetDocument })
 class SearchDocumentRoute extends React.Component {
   constructor(props) {
     super(props)
@@ -62,10 +62,14 @@ class SearchDocumentRoute extends React.Component {
   }
 
   handleMainBodyLinkClick(e, targetThis) {
-    const { replace } = this.props
+    const { push } = this.props
+
+    e.preventDefault()
 
     if (targetThis.host === window.location.host) {
-      replace(targetThis.pathname + targetThis.hash)
+      const target = targetThis.pathname + targetThis.hash
+
+      push(targetThis.pathname + targetThis.hash)
     }
   }
 
@@ -79,8 +83,6 @@ class SearchDocumentRoute extends React.Component {
         const elem = elements[i]
 
         elem.addEventListener('click', function (e) {
-          e.preventDefault()
-
           parent.handleMainBodyLinkClick(e, this)
         })
       }
@@ -119,9 +121,9 @@ class SearchDocumentRoute extends React.Component {
             dangerouslySetInnerHTML={body} />
         )}
 
-        {error && (<div>
-          Oops! Page not found.
-        </div>)}
+        {/*{error && (<div>*/}
+          {/*Oops! Page not found.*/}
+        {/*</div>)}*/}
       </section>
     )
   }
