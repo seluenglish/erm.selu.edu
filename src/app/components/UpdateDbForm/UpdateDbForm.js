@@ -28,7 +28,7 @@ const InnerForm = (props) => {
         </button>
       </div>
     </fieldset>
-  
+
   </Form>)
 }
 
@@ -42,17 +42,17 @@ export class UpdateDbForm extends React.Component {
     return (
       <div className='UpdateDbForm no-print'>
         <Formik
-          initialValues={{ password: 'batman' }}
+          initialValues={{ password: '' }}
           render={InnerForm}
           onSubmit={handleClick}
         />
-      
-        
+
+
       </div>
-      
+
     )
   }
-  
+
 }
 
 UpdateDbForm.propTypes = {
