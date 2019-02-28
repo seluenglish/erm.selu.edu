@@ -11,7 +11,7 @@ class XmlRoute extends React.Component {
     return (
       <section className='UpdateDbRoute container-fluid'>
         <DocumentMeta>
-          <title>XML&quot;s</title>
+          <title>XML</title>
         </DocumentMeta>
 
         <iframe
