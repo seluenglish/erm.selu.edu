@@ -24,6 +24,14 @@ rsync -a ${RUSKIN_ROOT}/_xml/_In_Process/essays/. ${TMP_DIR}/web/xml/essays
 
 echo "Copying images"
 cp -r ${RUSKIN_ROOT}/_Resources/images ${TMP_DIR}/web/images
+ln -s ../images ${TMP_DIR}/web/pages/images
+
+echo "Copying styles"
+cp -r ${RUSKIN_ROOT}/_Resources/css_styles ${TMP_DIR}/web/styles
+
+echo "Copying JavaScript files"
+cp -r ${RUSKIN_ROOT}/src/js ${TMP_DIR}/web/pages
+
 
 rm -rf build
 mv ${TMP_DIR} build
