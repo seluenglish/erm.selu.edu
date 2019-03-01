@@ -4,19 +4,7 @@
     "subTypes": []
   },
   {
-    "type": "apparatus",
-    "subTypes": []
-  },
-  {
-    "type": "artwork",
-    "subTypes": []
-  },
-  {
     "type": "astronomical",
-    "subTypes": []
-  },
-  {
-    "type": "book",
     "subTypes": []
   },
   {
@@ -33,10 +21,6 @@
   },
   {
     "type": "fictional",
-    "subTypes": []
-  },
-  {
-    "type": "figure",
     "subTypes": []
   },
   {
@@ -221,10 +205,6 @@
   },
   {
     "type": "vessel",
-    "subTypes": []
-  },
-  {
-    "type": "witness",
     "subTypes": []
   }
 ]
