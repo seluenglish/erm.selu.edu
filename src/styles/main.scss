@@ -302,8 +302,8 @@ div.QuickSearchBox {
     .navbar-collapse {
       padding-left: 1em;
     }
-
   }
+
   .navbar-brand {
     img {
       height: 4em;
@@ -317,6 +317,25 @@ div.QuickSearchBox {
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 0;
+  }
+
+  .navbar:not(.is-homepage) {
+  }
+
+  .navbar.is-homepage-false {
+    padding-left: 9em;
+    @media (min-width: 768px) {
+      .navbar-brand {
+        img {
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 8em;
+        }
+
+      }
+    }
+
   }
 
 }

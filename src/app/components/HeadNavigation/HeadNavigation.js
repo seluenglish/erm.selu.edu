@@ -7,6 +7,7 @@ import headerIcon from 'assets/site_logo.png'
 import {hot} from 'react-hot-loader'
 import { isEnv } from 'app/utils'
 import $ from 'jquery'
+import {withRouter} from 'react-router'
 
 
 // Putting this inside a connect will break activeClassName
@@ -34,6 +35,9 @@ export class HeadNavigation extends React.Component {
 
     if (!showNavbar) return false
 
+    const { pathname } = this.props.location
+    const isHomePage = pathname === '/'
+
     return (
       <div className='HeadNavigation'>
 
@@ -42,7 +46,13 @@ export class HeadNavigation extends React.Component {
           <div className='subtitle'>1826-1842</div>
         </div>
 
-        <nav className='navbar navbar-expand-md navbar-dark bg-dark fixed-top'>
+        <nav className={cx({
+          'navbar': true,
+          'navbar-expand-md': true,
+          'navbar-dark bg-dark': true,
+          'fixed-top': true,
+          'is-homepage': isHomePage,
+        })} >
           <NavLink
             to='/'
             className='navbar-brand'
@@ -170,4 +180,4 @@ export class HeadNavigation extends React.Component {
   }
 }
 
-export default hot(module)(HeadNavigation)
+export default hot(module)(withRouter(HeadNavigation))
