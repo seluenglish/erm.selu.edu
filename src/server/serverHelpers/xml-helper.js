@@ -159,11 +159,11 @@ function resolveTagTypes($tag, $) {
   switch (tagName) {
     case 'PERSNAME':
       type='person'
-      subType = $tag.attr('subType')
+      subType = $tag.attr('type')
       break
     case 'PLACENAME':
       type = 'place'
-      subType = $tag.attr('subType')
+      subType = $tag.attr('type')
       break
     case 'HANDNOTE':
       type = 'handNote'
