@@ -1,11 +1,9 @@
 import cx from 'classnames'
 import { NavLink } from 'react-router-dom'
 import { nav as navCopy } from 'app/copy'
-import styles from './HeadNavigation.module.scss'
 import QuickSearchBox from '../QuickSearchBox/QuickSearchBox'
 import headerIcon from 'assets/site_logo.png'
 import {hot} from 'react-hot-loader'
-import { isEnv } from 'app/utils'
 import $ from 'jquery'
 
 
@@ -117,13 +115,6 @@ export class HeadNavigation extends React.Component {
                     to='/essays/indices_essay#DRAWINGS'
                     className='dropdown-item'
                     onClick={this.handleMenuClick}>{navCopy.drawings}</NavLink>
-                  {isEnv('development') && (
-                    <NavLink
-                      exact
-                      to='/update_db'
-                      onClick={this.handleMenuClick}
-                      className='dropdown-item'>Update DB</NavLink>
-                  )}
                 </div>
               </li>
               <li className='nav-item'>
