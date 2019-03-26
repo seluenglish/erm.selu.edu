@@ -56,15 +56,12 @@ export default class App extends React.Component {
     super(props)
 
     let showNavbar = false
-    if (typeof window !== 'undefined')
-      showNavbar = window.location.href.indexOf('show_navbar=0') === -1
-
 
     this.state = {
       showNavbar,
     }
   }
-  componentWillMount(){
+  componentDidMount(){
     if (typeof window !== 'undefined') {
       const showNavbar = window.location.href.indexOf('show_navbar=0') === -1
       this.setState({
