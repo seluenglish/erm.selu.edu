@@ -3,6 +3,7 @@ import { routerReducer as routing } from 'react-router-redux'
 import { flashReducers as flash } from 'app/modules/flash/flash.reducers'
 import { barReducers as bar } from 'app/modules/bar/bar.reducers'
 import { searchReducers as search } from 'app/modules/search/search.reducers'
+import { pageUtilsReducers as pageUtils } from 'app/modules/page-utils/page-utils.reducers'
 import { searchDocumentReducers as searchDocument } from 'app/modules/search-document/search-document.reducers'
 import { serverUpdateDbReducers as serverUpdateDb } from 'app/modules/server-update-db/server-update-db.reducers'
 import { isBrowser } from 'app/utils'
@@ -21,6 +22,7 @@ if(isBrowser)
     search,
     serverUpdateDb,
     searchDocument,
+    pageUtils,
   })
 else
   reducer = combineReducers({
