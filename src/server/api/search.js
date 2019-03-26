@@ -1,5 +1,5 @@
 import { Document, Name, DateModel } from 'server/database/models'
-import { getMatchingSearches } from 'server/serverHelpers/search'
+import {cleanSearchText, getMatchingSearches} from 'server/serverHelpers/search'
 import _ from 'lodash'
 import mongoose from 'mongoose'
 import { parseDate } from 'server/serverHelpers/date-helper'
@@ -26,7 +26,7 @@ export default async function (ctx) {
   if (typeof beginAt !== 'number')
     throw new CustomError(`beginAt must be a number.`)
 
-  const filter = new RegExp(searchText, 'i')
+  let filter = new RegExp(searchText, 'i')
 
   let query, dates
 
@@ -57,12 +57,14 @@ export default async function (ctx) {
     if (type === 'all') type=null
     if (subType === 'all') subType = null
 
-    if (subType && subType !== 'all') {
+    filter = new RegExp(cleanSearchText(searchText), 'i')
+
+    if (subType) {
       names = await Name.find({ text: filter, type, subType })
     } else if (type) {
       names = await Name.find({ text: filter, type })
     } else {
-      names = await Name.find({text: filter})
+      names = await Name.find({ text: filter })
     }
 
     if (!names.length) names = [ ObjectId() ]

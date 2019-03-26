@@ -6,6 +6,7 @@ import cheerio from 'cheerio'
 import { getKeywordsForText } from 'helpers/keyword-helper'
 import { parseDate } from './date-helper'
 import moment from 'moment'
+import {cleanName} from './search'
 
 const dateStringBeforeLength = 30
 const dateStringAfterLength = 30
@@ -63,7 +64,8 @@ const extractCorresps = ($) => {
   return $('body [corresp]').map((_, elem) => {
     const $elem = $(elem)
     const corresp = $elem.attr('corresp')
-    const text = $elem.text()
+    let text = $elem.text()
+    text = cleanName(text)
 
     const tagData = resolveTagTypes($elem, $)
     if (tagData === undefined) return tagData
@@ -171,15 +173,15 @@ function resolveTagTypes($tag, $) {
       break
     case 'GEOGNAME':
       type = 'geographical'
-      subType = $tag.attr('subType')
+      subType = $tag.attr('type')
       break
     case 'TITLE':
-      type = $tag.attr('type')
-      subType = $tag.attr('subtype')
+      type = 'title'
+      subType = $tag.attr('type')
       break
     case 'ORGNAME':
       type = 'organization'
-      subType = $tag.attr('subtype')
+      subType = $tag.attr('type')
       break
     case 'REF':
       type = $tag.attr('type')

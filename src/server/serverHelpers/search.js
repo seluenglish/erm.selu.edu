@@ -51,3 +51,12 @@ ${showText.slice(wordShownAt+searchText.length)}`
 
   return occurencesAt
 }
+
+export function cleanSearchText(text) {
+  return text.replace(/^&[\w]+;/, '')
+
+}
+
+export function cleanName(text) {
+  return text.replace(/^&[\w]+;/, '')
+}
