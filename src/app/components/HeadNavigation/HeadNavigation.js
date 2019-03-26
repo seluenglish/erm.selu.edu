@@ -6,40 +6,33 @@ import QuickSearchBox from '../QuickSearchBox/QuickSearchBox'
 import headerIcon from 'assets/site_logo.png'
 import {hot} from 'react-hot-loader'
 import { isEnv } from 'app/utils'
+import $ from 'jquery'
 
 
 // Putting this inside a connect will break activeClassName
 // unless you also subscribe to changes to routing state or context
+
 export class HeadNavigation extends React.Component {
 
   constructor(props) {
     super(props)
 
-
-    this.toggleIndices = this.toggleIndices.bind(this)
     this.handleMenuClick = this.handleMenuClick.bind(this)
-
-    this.state = {
-      indicesExpanded: false,
-    }
   }
 
-  handleMenuClick(e){
+
+  handleMenuClick() {
     const toggler = $('.navbar-toggler')
     if (toggler.is(':visible')) {
-      toggler.click();
+      toggler.click()
     }
   }
 
-  toggleIndices() {
-    const { indicesExpanded } = this.state
 
-    this.setState({
-      indicesExpanded: !indicesExpanded,
-    })
-  }
   render() {
-    const { indicesExpanded } = this.state
+    const { showNavbar } = this.props
+
+    if (!showNavbar) return false
 
     return (
       <div className='HeadNavigation'>

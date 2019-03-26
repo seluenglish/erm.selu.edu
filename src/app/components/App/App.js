@@ -52,7 +52,28 @@ const LoadableXmlRoute = Loadable({
 initializeFontAwesome()
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    let showNavbar = false
+    if (typeof window !== 'undefined')
+      showNavbar = window.location.href.indexOf('show_navbar=0') === -1
+
+
+    this.state = {
+      showNavbar,
+    }
+  }
+  componentWillMount(){
+    if (typeof window !== 'undefined') {
+      const showNavbar = window.location.href.indexOf('show_navbar=0') === -1
+      this.setState({
+        showNavbar,
+      })
+    }
+  }
   render() {
+    const { showNavbar } = this.state
     return (
       <div className={style.app}>
         <DocumentMeta
@@ -64,7 +85,7 @@ export default class App extends React.Component {
           <meta name='description' content={appCopy.meta.description} />
           <meta name='keywords' content={appCopy.meta.keywords} />
         </DocumentMeta>
-        <HeadNavigation />
+        <HeadNavigation showNavbar={showNavbar} />
         <FlashMessages />
         {/*<SideNavigation />*/}
         <main className={style.content}>
