@@ -1,7 +1,6 @@
 import { STATUS_CODES } from 'http'
 import Router from 'koa-router'
 import koaBody from 'koa-body'
-import update_db from './update_db'
 import search from './search'
 
 const parseBody = koaBody()
@@ -20,7 +19,6 @@ export function setApiRoutes() {
     .get('bar', '/bar', (ctx) => {
       ctx.response.body = { bar: [ 'lorem', 'ipsum', 'dolor', 'sit', 'amet' ] }
     })
-    .post('update_db', '/update_db', update_db)
     .post('search', '/search', search)
     .get('nameTypes', '/nameTypes', (ctx) => {
       ctx.response.body = [ 'a', 'b', 'c' ]
