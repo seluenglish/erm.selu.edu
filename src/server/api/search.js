@@ -59,12 +59,19 @@ export default async function (ctx) {
 
     filter = new RegExp(cleanSearchText(searchText), 'i')
 
+    const searchFilter = {
+      $or: [ {
+        corresp: `#${searchText}`,
+      }, {
+        text: filter,
+      } ],
+    }
     if (subType) {
-      names = await Name.find({ text: filter, type, subType })
+      names = await Name.find({ ...searchFilter, type, subType })
     } else if (type) {
-      names = await Name.find({ text: filter, type })
+      names = await Name.find({ ...searchFilter, type })
     } else {
-      names = await Name.find({ text: filter })
+      names = await Name.find({ ...searchFilter })
     }
 
     if (!names.length) names = [ ObjectId() ]
