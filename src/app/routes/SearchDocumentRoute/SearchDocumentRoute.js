@@ -87,14 +87,13 @@ class SearchDocumentRoute extends React.Component {
         })
       }
     }
-
   }
 
   async reload() {
     const { pathname } = this.props.location
     let { hash } = window.location
 
-    if (pathname.startsWith('/witnesses/') || pathname.startsWith('/corpuses')) {
+    if (pathname.startsWith('/witnesses/') || pathname.startsWith('/corpuses') || pathname.startsWith('/figures')) {
       if (!hash) hash=''
       window.location.replace(`${SERVER_SHOWCASE_DIRECTORY}${pathname}.php${hash}`)
     }

@@ -14,7 +14,7 @@ echo "Copying PHP and HTML"
 cp -r ${RUSKIN_ROOT}/gen/_xml/_Completed ${TMP_DIR}/web/pages
 rsync -a ${RUSKIN_ROOT}/gen/_xml/_In_Process/essays/. ${TMP_DIR}/web/pages/essays
 
-cp ${RUSKIN_ROOT}/src/config.json.php ${TMP_DIR}/web/pages
+cp ${RUSKIN_ROOT}/src/config_production.json.php ${TMP_DIR}/web/pages/config.json.php
 cp ${RUSKIN_ROOT}/src/composer.json ${TMP_DIR}/web/pages
 cp ${RUSKIN_ROOT}/src/header.inc.php ${TMP_DIR}/web/pages
 cp ${RUSKIN_ROOT}/src/style.php ${TMP_DIR}/web/pages
