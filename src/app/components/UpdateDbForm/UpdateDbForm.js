@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import styles from './UpdateDbForm.scss'
+import './UpdateDbForm.scss'
 import PropTypes from 'prop-types'
 import { Formik, Field, Form } from 'formik'
 import { hot } from 'react-hot-loader'
@@ -11,8 +11,7 @@ const InnerForm = (form) => {
 
   return (
     <Form
-      className='UpdateDbForm'
-      style={styles}>
+      className='UpdateDbForm'>
       <fieldset>
         <legend>Admin Command Panel</legend>
         <div className='searchFields'>
@@ -86,9 +85,9 @@ export class UpdateDbForm extends React.Component {
     const { handleClick } = this.props
     const initialProps = {
       password: '',
-      wordCount: true,
-      showErrors: false,
-      updateSearchDb: false,
+      wordCount: false,
+      showErrors: true,
+      updateSearchDb: true,
       showDebug: false,
     }
     return (
