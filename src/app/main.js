@@ -3,17 +3,26 @@ import { Provider } from 'react-redux'
 import { sagaMiddleware } from 'app/composition/middleware'
 import rootSaga from 'app/sagas'
 import App from 'app/components/App/App'
-import ReactGA from 'react-ga';
+import { initialize, pageview } from 'react-ga'
 import { GA_TRACKING_ID } from 'config/constants'
 import { isBrowser } from 'app/utils'
 
-ReactGA.initialize(GA_TRACKING_ID, {
-  debug: false,
-})
+
+if (isBrowser) {
+  initialize(GA_TRACKING_ID, {
+    debug: false,
+  })
+}
 
 export const Main = (store, history, Router) => {
+  // < HACK >
+  if (!isBrowser) {
+    global.window = {}
+  }
+  // </ HACK >
+
   history.listen(location => {
-    ReactGA.pageview(location.pathname + location.hash)
+    pageview(location.pathname + location.hash)
   })
 
   return (
