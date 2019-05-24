@@ -111,6 +111,10 @@ export default async function updateDb(payload, client) {
           }
           if (data.corresps.length) {
             const namesInThisDoc = data.corresps
+            namesInThisDoc.unshift({
+              text: doc.title,
+              type: 'docTitle'
+            })
             namesInThisDoc.forEach(n => {
               let nameObj = allNames.find(x => x.type === n.type && x.corresp === n.corresp)
 
