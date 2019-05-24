@@ -19,6 +19,7 @@ class UpdateDbRoute extends React.Component {
 
   gotPasswordFromUser(formData) {
     // console.log('authenticating')
+    console.log('formdata: ', formData)
     this.props.updateLoggerDivId(this.loggerRef)
     this.props.startConnection(formData)
   }
