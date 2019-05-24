@@ -1,5 +1,5 @@
 import { Document, Name, DateModel } from 'server/database/models'
-import {cleanSearchText, getMatchingSearches} from 'server/serverHelpers/search'
+import { cleanSearchText, getMatchingSearches } from 'server/serverHelpers/search'
 import _ from 'lodash'
 import mongoose from 'mongoose'
 import { parseDate } from 'server/serverHelpers/date-helper'
@@ -14,6 +14,7 @@ export default async function (ctx) {
 
   let { searchText, beginAt, endAt, fullTextChecked, searchIn, type, subType } = searchParams
   let beginDate, endDate
+  let correspFilter
 
   if (beginAt === undefined) beginAt = 0
   if (!endAt) endAt = beginAt + SEARCH_LIMIT
@@ -22,6 +23,9 @@ export default async function (ctx) {
     // invalid endAt time
     endAt = beginAt + SEARCH_LIMIT
   }
+
+  if (!searchText)
+    throw new CustomError('Please provide a search text')
 
   if (typeof beginAt !== 'number')
     throw new CustomError(`beginAt must be a number.`)
@@ -58,10 +62,11 @@ export default async function (ctx) {
     if (subType === 'all') subType = null
 
     filter = new RegExp(cleanSearchText(searchText), 'i')
+    correspFilter = new RegExp(`#${cleanSearchText(searchText)}`, 'i')
 
     const searchFilter = {
       $or: [ {
-        corresp: `#${searchText}`,
+        corresp: correspFilter,
       }, {
         text: filter,
       } ],
@@ -100,6 +105,15 @@ export default async function (ctx) {
 
   const count = resultDocuments.length
 
+  // console.log(resultDocuments.map(x => ({
+  //   fileId: x.fileId,
+  //   title: x.title,
+  //   type: x.type,
+  //   subType: x.subType,
+  //   _id: x._id,
+  //   url: x._url,
+  //
+  // })))
   console.log('result count: ', count)
 
   let result = resultDocuments.slice(0, 100).map(doc => {
