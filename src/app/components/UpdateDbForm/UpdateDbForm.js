@@ -7,14 +7,14 @@ import { getSearch } from 'app/modules/search/search.selectors'
 import { connect } from 'react-redux'
 
 const InnerForm = (form) => {
-  const { showErrors, wordCount } = form.values
+  const { showErrors, wordCount, updateSearchDb, showDebug } = form.values
 
   return (
     <Form
       className='UpdateDbForm'
       style={styles}>
       <fieldset>
-        <legend>Update Database</legend>
+        <legend>Admin Command Panel</legend>
         <div className='searchFields'>
           <Field
             type='password'
@@ -42,6 +42,26 @@ const InnerForm = (form) => {
             />
             &nbsp;Word count</label>
           <br />
+          <label htmlFor='showDebug'>
+            <Field
+              type='checkbox'
+              name='showDebug'
+              id='showDebug'
+              checked={showDebug}
+              // onChange={void}
+            />
+            &nbsp;Show Debug</label>
+          <br />
+          <label htmlFor='updateSearchDb'>
+            <Field
+              type='checkbox'
+              name='updateSearchDb'
+              id='updateSearchDb'
+              checked={updateSearchDb}
+              // onChange={void}
+            />
+            &nbsp;Update Search Database</label>
+          <br />
           <button
             type='submit'
             className={cx(
@@ -67,7 +87,9 @@ export class UpdateDbForm extends React.Component {
     const initialProps = {
       password: '',
       wordCount: true,
-      showErrors: true,
+      showErrors: false,
+      updateSearchDb: false,
+      showDebug: false,
     }
     return (
       <div className='UpdateDbForm no-print'>

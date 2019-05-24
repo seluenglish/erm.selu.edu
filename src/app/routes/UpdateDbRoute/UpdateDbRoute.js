@@ -19,7 +19,6 @@ class UpdateDbRoute extends React.Component {
 
   gotPasswordFromUser(formData) {
     // console.log('authenticating')
-    console.log('formdata: ', formData)
     this.props.updateLoggerDivId(this.loggerRef)
     this.props.startConnection(formData)
   }
@@ -37,7 +36,7 @@ class UpdateDbRoute extends React.Component {
 
         <h1>Log</h1>
         <div ref={this.loggerRef} className='logs-holder' >
-          <div>initial message</div>
+          <div>Check at least one box and then click update.</div>
         </div>
 
       </section>

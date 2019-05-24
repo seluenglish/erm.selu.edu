@@ -11,7 +11,7 @@ import { Document, Name, DateModel } from 'server/database/models'
 import path from 'path'
 import mongoose from 'mongoose'
 import _ from 'lodash'
-import {LOG_INFO, LOG_WARNING, LOG_ERROR, LOG_FATAL, LOG_LEVELS} from 'server/serverHelpers/logging'
+import {LOG_INFO, LOG_DEBUG, LOG_WARNING, LOG_ERROR, LOG_FATAL, LOG_LEVELS} from 'server/serverHelpers/logging'
 import {createValidator} from 'server/serverHelpers/xml-document-validator'
 
 const ObjectId = mongoose.Types.ObjectId
@@ -20,12 +20,17 @@ const ObjectId = mongoose.Types.ObjectId
 export default async function updateDb(payload, client) {
   const store = global.store
 
+  const { password, wordCount, showErrors, updateSearchDb, showDebug } = payload
+
   const log = (message) => {
     let level = LOG_INFO
 
     if (Array.isArray(message) ) {
       [ level, message ] = message
     }
+
+    if (!showDebug && level === LOG_DEBUG ) return
+    if (!showErrors && level === LOG_ERROR ) return
 
     if (message) {
       console.log(`${level} `, message)
@@ -40,21 +45,21 @@ export default async function updateDb(payload, client) {
     })
   }
 
-  const clientPassword = payload.password
 
-  if (!isPasswordCorrect(clientPassword)) {
+  if (!isPasswordCorrect(password)) {
     log('wrong password')
   } else {
-    log('updating db')
+    log('Updating db')
 
     const allNames = []
     const allDocs = []
     let allDates = []
 
     const dirPath = [ path.join(process.env.XML_PATH, '_Completed/') ]
-    log('locating XML files')
+    log('Locating XML files')
     let xmls = await findXmlsInDirs(dirPath)
     log(`${xmls.length} XML files discovered`)
+    log()
 
     const validateDoc = createValidator(log)
 
@@ -63,15 +68,13 @@ export default async function updateDb(payload, client) {
     // xmls = [ 'corpuses/account_of_a_tour_on_the_continent_msia_g1_corpus.xml' ]
 
     const processFile = async (xmlFileName, docIndex) => {
-      log()
-      log(`processing ${docIndex+1}. ${xmlFileName}`)
+      log(`Processing ${docIndex+1}. ${xmlFileName}`)
       const resolved = resolveXmlFilePath(xmlFileName, dirPath)
-      log(`resolved to ${resolved}`)
+      log([ LOG_DEBUG, `resolved to ${resolved}` ])
 
       const xml = parseXmlFile(resolved)
 
       try {
-        log(`extracing data from XML`)
         const data = extractXmlData(xml)
 
         if (data.type === 'title') {
@@ -79,9 +82,6 @@ export default async function updateDb(payload, client) {
           return
         }
 
-        log(`converting xml data to db rows`)
-
-        log(`creating document row`)
         const doc = Document({
           _id: ObjectId(),
           fileId: data.fileId,
@@ -94,86 +94,95 @@ export default async function updateDb(payload, client) {
           keywords: data.keywords,
         })
 
-        log(`validating...`)
-        if(!validateDoc(data, doc)) {
-          log(`invalid document.`)
+        if (!validateDoc(data, doc)) {
+          log([ LOG_ERROR, `Invalid document.` ])
           return
         }
 
         allDocs.push(doc)
 
-        log(`validated.`)
+        if (updateSearchDb) {
 
-        if (data.dates.length) {
-          const thisDates = data.dates.map(x => new DateModel({ _id: ObjectId(), ...x }))
-          doc.dates = thisDates
+          if (data.dates.length) {
+            const thisDates = data.dates.map(x => new DateModel({_id: ObjectId(), ...x}))
+            doc.dates = thisDates
 
-          allDates = allDates.concat(thisDates)
+            allDates = allDates.concat(thisDates)
+          }
+          if (data.corresps.length) {
+            const namesInThisDoc = data.corresps
+            namesInThisDoc.forEach(n => {
+              let nameObj = allNames.find(x => x.type === n.type && x.corresp === n.corresp)
+
+              if (!nameObj) {
+                nameObj = Name({
+                  _id: ObjectId(),
+                  ...n,
+                })
+
+                // log(`using new name ${nameObj.text}`)
+                allNames.push(nameObj)
+              } else {
+                // log(`using existing name ${nameObj.text}`)
+              }
+
+              n.nameObj = nameObj
+            })
+
+            const uniqueNamesInThisDoc = _.uniq(namesInThisDoc.map(n => n.nameObj))
+
+            doc.names = uniqueNamesInThisDoc
+
+            log(`Found ${uniqueNamesInThisDoc.length} unique names in document ${xmlFileName}: `)
+            log(uniqueNamesInThisDoc.map((name, i) => {
+              return `${i + 1}: ${name.text}`
+            }).join('\t'))
+          } else {
+            log(`No names in this document.`)
+          }
         }
-        if (data.corresps.length) {
-          const namesInThisDoc = data.corresps
-          namesInThisDoc.forEach(n => {
-            let nameObj = allNames.find(x => x.type === n.type && x.corresp === n.corresp)
-
-            if (!nameObj) {
-              nameObj = Name({
-                _id: ObjectId(),
-                ...n,
-              })
-
-              // log(`using new name ${nameObj.text}`)
-              allNames.push(nameObj)
-            } else {
-              // log(`using existing name ${nameObj.text}`)
-            }
-
-            n.nameObj = nameObj
-          })
-
-          const uniqueNamesInThisDoc = _.uniq(namesInThisDoc.map(n => n.nameObj))
-
-          doc.names = uniqueNamesInThisDoc
-
-          log(`found ${uniqueNamesInThisDoc.length} unique names in document ${xmlFileName}: `)
-          log(uniqueNamesInThisDoc.map((name, i) => {
-            return `${i+1}: ${name.text}`
-          }).join('\t'))
-        } else {
-          log(`no names in this document.`)
+        if (wordCount) {
+          const words = doc.fullText.split(' ').filter(x => !!x).length
+          log(`Word count: ${words}`)
         }
       } catch (e) {
-        log([ LOG_ERROR, `unable to process ${xmlFileName}` ])
+        log([ LOG_ERROR, `Unable to process ${xmlFileName}` ])
         log([ LOG_ERROR, e.message ])
         log([ LOG_ERROR, e.stack ])
       }
+      log()
     }
 
     await xmls.forEach(processFile)
 
-    log(`total documents Length: ${allDocs.length}`)
-    log(`total names length: ${allNames.length}`)
-    log(`total dates length: ${allDates.length}`)
+    if (updateSearchDb) {
+      log(`Found ${allDocs.length} total documents.`)
+      log(`Found ${allNames.length} total names.`)
+      log(`Found ${allDates.length} total dates.`)
 
-    log(`removing existing names`)
-    await Name.remove({})
+      log(`Removing existing names`)
+      await Name.remove({})
 
-    log(`removing existing documents`)
-    await Document.remove({})
+      log(`Removing existing documents`)
+      await Document.remove({})
 
-    log(`removing existing dates`)
-    await DateModel.remove({})
+      log(`removing existing dates`)
+      await DateModel.remove({})
 
-    log(`Saving new names`)
-    await Name.insertMany(allNames)
-    log(`Names saved`)
+      log(`Saving new names`)
+      await Name.insertMany(allNames)
+      log(`Names saved`)
 
-    log(`Saving dates`)
-    await DateModel.insertMany(allDates)
-    log(`Dates saved.`)
+      log(`Saving dates`)
+      await DateModel.insertMany(allDates)
+      log(`Dates saved.`)
 
-    log(`Saving new documents`)
-    await Document.insertMany(allDocs)
-    log(`Documents saved`)
+      log(`Saving new documents`)
+      await Document.insertMany(allDocs)
+      log(`Documents saved`)
+    }
+
+
     log()
     log()
     log(`All done.`)

@@ -16,24 +16,32 @@ export const serverUpdateDbReducers = typeToReducer({
   },
   [ADD_MESSAGE]: (state, action) => {
     if (isBrowser) {
-      const { level, message } = action.payload
+      let { level, message } = action.payload
+
       const div = state.data.div
       if (div) {
         const container = div.current
-        
+
         const htmlDiv = document.createElement('div')
-        
+
         const lineNumber = container.children.length + 1
-        
+
         ReactDOM.render((
           <div className={cx('level-'+level, 'logger-row')}>
-            {lineNumber}. [{level}] {message}
+            <span className={'line-number'}>{lineNumber}</span>.
+            <span
+              className={'level'}
+              style={{
+                display: level === 'INFO'?'none':'inline-block',
+              }}
+            > [{level}]</span>
+            <span className={'message'}> {message}</span>
           </div>
         ), htmlDiv)
-        
+
         container.append(htmlDiv)
       }
-      
+
     }
     return state
   },
@@ -43,15 +51,15 @@ export const serverUpdateDbReducers = typeToReducer({
       while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild)
       }
-      
+
       return update(state, {
         data: {
           div: { $set: action.data },
         },
       })
-      
+
     }
     return state
   },
-  
+
 }, initialState)
