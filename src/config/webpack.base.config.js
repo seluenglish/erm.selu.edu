@@ -8,7 +8,7 @@ import {
 import svgoConfig from 'config/svgo.config'
 import { isomorphicPlugin } from 'server/isomorphic-tools'
 
-console.log('webpack env is ', process.env.NODE_ENV)
+const { NODE_ENV, DEBUG } = process.env
 
 export default {
   entry: {
@@ -51,8 +51,8 @@ export default {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        'DEBUG': JSON.stringify(process.env.DEBUG),
+        'NODE_ENV': JSON.stringify(NODE_ENV),
+        'DEBUG': JSON.stringify(NODE_ENV==='production'?null:DEBUG),
         'APP_ENV': JSON.stringify('browser'),
       },
     }),
