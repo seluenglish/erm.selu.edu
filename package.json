@@ -1,7 +1,7 @@
 {
-  "name": "breko-hub",
-  "version": "1.0.0-rc.8",
-  "description": "Babel React Koa - Hot Universal Boilerplate",
+  "name": "erm",
+  "version": "1.0.0",
+  "description": "The Early Ruskin Manuscripts",
   "moduleRoots": [
     "src"
   ],
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tomatau/breko-hub.git"
+    "url": "git+https://github.com/seluenglish/search.git"
   },
   "keywords": [
     "babel",
@@ -38,13 +38,13 @@
   "author": "Thomas `tomatao` Hudspith-Tatham <tom@tomatao.co.uk>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tomatau/breko-hub/issues"
+    "url": "https://github.com/seluenglish/search/issues"
   },
   "engines": {
     "node": "~8.9",
     "npm": "~5.5"
   },
-  "homepage": "https://github.com/tomatau/breko-hub#readme",
+  "homepage": "http://erm.selu.edu",
   "greenkeeper": {
     "ignore": [
       "redux-promise-middleware"
