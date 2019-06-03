@@ -55,7 +55,7 @@ export default async function updateDb(payload, client) {
     const allDocs = []
     let allDates = []
 
-    const dirPath = [ path.join(process.env.XML_PATH, '_Completed/') ]
+    const dirPath = [ process.env.XML_PATH ]
     log('Locating XML files')
     let xmls = await findXmlsInDirs(dirPath)
     log(`${xmls.length} XML files discovered`)
