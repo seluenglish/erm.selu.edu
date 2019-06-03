@@ -19,9 +19,6 @@
     "coverage:check": "babel-istanbul check-coverage"
   },
   "pre-push": [
-    "lint:js",
-    "lint:styles",
-    "test"
   ],
   "repository": {
     "type": "git",
