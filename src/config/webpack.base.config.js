@@ -8,6 +8,8 @@ import {
 import svgoConfig from 'config/svgo.config'
 import { isomorphicPlugin } from 'server/isomorphic-tools'
 
+console.log('webpack env is ', process.env.NODE_ENV)
+
 export default {
   entry: {
     // need body first in list for development hot reloading

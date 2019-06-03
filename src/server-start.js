@@ -19,7 +19,10 @@ momenttz.tz.setDefault(`UTC`)
 if (!isBrowser) {
   dotenv.config()
   mongoose.connect(process.env.DB_CONN_STRING)
+
+  console.log('server env is ', process.env.NODE_ENV)
 }
+
 
 const log = debug('app')
 
