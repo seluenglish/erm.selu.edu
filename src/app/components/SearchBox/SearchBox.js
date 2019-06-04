@@ -26,7 +26,7 @@ const InnerForm = (form) => {
 
   const textPlaceHolderGenerator = () => {
     if (fullTextChecked) {
-      return 'Search for a phrase...'
+      return 'Search for a word or a phrase...'
     }
 
     if (nameType === 'date') {
@@ -34,11 +34,11 @@ const InnerForm = (form) => {
     }
 
     if (showSubType && form.values.subType && form.values.subType !== 'all') {
-      return `Search for a ${form.values.subType}`
+      return `Search ${form.values.subType}`
     }
 
     if (nameType && nameType !== 'all') {
-      return `Search for a ${nameType}`
+      return `Search ${nameType}`
     }
 
     return `Search for a keyword...`
@@ -111,7 +111,7 @@ const InnerForm = (form) => {
             <div className='secondBox col-sm-3'>
               <button
                 type='submit'
-                className='btn btn-outline-dark'>Search
+                className='btn btn-secondary'>Search
               </button>
             </div>
             <div className='thirdBox col-sm-5'>

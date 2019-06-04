@@ -66,6 +66,12 @@ body {
   .text {
     font-style: italic;
   }
+
+  mark {
+    background: $highlight-color;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 div.QuickSearchBox {
