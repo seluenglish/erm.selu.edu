@@ -59,6 +59,7 @@ export default class App extends React.Component {
 
     this.state = {
       showNavbar,
+      showFooter: false,
     }
   }
   componentDidMount(){
@@ -66,11 +67,12 @@ export default class App extends React.Component {
       const showNavbar = window.location.href.indexOf('show_navbar=0') === -1
       this.setState({
         showNavbar,
+        showFooter: true
       })
     }
   }
   render() {
-    const { showNavbar } = this.state
+    const { showNavbar, showFooter } = this.state
     return (
       <div className={style.app}>
         <DocumentMeta
@@ -125,7 +127,7 @@ export default class App extends React.Component {
         </ScrollUp>
 
 
-        <Footer />
+        <Footer showFooter={showFooter} />
       </div>
     )
   }

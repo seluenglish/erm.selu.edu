@@ -3,6 +3,10 @@ import ccLogo from 'assets/by-nc.png'
 
 export default class Footer extends React.Component {
   render() {
+    const { showFooter } = this.props
+
+    if(!showFooter) return null;
+
     return (
       <footer className='footer'>
         <div className='container'>
