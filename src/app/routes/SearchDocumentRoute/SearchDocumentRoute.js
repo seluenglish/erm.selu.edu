@@ -8,6 +8,7 @@ import { getSearchDocument, getError, getIsPending } from 'app/modules/search-do
 import { apiGetDocument } from 'app/modules/search-document/search-document.actions'
 import { SERVER_SHOWCASE_DIRECTORY } from 'config/constants'
 import cx from 'classnames'
+import * as R from 'ramda'
 
 @connect(state => ({
   searchDocument: getSearchDocument(state),
@@ -53,6 +54,25 @@ class SearchDocumentRoute extends React.Component {
       }
 
     })
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { props } = this
+
+    if(!R.equals(props.searchDocument, nextProps.searchDocument)) return true
+
+    if (R.equals(props.location, nextProps.location )) return false
+
+    const picker = R.pick(['pathname', 'search', 'state'])
+
+    if (!R.equals(picker(props.location), picker(nextProps.location))) {
+      // console.log('pathname, search, or state different')
+      return true
+    } else {
+      // console.log('hash change')
+      return false
+    }
+
   }
 
   componentDidUpdate(prevProps) {
