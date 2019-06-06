@@ -26,6 +26,7 @@ export class HeadNavigation extends React.Component {
       toggler.click()
     }
 
+    console.log([e.target])
     console.log('menu item clicked')
   }
 
