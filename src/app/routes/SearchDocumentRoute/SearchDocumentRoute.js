@@ -1,12 +1,12 @@
 import DocumentMeta from 'react-helmet'
-import { replace, push } from 'react-router-redux'
-import { hot } from 'react-hot-loader'
-import { notFoundRoute } from 'app/copy'
-import { Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { getSearchDocument, getError, getIsPending } from 'app/modules/search-document/search-document.selectors'
-import { apiGetDocument } from 'app/modules/search-document/search-document.actions'
-import { SERVER_SHOWCASE_DIRECTORY } from 'config/constants'
+import {replace, push} from 'react-router-redux'
+import {hot} from 'react-hot-loader'
+import {notFoundRoute} from 'app/copy'
+import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {getSearchDocument, getError, getIsPending} from 'app/modules/search-document/search-document.selectors'
+import {apiGetDocument} from 'app/modules/search-document/search-document.actions'
+import {SERVER_SHOWCASE_DIRECTORY} from 'config/constants'
 import cx from 'classnames'
 import * as R from 'ramda'
 
@@ -14,7 +14,7 @@ import * as R from 'ramda'
   searchDocument: getSearchDocument(state),
   error: getError(state),
   isPending: getIsPending(state),
-}), { push, apiGetDocument })
+}), {push, apiGetDocument})
 class SearchDocumentRoute extends React.Component {
   constructor(props) {
     super(props)
@@ -33,45 +33,32 @@ class SearchDocumentRoute extends React.Component {
 
     setTimeout(() => {
       let id = props.location.hash
-      if (id) {
-        id = id.replace('#', '')
-      }
+      if (!id) return
 
+      id = id.replace('#', '')
 
       const elem = window.document.getElementById(id)
 
       if (elem) {
+        // highlight active glosses
         elem.classList.add('active')
-
-        elem.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-          inline: 'start',
-        })
-        // window.scrollTo(0, elem.offsetTop - 80)
-      } else {
-        window.scrollTo(0, 0)
       }
 
     })
   }
 
   shouldComponentUpdate(nextProps) {
-    const { props } = this
+    // do not re-render on hash link change
 
-    if(!R.equals(props.searchDocument, nextProps.searchDocument)) return true
+    const {props} = this
 
-    if (R.equals(props.location, nextProps.location )) return false
+    if (!R.equals(props.searchDocument, nextProps.searchDocument)) return true
+
+    if (R.equals(props.location, nextProps.location)) return false
 
     const picker = R.pick(['pathname', 'search', 'state'])
 
-    if (!R.equals(picker(props.location), picker(nextProps.location))) {
-      // console.log('pathname, search, or state different')
-      return true
-    } else {
-      // console.log('hash change')
-      return false
-    }
+    return !R.equals(picker(props.location), picker(nextProps.location));
 
   }
 
@@ -82,7 +69,7 @@ class SearchDocumentRoute extends React.Component {
   }
 
   handleMainBodyLinkClick(e, targetThis) {
-    const { push } = this.props
+    const {push} = this.props
 
     e.preventDefault()
 
@@ -99,7 +86,7 @@ class SearchDocumentRoute extends React.Component {
 
     if (this.mainBody) {
       const elements = this.mainBody.getElementsByTagName('a')
-      for (let i=0; i<elements.length; i++) {
+      for (let i = 0; i < elements.length; i++) {
         const elem = elements[i]
 
         elem.addEventListener('click', function (e) {
@@ -110,11 +97,11 @@ class SearchDocumentRoute extends React.Component {
   }
 
   async reload() {
-    const { pathname } = this.props.location
-    let { hash } = window.location
+    const {pathname} = this.props.location
+    let {hash} = window.location
 
     if (pathname.startsWith('/witnesses/') || pathname.startsWith('/corpuses') || pathname.startsWith('/figures')) {
-      if (!hash) hash=''
+      if (!hash) hash = ''
       window.location.replace(`${SERVER_SHOWCASE_DIRECTORY}${pathname}.php${hash}`)
     }
 
@@ -123,26 +110,23 @@ class SearchDocumentRoute extends React.Component {
 
   render() {
     const data = this.props.searchDocument
-    const { error, isPending } = this.props
-    const body = data?data.body : null
-    const title = data?data.title : 'Loading...'
+    const {error, isPending} = this.props
+    const body = data ? data.body : null
+    const title = data ? data.title : 'Loading...'
 
+    if (error) return null
     return (
       <section className='SearchDocumentRoute'>
         <DocumentMeta>
           <title>{title}</title>
         </DocumentMeta>
 
-        {!error && (
-          <div
-            className='mainBody'
-            ref={this.gotNewMainBodyRef.bind(this)}
-            dangerouslySetInnerHTML={body} />
-        )}
+        <div
+          className='mainBody'
+          ref={this.gotNewMainBodyRef.bind(this)}
+          dangerouslySetInnerHTML={body}/>
 
-        {/*{error && (<div>*/}
-          {/*Oops! Page not found.*/}
-        {/*</div>)}*/}
+
       </section>
     )
   }

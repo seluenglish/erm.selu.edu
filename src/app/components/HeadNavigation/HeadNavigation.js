@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { nav as navCopy } from 'app/copy'
 import QuickSearchBox from '../QuickSearchBox/QuickSearchBox'
 import headerIcon from 'assets/site_logo.png'
+import { withRouter} from "react-router"
 import {hot} from 'react-hot-loader'
 import $ from 'jquery'
 
@@ -161,4 +162,4 @@ export class HeadNavigation extends React.Component {
   }
 }
 
-export default hot(module)(HeadNavigation)
+export default hot(module)(withRouter(HeadNavigation))
