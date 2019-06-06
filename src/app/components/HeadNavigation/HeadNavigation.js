@@ -20,11 +20,13 @@ export class HeadNavigation extends React.Component {
   }
 
 
-  handleMenuClick() {
+  handleMenuClick(e) {
     const toggler = $('.navbar-toggler')
     if (toggler.is(':visible')) {
       toggler.click()
     }
+
+    console.log('menu item clicked')
   }
 
 
@@ -32,6 +34,8 @@ export class HeadNavigation extends React.Component {
     const { showNavbar } = this.props
 
     if (!showNavbar) return false
+
+    console.log('props: ', this.props)
 
     return (
       <div className='HeadNavigation'>

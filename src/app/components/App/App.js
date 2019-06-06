@@ -4,16 +4,13 @@ import Loadable from 'react-loadable'
 import { app as appCopy } from 'app/copy'
 import Footer from 'app/components/Footer/Footer'
 import HeadNavigation from 'app/components/HeadNavigation/HeadNavigation'
-import SideNavigation from 'app/components/SideNavigation/SideNavigation'
 import FlashMessages from 'app/components/@FlashMessages/FlashMessages'
-import PrivateRoute from 'app/routes/PrivateRoute/PrivateRoute'
-import UpdateDbRoute from 'app/routes/UpdateDbRoute/UpdateDbRoute'
 import style from './App.module.scss'
 import { isBrowser } from 'app/utils'
-import XmlRoute from 'app/routes/XmlRoute/XmlRoute'
 import { initializeFontAwesome } from 'helpers/font-awesome'
 import ScrollUp from 'app/components/ScrollToTopExtension/ScrollToTopExtension';
 import scrollIcon from 'assets/up_arrow_round.png'
+import ScrollManagerWrapper from 'app/components/ScrollManager/ScrollManagerWrapper'
 
 const log = debug('App.js')
 
@@ -26,6 +23,13 @@ const LoadableHomeRoute = Loadable({
   loading: Loading,
   webpack: () => [ require.resolveWeak('../../routes/HomeRoute/HomeRoute') ],
   modules: [ '../../routes/HomeRoute/HomeRoute' ],
+})
+
+const LoadableUpdateDbRoute = Loadable({
+  loader: () => import('../../routes/UpdateDbRoute/UpdateDbRoute'),
+  loading: Loading,
+  webpack: () => [ require.resolveWeak('../../routes/UpdateDbRoute/UpdateDbRoute') ],
+  modules: [ '../../routes/UpdateDbRoute/UpdateDbRoute' ],
 })
 
 const LoadableSearchRoute = Loadable({
@@ -73,6 +77,8 @@ export default class App extends React.Component {
   }
   render() {
     const { showNavbar, showFooter } = this.state
+
+
     return (
       <div className={style.app}>
         <DocumentMeta
@@ -84,6 +90,8 @@ export default class App extends React.Component {
           <meta name='description' content={appCopy.meta.description} />
           <meta name='keywords' content={appCopy.meta.keywords} />
         </DocumentMeta>
+        <ScrollManagerWrapper />
+
         <HeadNavigation showNavbar={showNavbar} />
         <FlashMessages />
         {/*<SideNavigation />*/}
@@ -100,7 +108,7 @@ export default class App extends React.Component {
             />
             <Route
               path={'/update_db'}
-              component={UpdateDbRoute}
+              component={LoadableUpdateDbRoute}
             />
             <Route
               path={'/xml'}
