@@ -11,44 +11,45 @@ import { initializeFontAwesome } from 'helpers/font-awesome'
 import ScrollUp from 'app/components/ScrollToTopExtension/ScrollToTopExtension';
 import scrollIcon from 'assets/up_arrow_round.png'
 import ScrollManagerWrapper from 'app/components/ScrollManager/ScrollManagerWrapper'
+import LoadingComponent from 'app/components/Loading/Loading'
 
 const log = debug('App.js')
 
-const Loading = ({ pastDelay }) => (
+const LoadingPage = ({ pastDelay }) => (
   pastDelay ? <div>{appCopy.loading}</div> : null
 )
 
 const LoadableHomeRoute = Loadable({
   loader: () => import('../../routes/HomeRoute/HomeRoute'),
-  loading: Loading,
+  loading: LoadingPage,
   webpack: () => [ require.resolveWeak('../../routes/HomeRoute/HomeRoute') ],
   modules: [ '../../routes/HomeRoute/HomeRoute' ],
 })
 
 const LoadableUpdateDbRoute = Loadable({
   loader: () => import('../../routes/UpdateDbRoute/UpdateDbRoute'),
-  loading: Loading,
+  loading: LoadingPage,
   webpack: () => [ require.resolveWeak('../../routes/UpdateDbRoute/UpdateDbRoute') ],
   modules: [ '../../routes/UpdateDbRoute/UpdateDbRoute' ],
 })
 
 const LoadableSearchRoute = Loadable({
   loader: () => import('../../routes/SearchRoute/SearchRoute'),
-  loading: Loading,
+  loading: LoadingPage,
   webpack: () => [ require.resolveWeak('../../routes/SearchRoute/SearchRoute') ],
   modules: [ '../../routes/SearchRoute/SearchRoute' ],
 })
 
 const LoadableSearchDocumentRoute = Loadable({
   loader: () => import('../../routes/SearchDocumentRoute/SearchDocumentRoute'),
-  loading: Loading,
+  loading: LoadingPage,
   webpack: () => [ require.resolveWeak('../../routes/SearchDocumentRoute/SearchDocumentRoute') ],
   modules: [ '../../routes/SearchDocumentRoute/SearchDocumentRoute' ],
 })
 
 const LoadableXmlRoute = Loadable({
   loader: () => import('../../routes/XmlRoute/XmlRoute'),
-  loading: Loading,
+  loading: LoadingPage,
   webpack: () => [ require.resolveWeak('../../routes/XmlRoute/XmlRoute') ],
   modules: [ '../../routes/XmlRoute/XmlRoute' ],
 })
@@ -119,6 +120,7 @@ export default class App extends React.Component {
             />
           </Switch>
         </main>
+        <LoadingComponent />
 
         <ScrollUp
           showUnder={350}
