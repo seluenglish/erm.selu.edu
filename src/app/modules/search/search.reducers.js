@@ -69,10 +69,6 @@ export const searchReducers = typeToReducer({
     [PENDING]: pendingReducer,
     [REJECTED]: rejectedReducer,
     [FULFILLED]: (state, action) => {
-      ReactGA.event({
-        category: 'search',
-        action: API_SEARCH,
-      })
       return {
         ...state,
         error: '',

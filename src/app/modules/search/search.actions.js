@@ -8,6 +8,7 @@ import {
   SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES,
 } from './search.constants'
 import { START_CONNECTION } from 'app/modules/server-update-db/server-update-db.constants'
+import ReactGA from 'react-ga'
 
 export const apiFetchNameTypes = () => ({
   type: API_FETCH_NAME_TYPES,
@@ -42,18 +43,26 @@ export const apiUpdateDbAuthenticate = (formData) => ({
   payload: formData,
 })
 
-export const apiSearch = (formData) => ({
-  type: API_SEARCH,
-  payload: {
-    promise: request.fetch('/api/search', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    }),
-  },
-})
+export const apiSearch = (formData) => {
+  ReactGA.event({
+    category: 'search',
+    action: API_SEARCH,
+    label: JSON.stringify(formData)
+  })
+
+  return {
+    type: API_SEARCH,
+    payload: {
+      promise: request.fetch('/api/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      }),
+    },
+  }
+}
 
 export const updateSearchParams = (formData) => ({
   type: UPDATE_SEARCH_PARAMS,
