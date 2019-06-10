@@ -35,26 +35,22 @@ export class ScrollManager extends React.Component {
   restoreScrollPosition(pos) {
     pos = pos || this.props.scrollStore.get(this.props.scrollKey) || { x: 0, y: 0 }
 
-    let hash = window.location.hash
-    if(hash) {
-      hash = hash.replace('#', '')
+    setTimeout(() => {
 
-      console.log('hash is ', `#${hash}`)
-      let elem = document.getElementById(hash)
-
-      if (elem) {
-        pos = { x: 0, y: elem.offsetTop }
+      const hashElem = this.getHashElement()
+      if (hashElem) {
+        pos = { x: 0, y: hashElem.offsetTop }
       }
 
-    }
-
-    requestAnimationFrame(() => {
-      window.scroll(pos.x, pos.y)
-    })
+      requestAnimationFrame(() => {
+        window.scroll(pos.x, pos.y)
+      })
+    }, 5)
   }
 
   saveScrollPosition(key) {
     const pos = getScrollPosition()
+    const { hash } = this.props
     key = key || this.props.scrollKey
     this.props.scrollStore.set(key, pos)
   }
@@ -64,18 +60,17 @@ export class ScrollManager extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('props received', this.props, nextProps)
     if (this.props.scrollKey !== nextProps.scrollKey) {
       return this.saveScrollPosition()
     }
 
-    if(this.props.hash !== nextProps.hash) {
-      console.log('hash different. scrolling')
+    if (this.props.hash !== nextProps.hash) {
       return this.scrollToHash(nextProps.hash)
     }
 
-    if(this.props.searchDocument !== nextProps.searchDocument) {
-      this.restoreScrollPosition()
+    if (this.props.searchDocument !== nextProps.searchDocument) {
+      if (nextProps.searchDocument.body)
+        this.restoreScrollPosition()
     }
   }
 
