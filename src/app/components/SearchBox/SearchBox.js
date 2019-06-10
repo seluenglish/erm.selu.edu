@@ -75,7 +75,7 @@ const InnerForm = (form) => {
   }
 
   return (
-    <Form className='' style={styles} onSubmit={handleSubmit}>
+    <Form className='d-print-none' style={styles} onSubmit={handleSubmit}>
       <fieldset>
         <legend>Advanced Search</legend>
         <div className='container-fluid'>

@@ -123,6 +123,7 @@ export default class App extends React.Component {
         <LoadingComponent />
 
         <ScrollUp
+          className='d-print-none'
           showUnder={350}
           duration={1}
           style={{
@@ -133,7 +134,7 @@ export default class App extends React.Component {
             right: '25px',
           }}
         >
-          <img src={scrollIcon} alt='Back to top' />
+          <img className='d-print-none' src={scrollIcon} alt='Back to top' />
         </ScrollUp>
 
 

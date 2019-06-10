@@ -48,7 +48,6 @@ export default class Html extends React.Component {
               href={style}
               type='text/css'
               rel='stylesheet'
-              media='screen'
             />
           ))}
           {stringScripts.map((script, i) => (

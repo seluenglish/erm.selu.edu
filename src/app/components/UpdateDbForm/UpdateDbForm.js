@@ -63,11 +63,8 @@ const InnerForm = (form) => {
           <br />
           <button
             type='submit'
-            className={cx(
-              {
-                btn: true,
-              }
-            )}>Update
+            className='btn btn-secondary'>
+            Update
           </button>
         </div>
       </fieldset>

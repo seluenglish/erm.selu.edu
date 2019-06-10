@@ -34,7 +34,8 @@ export class HeadNavigation extends React.Component {
     if (!showNavbar) return false
 
     return (
-      <div className='HeadNavigation'>
+      <div className='HeadNavigation d-print-none'>
+
 
         <div className='title'>
           The Early Ruskin Manuscripts
