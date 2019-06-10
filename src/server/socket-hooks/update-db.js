@@ -14,6 +14,7 @@ import _ from 'lodash'
 import {LOG_INFO, LOG_DEBUG, LOG_WARNING, LOG_ERROR, LOG_FATAL, LOG_LEVELS} from 'server/serverHelpers/logging'
 import {createValidator} from 'server/serverHelpers/xml-document-validator'
 
+
 const ObjectId = mongoose.Types.ObjectId
 
 
@@ -55,7 +56,10 @@ export default async function updateDb(payload, client) {
     const allDocs = []
     let allDates = []
 
-    const dirPath = [ process.env.XML_PATH ]
+    const dirPath = process.env.NODE_ENV === 'production'
+      ?[ process.env.XML_PATH ]
+      :[ path.join(process.env.XML_PATH, '_Completed'), path.join(process.env.XML_PATH, '_In_Process') ]
+
     log('Locating XML files')
     let xmls = await findXmlsInDirs(dirPath)
     log(`${xmls.length} XML files discovered`)
@@ -109,41 +113,44 @@ export default async function updateDb(payload, client) {
 
             allDates = allDates.concat(thisDates)
           }
-          if (data.corresps.length) {
-            const namesInThisDoc = data.corresps
-            namesInThisDoc.unshift({
-              text: doc.title,
-              type: 'docTitle'
-            })
-            namesInThisDoc.forEach(n => {
-              let nameObj = allNames.find(x => x.type === n.type && x.corresp === n.corresp)
 
-              if (!nameObj) {
-                nameObj = Name({
-                  _id: ObjectId(),
-                  ...n,
-                })
+          // process names
+          const namesInThisDoc = data.corresps
 
-                // log(`using new name ${nameObj.text}`)
-                allNames.push(nameObj)
-              } else {
-                // log(`using existing name ${nameObj.text}`)
-              }
+          // document title is in itself a name
+          namesInThisDoc.unshift({
+            text: doc.title,
+            type: 'docTitle'
+          })
+          namesInThisDoc.forEach(n => {
+            let nameObj = allNames.find(x => x.type === n.type && x.corresp === n.corresp)
 
-              n.nameObj = nameObj
-            })
+            if (!nameObj) {
+              nameObj = Name({
+                _id: ObjectId(),
+                ...n,
+              })
 
-            const uniqueNamesInThisDoc = _.uniq(namesInThisDoc.map(n => n.nameObj))
+              // log(`using new name ${nameObj.text}`)
+              allNames.push(nameObj)
+            } else {
+              // log(`using existing name ${nameObj.text}`)
+            }
 
-            doc.names = uniqueNamesInThisDoc
+            n.nameObj = nameObj
+          })
 
-            log(`Found ${uniqueNamesInThisDoc.length} unique names in document ${xmlFileName}: `)
-            log(uniqueNamesInThisDoc.map((name, i) => {
-              return `${i + 1}: ${name.text}`
-            }).join('\t'))
-          } else {
-            log(`No names in this document.`)
-          }
+
+          // find unique names
+          const uniqueNamesInThisDoc = _.uniq(namesInThisDoc.map(n => n.nameObj))
+
+          doc.names = uniqueNamesInThisDoc
+
+          log(`Found ${uniqueNamesInThisDoc.length} unique names in document ${xmlFileName}: `)
+          log(uniqueNamesInThisDoc.map((name, i) => {
+            return `${i + 1}: ${name.text}`
+          }).join('\t'))
+
         }
         if (wordCount) {
           const words = doc.fullText.split(' ').filter(x => !!x).length
