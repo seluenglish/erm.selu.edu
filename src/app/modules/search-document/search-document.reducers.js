@@ -31,15 +31,17 @@ const rejectedReducer = (state, action) => {
   }
 }
 
-const pendingReducer = (state) => ({
-  ...state,
-  isPending: true,
-  error: false,
-})
-
 export const searchDocumentReducers = typeToReducer({
   [API_GET_PAGE]: {
-    [PENDING]: pendingReducer,
+    [PENDING]: (state) => {
+      return update(state, {
+        isPending: {$set: true},
+        error: {$set: false},
+        data: {
+          body: {$set: null},
+        },
+      })
+    },
     [REJECTED]: rejectedReducer,
     [FULFILLED]: (state, action) => {
       const meta = parseData(get('payload')(action))
