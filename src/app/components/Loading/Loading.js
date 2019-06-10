@@ -11,7 +11,6 @@ export class LoadingComponent extends React.Component {
   render() {
 
     const { isPending } = this.props
-    console.log('isPending', isPending)
 
     if (!isPending) return null;
 

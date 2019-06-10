@@ -1,5 +1,8 @@
 import React from 'react'
 import requestAnimationFrame from 'raf'
+import {hot} from "react-hot-loader"
+import {connect} from 'react-redux'
+import {getSearchDocument} from "app/modules/search-document/search-document.selectors"
 
 export const memoryStore = {
   _data: new Map(),
@@ -21,24 +24,29 @@ export const memoryStore = {
 /**
  * Component that will save and restore Window scroll position.
  */
-export default class ScrollPositionManager extends React.Component {
+@connect(state => ({
+  searchDocument: getSearchDocument(state),
+}), {})
+export class ScrollManager extends React.Component {
   constructor(props) {
     super(props)
   }
 
   restoreScrollPosition(pos) {
     pos = pos || this.props.scrollStore.get(this.props.scrollKey) || { x: 0, y: 0 }
-    const hash = this.props.scrollKey.split('#')[1]
 
-    console.log('hash is ', `#${hash}`)
-    let elem
-    if (hash) elem = document.getElementById(hash)
+    let hash = window.location.hash
+    if(hash) {
+      hash = hash.replace('#', '')
 
-    if (elem) {
-      pos = { x: 0, y: elem.offsetTop }
+      console.log('hash is ', `#${hash}`)
+      let elem = document.getElementById(hash)
+
+      if (elem) {
+        pos = { x: 0, y: elem.offsetTop }
+      }
+
     }
-
-    console.log('hash, elem, pos', hash, elem, pos)
 
     requestAnimationFrame(() => {
       window.scroll(pos.x, pos.y)
@@ -56,8 +64,18 @@ export default class ScrollPositionManager extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('props received', this.props, nextProps)
     if (this.props.scrollKey !== nextProps.scrollKey) {
-      this.saveScrollPosition()
+      return this.saveScrollPosition()
+    }
+
+    if(this.props.hash !== nextProps.hash) {
+      console.log('hash different. scrolling')
+      return this.scrollToHash(nextProps.hash)
+    }
+
+    if(this.props.searchDocument !== nextProps.searchDocument) {
+      this.restoreScrollPosition()
     }
   }
 
@@ -71,13 +89,41 @@ export default class ScrollPositionManager extends React.Component {
     this.saveScrollPosition()
   }
 
+  getHashElement(hash) {
+    hash = hash || this.props.hash
+
+    if (!hash) return
+
+    hash = hash.replace('#', '')
+
+    return window.document.getElementById(hash)
+  }
+
+  scrollToHash(hash) {
+    const elem = this.getHashElement(hash)
+
+    if (elem) {
+      const pos = { x: 0, y: elem.offsetTop }
+
+      requestAnimationFrame(() => {
+        window.scroll(pos.x, pos.y)
+      })
+
+    }
+
+
+  }
+
   render() {
     return null
   }
 }
 
-ScrollPositionManager.defaultProps = {
-  scrollStore: memoryStore
+export default hot(module)(ScrollManager)
+
+ScrollManager.defaultProps = {
+  scrollStore: memoryStore,
+  hash: '',
 }
 
 function getScrollPosition() {

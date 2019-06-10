@@ -1,5 +1,6 @@
 import DocumentMeta from 'react-helmet'
 import {replace, push} from 'react-router-redux'
+import {browserHistory} from 'react-router'
 import {hot} from 'react-hot-loader'
 import {notFoundRoute} from 'app/copy'
 import {Redirect} from 'react-router-dom'
@@ -25,47 +26,79 @@ class SearchDocumentRoute extends React.Component {
   }
 
   componentDidMount() {
-    this.reload()
+    this.getDocument()
   }
 
   componentWillReceiveProps(props, oldProps) {
     if (!props) return
 
-    setTimeout(() => {
-      let id = props.location.hash
-      if (!id) return
-
-      id = id.replace('#', '')
-
-      const elem = window.document.getElementById(id)
-
-      if (elem) {
-        // highlight active glosses
-        elem.classList.add('active')
-      }
-
-    })
+    setTimeout(() => this.highlightHash())
   }
 
   shouldComponentUpdate(nextProps) {
-    // do not re-render on hash link change
 
     const {props} = this
 
+
+    // different data
     if (!R.equals(props.searchDocument, nextProps.searchDocument)) return true
 
+    // same location
     if (R.equals(props.location, nextProps.location)) return false
 
     const picker = R.pick(['pathname', 'search', 'state'])
 
+    // if location change is only hash change, return false
     return !R.equals(picker(props.location), picker(nextProps.location));
 
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
-      this.reload()
+      this.getDocument()
     }
+  }
+
+  highlightHash() {
+    const elem = this.getHashElement()
+
+    if (elem) {
+      // highlight active glosses
+      elem.classList.add('active')
+    }
+  }
+
+  isValidHash() {
+    return !!this.getHashElement()
+  }
+
+  getHashElement() {
+    const { props } = this
+
+    let id = props.location.hash
+    if (!id) return
+
+    id = id.replace('#', '')
+
+
+    const elem = window.document.getElementById(id)
+
+    return elem
+  }
+
+  scrollToHash() {
+    const elem = this.getHashElement()
+
+    if (elem) {
+     const pos = { x: 0, y: elem.offsetTop }
+
+      requestAnimationFrame(() => {
+        window.scroll(pos.x, pos.y)
+      })
+
+    }
+
+
   }
 
   handleMainBodyLinkClick(e, targetThis) {
@@ -96,7 +129,7 @@ class SearchDocumentRoute extends React.Component {
     }
   }
 
-  async reload() {
+  async getDocument() {
     const {pathname} = this.props.location
     let {hash} = window.location
 

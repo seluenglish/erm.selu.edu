@@ -1,16 +1,16 @@
 import { withRouter} from "react-router"
-import ScrollPositionManager from "./ScrollManager"
+import ScrollManager from "./ScrollManager"
 
-export const localStorageInterface = {
+export const sessionStorageInterface = {
   get(key) {
-    const val = window.localStorage.getItem(key)
-    if(val === undefined) return
+    const val = window.sessionStorage.getItem(key)
+    if(val === undefined) return val
     else return JSON.parse(val)
   },
   set(key, val) {
     const data = JSON.stringify(val)
 
-    window.localStorage.setItem(key, data)
+    window.sessionStorage.setItem(key, data)
   }
 }
 export class ScrollManagerWrapper extends React.Component {
@@ -19,12 +19,12 @@ export class ScrollManagerWrapper extends React.Component {
 
     let {key, pathname, search, hash} = location
     if (!search) search = ''
-    if (!hash) hash='#'
-    const scrollKey = `${pathname}${search}${hash}`
+    const scrollKey = `${pathname}${search}`
 
-    return <ScrollPositionManager
+    return <ScrollManager
       scrollKey={scrollKey}
-      scrollStore={localStorageInterface}/>
+      hash={hash}
+      scrollStore={sessionStorageInterface}/>
   }
 }
 
