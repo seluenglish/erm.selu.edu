@@ -10,6 +10,8 @@ import {apiGetDocument} from 'app/modules/search-document/search-document.action
 import {SERVER_SHOWCASE_DIRECTORY} from 'config/constants'
 import cx from 'classnames'
 import * as R from 'ramda'
+import { isWitnessPath } from 'helpers/showcase-helper'
+import { redirectShowcaseElem } from 'app/utils/showcase'
 
 @connect(state => ({
   searchDocument: getSearchDocument(state),
@@ -46,7 +48,7 @@ class SearchDocumentRoute extends React.Component {
     // same location
     if (R.equals(props.location, nextProps.location)) return false
 
-    const picker = R.pick(['pathname', 'search', 'state'])
+    const picker = R.pick([ 'pathname', 'search', 'state' ])
 
     // if location change is only hash change, return false
     return !R.equals(picker(props.location), picker(nextProps.location));
@@ -133,9 +135,8 @@ class SearchDocumentRoute extends React.Component {
     const {pathname} = this.props.location
     let {hash} = window.location
 
-    if (pathname.startsWith('/witnesses/') || pathname.startsWith('/corpuses') || pathname.startsWith('/figures')) {
-      if (!hash) hash = ''
-      window.location.replace(`${SERVER_SHOWCASE_DIRECTORY}${pathname}.php${hash}`)
+    if (isWitnessPath(pathname)) {
+      return redirectShowcaseElem(pathname, hash)
     }
 
     this.props.apiGetDocument(pathname)
