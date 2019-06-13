@@ -1,6 +1,6 @@
 import DocumentMeta from 'react-helmet'
 import { hot } from 'react-hot-loader'
-import SearchDocumentRoute from '../SearchDocumentRoute/SearchDocumentRoute'
+import SearchDocumentRoute from 'app/routes/SearchDocumentRoute/SearchDocumentRoute'
 
 class HomeRoute extends React.Component {
   render() {
