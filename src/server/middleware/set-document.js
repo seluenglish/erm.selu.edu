@@ -16,12 +16,12 @@ const mapUrl = (request) => {
 
 }
 export default async function setDocument(ctx, next) {
-  log('setting document')
   const path = ctx.request.originalUrl
 
   const url = mapUrl(path)
 
-  // console.log('url is ', url)
+  log(`setting document for ${path}: ${url}`)
+
   try {
     const fileContents = await request.fetch(url)
 
@@ -30,8 +30,8 @@ export default async function setDocument(ctx, next) {
       payload: fileContents,
     })
   } catch (e) {
-    console.log('could not download file. Not setting the store.')
-    console.log(e)
+    log('could not download file. Not setting the store.')
+    log(e)
 
     ctx.store.dispatch({
       type: `${API_GET_PAGE}_${REJECTED}`,
