@@ -23,6 +23,7 @@ if(isBrowser)
 else
   reducer = combineReducers({
     serverUpdateDb,
+    searchDocument,
     search,
   })
 

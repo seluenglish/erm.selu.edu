@@ -38,7 +38,7 @@
     "no-unexpected-multiline": 2,
     "no-unsafe-negation": 2,
     "no-unused-vars": 1,
-    "object-curly-spacing": [2, "always"],
+    "object-curly-spacing": [1, "always"],
     "operator-linebreak": ["error", "before"],
     "padded-blocks": 0,
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],

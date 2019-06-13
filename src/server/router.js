@@ -4,6 +4,7 @@ import Loadable from 'react-loadable'
 import setStore from 'server/middleware/set-store'
 import flashMessages from 'server/middleware/flash-messages'
 import renderApp from 'server/middleware/render-app'
+import setDocument from 'server/middleware/set-document'
 
 const log = debug('server-router')
 
@@ -18,6 +19,7 @@ export async function setRoutes(assets) {
   const renderReactApp = compose([
     /* set a store for server side state rendering */
     setStore,
+    setDocument,
     /* wire up flashMessages from redirect to server store */
     flashMessages,
     /* give assets from bundle, set response body from react app */
