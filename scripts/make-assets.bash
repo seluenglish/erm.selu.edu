@@ -26,6 +26,9 @@ echo "Copying images"
 cp -r ${RUSKIN_ROOT}/_Resources/images ${TMP_DIR}/web/images
 ln -s ../images ${TMP_DIR}/web/pages/images
 
+echo "Copying fonts"
+cp -r ${RUSKIN_ROOT}/_Resources/fonts ${TMP_DIR}/web/fonts
+
 echo "Copying styles"
 cp -r ${RUSKIN_ROOT}/_Resources/css_styles ${TMP_DIR}/web/styles
 
