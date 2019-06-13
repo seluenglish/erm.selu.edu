@@ -23,15 +23,15 @@ export default async function setDocument(ctx, next) {
 
   // console.log('url is ', url)
   try {
-    const fileContents = await (await request.fetch(url)).text()
+    const fileContents = await request.fetch(url)
 
     ctx.store.dispatch({
       type: `${API_GET_PAGE}_${FULFILLED}`,
       payload: fileContents,
     })
   } catch (e) {
-    // console.log('could not download file. Not setting the store.')
-    // console.log(e)
+    console.log('could not download file. Not setting the store.')
+    console.log(e)
 
     ctx.store.dispatch({
       type: `${API_GET_PAGE}_${REJECTED}`,
