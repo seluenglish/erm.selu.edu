@@ -9,6 +9,7 @@ class HomeRoute extends React.Component {
 
         <DocumentMeta>
           <title />
+          <meta name='google-site-verification' content='P0K84BKAT6-EVjbiEHceFww4zyVm-AFqVNNYMxuqLNE' />
         </DocumentMeta>
         <SearchDocumentRoute location={{ pathname: '/webpages/homepage' }} />
       </section>
