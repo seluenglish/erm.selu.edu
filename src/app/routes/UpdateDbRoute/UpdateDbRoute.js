@@ -4,9 +4,8 @@ import {hot} from 'react-hot-loader'
 import UpdateDbForm from 'app/components/UpdateDbForm/UpdateDbForm'
 import { request } from 'app/utils'
 import { startConnection, updateLoggerDivId } from 'app/modules/server-update-db/server-update-db.actions'
-import { addMessage } from 'app/modules/flash/flash.actions'
 
-@connect(null, { addMessage, startConnection, updateLoggerDivId })
+@connect(null, { startConnection, updateLoggerDivId })
 class UpdateDbRoute extends React.Component {
   constructor(props) {
     super(props)

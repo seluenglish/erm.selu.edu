@@ -4,7 +4,6 @@ import Loadable from 'react-loadable'
 import { app as appCopy } from 'app/copy'
 import Footer from 'app/components/Footer/Footer'
 import HeadNavigation from 'app/components/HeadNavigation/HeadNavigation'
-import FlashMessages from 'app/components/@FlashMessages/FlashMessages'
 import style from './App.module.scss'
 import { isBrowser } from 'app/utils'
 import { initializeFontAwesome } from 'helpers/font-awesome'
@@ -76,7 +75,6 @@ export default class App extends React.Component {
         <ScrollManagerWrapper />
 
         <HeadNavigation />
-        <FlashMessages />
         {/*<SideNavigation />*/}
         <main className={style.content}>
           <Switch>

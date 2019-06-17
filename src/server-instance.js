@@ -5,7 +5,6 @@ import session from 'koa-session-store'
 import logger from 'koa-logger'
 import favicon from 'koa-favicon'
 import { ASSETS } from 'config/paths'
-import sessionFlashArray from 'server/middleware/session-flash-array'
 import handleError from 'server/middleware/handle-error'
 import json from 'koa-json'
 
@@ -17,7 +16,6 @@ app.use(compress())
 app.use(favicon(`${ASSETS}/favicon.ico`))
 app.use(convert(session()))
 app.use(json())
-app.use(sessionFlashArray())
 
 // reads process.env.DEBUG
 /* istanbul ignore if  */

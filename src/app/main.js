@@ -1,7 +1,5 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { sagaMiddleware } from 'app/composition/middleware'
-import rootSaga from 'app/sagas'
 import App from 'app/components/App/App'
 import { initialize, pageview } from 'react-ga'
 import { GA_TRACKING_ID } from 'config/constants'
@@ -33,5 +31,3 @@ export const Main = (store, history, Router) => {
     </Provider>
   )
 }
-
-export const run = () => sagaMiddleware.run(rootSaga)
