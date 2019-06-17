@@ -3,6 +3,7 @@ import { SERVER_HTML_DIRECTORY, SERVER_SHOWCASE_DIRECTORY } from 'config/constan
 import { FULFILLED, REJECTED } from 'redux-promise-middleware'
 import { request } from 'app/utils'
 import { isWitnessPath } from 'helpers/showcase-helper'
+import { hideNavbar } from 'app/modules/general/general.actions'
 
 const log = debug('set-document')
 
@@ -25,12 +26,17 @@ export default async function setDocument(ctx, next) {
   } else {
     const url = mapUrl(path)
 
+    const shouldHideNavbar = path.indexOf('show_navbar=0') > -1
+    if (shouldHideNavbar) {
+      ctx.store.dispatch(hideNavbar())
+    }
+
     log(`setting document for ${path}: ${url}`)
 
     try {
       const fileContents = await request.fetch(url)
 
-      ctx.store.dispatch({
+      ctx.store.dispatch({ /* TODO change delimiter */
         type: `${API_GET_PAGE}_${FULFILLED}`,
         payload: fileContents,
       })

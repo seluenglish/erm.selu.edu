@@ -60,26 +60,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
 
-    let showNavbar = false
-
-    this.state = {
-      showNavbar,
-      showFooter: false,
-    }
-  }
-  componentDidMount(){
-    if (typeof window !== 'undefined') {
-      const showNavbar = window.location.href.indexOf('show_navbar=0') === -1
-      this.setState({
-        showNavbar,
-        showFooter: true
-      })
-    }
   }
   render() {
-    const { showNavbar, showFooter } = this.state
-
-
     return (
       <div className={style.app}>
         <DocumentMeta
@@ -93,7 +75,7 @@ export default class App extends React.Component {
         </DocumentMeta>
         <ScrollManagerWrapper />
 
-        <HeadNavigation showNavbar={showNavbar} />
+        <HeadNavigation />
         <FlashMessages />
         {/*<SideNavigation />*/}
         <main className={style.content}>
@@ -138,7 +120,7 @@ export default class App extends React.Component {
         </ScrollUp>
 
 
-        <Footer showFooter={showFooter} />
+        <Footer />
       </div>
     )
   }

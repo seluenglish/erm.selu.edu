@@ -1,11 +1,13 @@
-import cx from 'classnames'
 import ccLogo from 'assets/by-nc.png'
+import { getShowFooter } from 'app/modules/general/general.selectors'
+import { hot } from 'react-hot-loader'
+import { connect } from 'react-redux'
 
-export default class Footer extends React.Component {
+export class Footer extends React.Component {
   render() {
     const { showFooter } = this.props
 
-    if(!showFooter) return null;
+    if (!showFooter) return null;
 
     return (
       <footer className='footer'>
@@ -22,3 +24,11 @@ export default class Footer extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  showFooter: getShowFooter(state),
+})
+
+export default hot(module)(connect(mapStateToProps, null, null, {
+  pure: false,
+})(Footer))

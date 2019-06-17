@@ -3,13 +3,19 @@ import { NavLink } from 'react-router-dom'
 import { nav as navCopy } from 'app/copy'
 import QuickSearchBox from '../QuickSearchBox/QuickSearchBox'
 import headerIcon from 'assets/site_logo.png'
-import { withRouter} from "react-router"
+import { withRouter} from 'react-router'
 import {hot} from 'react-hot-loader'
 import $ from 'jquery'
+import { connect } from 'react-redux'
+import * as R from 'ramda'
+import { getShowNavBar } from 'app/modules/general/general.selectors'
 
 
+/* Original remark */
 // Putting this inside a connect will break activeClassName
 // unless you also subscribe to changes to routing state or context
+/* Damodar's comment: No it doesn't if you use an impure component.
+https://github.com/reduxjs/react-redux/blob/v4.0.0/docs/troubleshooting.md#my-views-arent-updating-when-something-changes-outside-of-redux */
 
 export class HeadNavigation extends React.Component {
 
@@ -163,4 +169,10 @@ export class HeadNavigation extends React.Component {
   }
 }
 
-export default hot(module)(withRouter(HeadNavigation))
+const mapStateToProps = (state) => ({
+  showNavbar: getShowNavBar(state),
+})
+
+export default hot(module)(connect(mapStateToProps, null, null, {
+  pure: false,
+})(withRouter(HeadNavigation)))
