@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node ./src/server-entry.js",
     "build": "scripty",
-    "deploy": "scripty",
+    "deploy": "scripty"
   },
   "pre-push": [],
   "repository": {
