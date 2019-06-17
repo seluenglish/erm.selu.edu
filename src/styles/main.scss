@@ -386,6 +386,7 @@ $margin-right-phone: 3%;
 @media all and (max-width: 500px) {
   #brand-image {
     left: (50% - ($margin-left-phone - $margin-right-phone)/2);
+    min-height: 15vh;
   }
   [data-reactroot] > main {
     padding-top: 35px;
