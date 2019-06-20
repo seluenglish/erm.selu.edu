@@ -10,10 +10,13 @@
   src: url('https://erm.selu.edu/web/fonts/andron_scriptor_web_3_1.woff');
 }
 
+html {
+  font-size: 13.5pt;
+  scroll-behavior: smooth;
+}
+
 body{
   font-family: Andron, Arial, sans-serif;
-// font-family: Arial;
-  font-size: 12pt;
-  line-height: 1.5em;
+  line-height: 1.3em;
 }
 

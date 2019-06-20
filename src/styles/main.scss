@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 @import "~bootstrap/scss/bootstrap";
+@import 'styles_common';
 @import 'vars';
 @import '~tao-scss/index';
-@import "components/fonts";
 @import 'components/keyframes';
 
 /*
@@ -12,15 +12,8 @@
 
 $header-color: #fff;
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   color: $body-color;
-  font-family: Andron, Arial, sans-serif;
-  font-size: $font-size;
-  line-height: $font-size*1.3;
 
   a {
     //text-decoration-color: #aaaaaa;

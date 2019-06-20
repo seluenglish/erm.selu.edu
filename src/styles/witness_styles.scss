@@ -4,10 +4,6 @@
 @import "components/showcase/account_toc";
 @import "components/showcase/linenumber";
 
-.page-title {
-	line-height: 1em;
-}
-
 .overwriting {
 	font-weight: bold;
 }
@@ -76,7 +72,7 @@
 	}
 	&.s-del{
 		display: inline-block;
-		
+
 		&:not(.s-strikethrough):not(.s-erasure):not(.s-scratchout),
 		&.s-erasure
 		{
@@ -85,12 +81,12 @@
 				position: absolute;
 			}
 		}
-		
+
 		&.s-strikethrough{
 			text-decoration: line-through;
 		}
 	}
-	
+
 }
 
 /* S u b s t i t u t i o n */
