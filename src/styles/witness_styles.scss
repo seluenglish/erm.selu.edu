@@ -1,0 +1,165 @@
+@import "styles_common";
+@import "witness_styles_old";
+
+@import "components/showcase/account_toc";
+@import "components/showcase/linenumber";
+
+.page-title {
+	line-height: 1em;
+}
+
+.overwriting {
+	font-weight: bold;
+}
+
+.subst{
+	display: inline-block;
+}
+
+.add {
+	display: inline-block;
+}
+.add.overwriting{
+	font-weight: normal;
+}
+
+.del {
+	color: #ccc;
+}
+.del, .add{
+	display: inline-block;
+}
+.del.absolute{
+	position: absolute;
+}
+
+
+.l {
+	display: block;
+	position: relative;
+	width: 100%;
+}
+
+.runover {
+	position: absolute;
+	display: inline;
+	bottom: -1em;
+}
+
+
+
+.tablespace {
+	.del{
+		position: relative;
+	}
+}
+
+.s-inline{
+	display: inline;
+}
+.s-subst{
+	&.s-add{
+		&.s-overwrite{
+			&.s-inline{
+				position: relative;
+			}
+			&:not(.s-inline){
+				position: absolute;
+			}
+			&.s-above{
+				top: -1em;
+			}
+			&.s-below{
+				bottom: -1em;
+			}
+		}
+	}
+	&.s-del{
+		display: inline-block;
+		
+		&:not(.s-strikethrough):not(.s-erasure):not(.s-scratchout),
+		&.s-erasure
+		{
+			color: #ccc;
+			&:not(.s-revision-original){
+				position: absolute;
+			}
+		}
+		
+		&.s-strikethrough{
+			text-decoration: line-through;
+		}
+	}
+	
+}
+
+/* S u b s t i t u t i o n */
+.subst-add-above {
+	color: #000;
+	position: absolute;
+	top: -1em;
+}
+
+.subst-add-below {
+	bottom: -1em;
+	color: #000;
+	position: absolute;
+}
+.subst-add-below-overwriting {
+	bottom: -1em;
+}
+
+.subst-add-above-overwriting {
+	top: -1em;
+}
+
+.add-above {
+	color: #000;
+	position: absolute;
+	top: -1em;
+}
+.add-below {
+	bottom: -1em;
+	color: #000;
+	position: absolute;
+}
+.add-margin-left {
+	color: #000;
+	left: -1.5em;
+	position: absolute;
+}
+.add-margin-left-counterclockwise {      /* x New 04/06/16 */
+	color: #000;
+	left: -3.5em;
+	position: absolute;
+	transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+}
+.add-margin-right {
+	color: #000;
+	right: 0em;
+	position: absolute;
+}
+.add-margin-right-counterclockwise {     /* x New 04/06/16 */
+	// color: #000;
+	// right: 0em;
+	// position: absolute;
+	// transform: rotate(-90deg);
+	// -ms-transform: rotate(-90deg);
+	// -webkit-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	display: inline-block;
+	margin-left: 3em;
+}
+.add-overwriting {
+	color: #000;
+	position: relative;
+}
+.add-runover-above {                     /* ~ New 04/06/16 */
+	color: #000;
+	position: absolute;
+	top: -1em;
+}

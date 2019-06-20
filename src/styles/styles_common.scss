@@ -2,7 +2,7 @@
 
 @import 'components/fonts';
 /**
- * Early Ruskin Manuscripts.
+ * Styles common both for witnesses as well as the website
  */
 
 .tablespace{
@@ -12,16 +12,16 @@
   	max-width: 600px;
   	text-align: center;
   	table-layout: fixed;
-    
+
     >tr, >tbody>tr, >tr>td, >tbody>tr>td{
       border: 1px solid black;
     	border-collapse: collapse;
     }
-    
+
     tr.label{
       font-weight: bold;
     }
-    
+
     >tr>td, >tbody>tr>td{
       word-wrap:break-word;
     	white-space: normal;

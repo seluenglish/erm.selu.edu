@@ -18,3 +18,5 @@ logs
 build/
 
 _xml
+
+scss_cache

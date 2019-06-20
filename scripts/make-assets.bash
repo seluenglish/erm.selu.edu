@@ -30,7 +30,7 @@ echo "Copying fonts"
 cp -r ${RUSKIN_ROOT}/_Resources/fonts ${TMP_DIR}/web/fonts
 
 echo "Copying styles"
-cp -r ${RUSKIN_ROOT}/_Resources/css_styles ${TMP_DIR}/web/styles
+cp -r ${RUSKIN_ROOT}/search/src/styles ${TMP_DIR}/web/styles
 
 echo "Copying JavaScript files"
 cp -r ${RUSKIN_ROOT}/src/js ${TMP_DIR}/web/pages
