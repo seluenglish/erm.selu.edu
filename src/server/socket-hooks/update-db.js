@@ -154,6 +154,7 @@ export default async function updateDb(payload, client) {
         }
         if (wordCount) {
           const words = doc.fullText.split(' ').filter(x => !!x).length
+          doc.wordCount = words
           log(`Word count: ${words}`)
         }
       } catch (e) {
@@ -166,6 +167,36 @@ export default async function updateDb(payload, client) {
 
     await xmls.forEach(processFile)
 
+    if (wordCount) { // aggregate word counts
+      const types = _.groupBy(allDocs, x => {
+        if (!x.type) return 'documents without types'
+
+        return `${x.type}`
+      })
+
+      Object.keys(types).forEach(key => {
+        log(`Number of files of type ${key}: ${types[key].length}`)
+        const numWords = _.sum(types[key].map(x => x.wordCount))
+        log(`Number of words in this category: ${numWords}`)
+        log()
+      })
+
+      const subTypes = _.groupBy(allDocs, x => {
+        if (!x.type || !x.subType) return ''
+
+        return `${x.type} -> ${x.subType}`
+      })
+
+      delete subTypes['']
+
+      Object.keys(subTypes).forEach(key => {
+        log(`Number of files of sub-type in ${key}: ${subTypes[key].length}`)
+        const numWords = _.sum(subTypes[key].map(x => x.wordCount))
+        log(`Number of words in this category: ${numWords}`)
+        log()
+      })
+
+    }
     if (updateSearchDb) {
       log(`Found ${allDocs.length} total documents.`)
       log(`Found ${allNames.length} total names.`)
