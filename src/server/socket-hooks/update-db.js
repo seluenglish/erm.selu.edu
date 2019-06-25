@@ -119,11 +119,15 @@ export default async function updateDb(payload, client) {
 
           // document title is in itself a name
           namesInThisDoc.unshift({
-            text: doc.title,
+            text: data.title,
             type: 'docTitle'
           })
           namesInThisDoc.forEach(n => {
-            let nameObj = allNames.find(x => x.type === n.type && x.corresp === n.corresp)
+            let nameObj = allNames.find(x => {
+              if (x.type === 'docTitle') return false // skip finding any existing docTitle.
+
+              return x.type === n.type && x.corresp === n.corresp
+            })
 
             if (!nameObj) {
               nameObj = Name({
