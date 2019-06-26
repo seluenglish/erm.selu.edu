@@ -34,6 +34,11 @@ const FILE_TYPES = [
     ],
   },
   {
+    type: 'letter',
+    locatedAt: 'letters',
+    showInSearch: true,
+  },
+  {
     type: 'figure',
     locatedAt: 'figures',
     showInSearch: true,
