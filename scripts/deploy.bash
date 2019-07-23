@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-REMOTE_HOST="ip-addr"
-REMOTE_USER="www"
-REMOTE_ROOT="/var/www/html"
-REMOTE_PORT="22"
+REMOTE_HOST="erm.selu.edu"
+REMOTE_USER="webmaster"
+REMOTE_ROOT="/home/webmaster/ruskin-stuffs"
+REMOTE_PORT="4422"
 
 LOCAL_ASSETS_DIR="./build"
 
