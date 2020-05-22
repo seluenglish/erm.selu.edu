@@ -102,7 +102,7 @@
     "mongoose": "^5.4.16",
     "node-env-file": "~0.1.8",
     "node-prune": "^1.0.2",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.14.1",
     "popper": "^1.0.1",
     "postcss-loader": "^2.1.5",
     "prop-types": "^15.6.1",
