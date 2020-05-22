@@ -87,7 +87,7 @@ export default class App extends React.Component {
             />
             <Route
               exact
-              path='/test'
+              path='/news'
               component={Test}
             />
             <Route
