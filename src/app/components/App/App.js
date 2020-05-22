@@ -7,10 +7,12 @@ import HeadNavigation from 'app/components/HeadNavigation/HeadNavigation'
 import style from './App.module.scss'
 import { isBrowser } from 'app/utils'
 import { initializeFontAwesome } from 'helpers/font-awesome'
-import ScrollUp from 'app/components/ScrollToTopExtension/ScrollToTopExtension';
+import ScrollUp from 'app/components/ScrollToTopExtension/ScrollToTopExtension'
 import scrollIcon from 'assets/up_arrow_round.png'
 import ScrollManagerWrapper from 'app/components/ScrollManager/ScrollManagerWrapper'
 import LoadingComponent from 'app/components/Loading/Loading'
+import { Test } from '../Test/Test'
+
 
 const log = debug('App.js')
 
@@ -84,6 +86,11 @@ export default class App extends React.Component {
               component={LoadableHomeRoute}
             />
             <Route
+              exact
+              path='/test'
+              component={Test}
+            />
+            <Route
               path='/search'
               component={LoadableSearchRoute}
             />
@@ -98,9 +105,13 @@ export default class App extends React.Component {
             <Route
               component={LoadableSearchDocumentRoute}
             />
+
+
           </Switch>
+
+
         </main>
-        <LoadingComponent />
+
 
         <ScrollUp
           className='d-print-none'
@@ -112,9 +123,12 @@ export default class App extends React.Component {
             transitionDelay: '0s',
             bottom: '25px',
             right: '25px',
-          }}
-        >
-          <img className='d-print-none' src={scrollIcon} alt='Back to top' />
+          }}>
+
+          <img
+            className='d-print-none' src={scrollIcon}
+            alt='Back to top'
+          />
         </ScrollUp>
 
 
