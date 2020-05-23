@@ -25,6 +25,7 @@ export const nav = {
   bibliography: 'Bibliography',
   staffAndSupport: 'Staff',
   legal: 'Legal',
+  news: 'News',
 
 }
 

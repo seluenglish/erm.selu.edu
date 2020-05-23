@@ -78,18 +78,19 @@ export default class App extends React.Component {
 
         <HeadNavigation />
         {/*<SideNavigation />*/}
-        <main className={style.content}>
+        <main className={style.content} style={{marginTop:'3%'}}>
           <Switch>
-            <Route
-              exact
-              path='/'
-              component={LoadableHomeRoute}
-            />
             <Route
               exact
               path='/news'
               component={Test}
             />
+            <Route
+              exact
+              path='/'
+              component={LoadableHomeRoute}
+            />
+
             <Route
               path='/search'
               component={LoadableSearchRoute}

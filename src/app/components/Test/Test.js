@@ -5,10 +5,11 @@ import { MediaCard } from '../NestingComponents/Cards/Card'
 export class Test extends React.Component {
   render() {
     return (
-      // <p>
-      //   prashant
-      // </p>
-      <MediaCard />
+      <p>
+        <h1>prashant</h1>
+        <MediaCard />
+      </p>
+
     )
   }
 }
