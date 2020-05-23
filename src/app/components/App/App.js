@@ -11,8 +11,9 @@ import ScrollUp from 'app/components/ScrollToTopExtension/ScrollToTopExtension'
 import scrollIcon from 'assets/up_arrow_round.png'
 import ScrollManagerWrapper from 'app/components/ScrollManager/ScrollManagerWrapper'
 import LoadingComponent from 'app/components/Loading/Loading'
-import { Test } from '../Test/Test'
-
+import {News} from '../News/News'
+import {NewsProfile} from '../NestingComponents/Cards/NewsProfile'
+import {PostNews} from '../NestingComponents/PostNews/PostNews'
 
 const log = debug('App.js')
 
@@ -83,7 +84,18 @@ export default class App extends React.Component {
             <Route
               exact
               path='/news'
-              component={Test}
+              component={News}
+            />
+            <Route
+              exact
+              path='/news/:title'
+              component={NewsProfile}
+            />
+
+            <Route
+              exact
+              path='/addNews'
+              component={PostNews}
             />
             <Route
               exact
