@@ -26,6 +26,7 @@ export const nav = {
   staffAndSupport: 'Staff',
   legal: 'Legal',
   news: 'News',
+  addNews: 'Post News',
 
 }
 

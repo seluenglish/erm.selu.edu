@@ -1,40 +1,57 @@
-import { Form, Col, Card } from 'react-bootstrap'
+import { Form, Col, Card, Button } from 'react-bootstrap'
 import React from 'react'
 
 export class PostNews extends React.Component{
 
   render() {
     return (
-      <Card>
-        <Form.Group>
+      <div>
+
+        <Form>
           <Form.Row>
-            <Form.Label column="lg" lg={2}>
-              Large Text
-            </Form.Label>
-            <Col>
-              <Form.Control size="lg" type="text" placeholder="Large text" />
-            </Col>
+            <Form.Group as={Col} controlId="formGridEmail">
+              <Form.Label>Title of Post</Form.Label>
+              <Form.Control type="text" placeholder="Enter post title" />
+            </Form.Group>
           </Form.Row>
-          <br />
+
+          <Form.Label>Image</Form.Label>
           <Form.Row>
-            <Form.Label column lg={2}>
-              Normal Text
-            </Form.Label>
-            <Col>
-              <Form.Control type="text" placeholder="Normal text" />
-            </Col>
+
+            <Form.Group as={Col} controlId="formGridEmail">
+              <Form.File
+
+                label="Custom file input"
+                lang="en"
+                custom
+              />
+            </Form.Group>
+
+            <Form.Group as={Col} controlId="formGridPassword">
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Control type="text" placeholder="Enter image link" />
+              </Form.Group>
+            </Form.Group>
           </Form.Row>
-          <br />
+
+
+
+          <Form.Label>Post in Detail</Form.Label>
           <Form.Row>
-            <Form.Label column="sm" lg={2}>
-              Small Text
-            </Form.Label>
-            <Col>
-              <Form.Control size="sm" type="text" placeholder="Small text" />
-            </Col>
+                <textarea style={{height:'250px',width:'100%'}} placeholder={'Write your post description here!'}>
+                </textarea>
           </Form.Row>
-        </Form.Group>
-      </Card>
+
+          <br/>
+
+
+
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+
+      </div>
 
     )
   }

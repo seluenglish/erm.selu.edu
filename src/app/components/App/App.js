@@ -97,6 +97,7 @@ export default class App extends React.Component {
               path='/addNews'
               component={PostNews}
             />
+
             <Route
               exact
               path='/'
