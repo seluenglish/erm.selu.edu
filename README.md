@@ -56,3 +56,17 @@ https://erm.selu.edu/webpages/legal
             path='/addNews'
             component={PostNews}
         />
+        
+#Backend APi EndPoint
+
+    src
+    ├---app/components
+    |---server
+    |---|---serverHelpers
+    |---|---components
+    |---|---database
+    |---|---middleware
+    |---|---api
+    |---|---|---index.js                #This is where 
+    |---|---|---NewsPortal              #Controler of news portal located
+    |---|---router.js                   # Controllers are registered with the routes

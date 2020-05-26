@@ -4,8 +4,9 @@ import Loadable from 'react-loadable'
 import setStore from 'server/middleware/set-store'
 import renderApp from 'server/middleware/render-app'
 import setDocument from 'server/middleware/set-document'
-
 const log = debug('server-router')
+let koa = require('koa')
+import getNews from './api/NewsPortal'
 
 export const rootRouter = new Router()
 
@@ -30,7 +31,10 @@ export async function setRoutes(assets) {
   rootRouter
     .use(apiRouter.routes())
     /* render error page when problem found */
+    .get('/test', ctx=>(getNews(ctx)) )
     .get('error', '/oops', renderReactApp)
     /* render react app for all other routes */
     .get('react', '/(.*)', renderReactApp)
+
 }
+
