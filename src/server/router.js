@@ -6,7 +6,7 @@ import renderApp from 'server/middleware/render-app'
 import setDocument from 'server/middleware/set-document'
 const log = debug('server-router')
 let koa = require('koa')
-import getNews from './api/NewsPortal'
+import {getNews} from './api/NewsPortal'
 
 export const rootRouter = new Router()
 
