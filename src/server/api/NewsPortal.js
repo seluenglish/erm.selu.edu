@@ -1,36 +1,43 @@
 let NewsModel= require('../database/models/News');
 
 export function getNews(ctx){
-  //  NewsModel.create({
-  //   title:'Prashant',
-  //   imgUrl: 'basnet',
-  //   description:'What the hell is going on?'
-  // },function (err,response) {
-  //   if(err){
+  let data=JSON.stringify(ctx.request.body)
+  let {title, imgUrl, description} =ctx.request.body
+  console.log('-----test--------')
+  console.log(ctx.request.body)
+  console.log(ctx.request.body.imgUrl)
+  // NewsModel.create({
+  //   title:title,
+  //   imgUrl: imgUrl,
+  //   description:description
+  // }, function (err, response) {
+  //   if (err){
   //
-  //   }else{
+  //   } else {
   //     console.log(response);
   //   }
   // })
-
-  ctx.body='hello from news added';
+  //
+  ctx.body =  (ctx.request.body)
 
   // this.body = 'Your request has been logged.';
 }
 
 
-//
-// export async function setNews(data){
-//
-//   await NewsModel.create({
-//     title:data.title,
-//     imgUrl: data.imgUrl,
-//     description:data.description
-//   },function (err,response) {
-//     if (err){
-//       console.log(err)
-//     }
-//   })
-//
-// }
-//
+
+export function setNews(data){
+
+  console.log('-----test--------')
+  console.log(data)
+  //  NewsModel.create({
+  //   title:data.title,
+  //   imgUrl: data.imgUrl,
+  //   description:data.description
+  // },function (err,response) {
+  //   if (err){
+  //     console.log(err)
+  //   }
+  // })
+
+}
+

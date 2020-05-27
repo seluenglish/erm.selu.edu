@@ -29,8 +29,16 @@ export const DateModel = mongoose.model('DateModel', {
   searchText: String,
 }, null, { cache: false })
 
-export const NewsModel = mongoose.model('NewsModel', {
-  title:String,
-  imgUrl:String,
-  description:String,
-})
+
+// export const NewsModel = mongoose.model('NewsModel', {
+//   title:String,
+//   imgUrl:String,
+//   description:String,
+// })
+
+
+// export const NewsModel = mongoose.model('NewsModel', {
+//   title:String,
+//   imgUrl:String,
+//   description:String,
+// })

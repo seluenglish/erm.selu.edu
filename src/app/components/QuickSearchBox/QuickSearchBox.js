@@ -10,6 +10,8 @@ import { replace } from 'react-router-redux'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+
+
 const InnerForm = () => {
   return (
     <Form className='form-inline my-lg-0' role='form'>

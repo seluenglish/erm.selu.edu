@@ -1,5 +1,5 @@
-let mongooseC =require('mongoose'),
+let mongoose =require('mongoose'),
   NewsSchema = require('../schemas/News')
 
 
-module.exports = mongooseC.model('NewsSchema', NewsSchema)
+module.exports = mongoose.model('NewsModel', NewsSchema,null, { cache: false })

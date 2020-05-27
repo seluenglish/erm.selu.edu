@@ -1,7 +1,8 @@
 import { Form, Col, Card, Button } from 'react-bootstrap'
 import React,{useState,useEfect} from 'react'
-//import {setNews} from '../../../../server/api/NewsPortal'
-import {NewsModel} from '../../../../server/database/models'
+
+
+
 
 export class PostNews extends React.Component{
 
@@ -20,19 +21,15 @@ export class PostNews extends React.Component{
     e.preventDefault();
     if (this.state.title && this.state.imgUrl && this.state.description){
 
-      // eslint-disable-next-line no-unused-vars
-     let data= {
-        title:this.state.title,
-        imgUrl: this.state.imgUrl,
-        description:this.state.description
-      }
-      let data2= new NewsModel(data)
-        data2.save(function (err) {
-        if(err){
-          console.log(err)
-        }
-        })
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: 'React POST Request Example' })
+      };
 
+      fetch('/test', requestOptions)
+        .then(response => response.json())
+        .then(data => this.setState({ postId: data.id }));
     }
   }
 
