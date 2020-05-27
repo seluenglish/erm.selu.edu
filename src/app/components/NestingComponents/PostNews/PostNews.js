@@ -1,5 +1,6 @@
 import { Form, Col, Card, Button } from 'react-bootstrap'
 import React,{useState,useEfect} from 'react'
+const axios = require('axios')
 
 
 
@@ -21,17 +22,28 @@ export class PostNews extends React.Component{
     e.preventDefault();
     if (this.state.title && this.state.imgUrl && this.state.description){
 
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: 'React POST Request Example' })
-      };
+      // const requestOptions = {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: {
+      //     "title":"prashant",
+      //     "imgUrl":"what?",
+      //     "description":"no no no"
+      //   }
+      // };
 
-      fetch('/test', requestOptions)
-        .then(response => response.json())
-        .then(data => this.setState({ postId: data.id }));
+
+      axios.post(`/createNews`,{"title":"prash'ant","imgUrl":"what?","description":"n"})
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+        })
+
+
     }
   }
+
+
 
   change(e) {
     this.setState({[e.target.name]:e.target.value})

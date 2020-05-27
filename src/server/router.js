@@ -5,13 +5,16 @@ import setStore from 'server/middleware/set-store'
 import renderApp from 'server/middleware/render-app'
 import setDocument from 'server/middleware/set-document'
 const log = debug('server-router')
-let koa = require('koa')
+
+
 import {getNews,setNews} from './api/NewsPortal'
+
 
 
 export const rootRouter = new Router()
 
 export async function setRoutes(assets) {
+
   log('rebuilding route middleware')
   rootRouter.stack.length = 0
   await Loadable.preloadAll()

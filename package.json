@@ -46,6 +46,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.7.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "autoprefixer": "^8.6.2",
+    "axios": "^0.19.2",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-add-module-exports": "^0.2.1",

@@ -10,14 +10,16 @@ import json from 'koa-json'
 
 const app = new Koa()
 const koaBody = require('koa-body')
+const bodyParser = require('koa-bodyparser')
 
 app.keys = [ 'd0n7', '7311', '4ny0n3' ]
-app.use(json())
+
 app.use(koaBody())
+app.use(bodyParser())
 app.use(compress())
 app.use(favicon(`${ASSETS}/favicon.ico`))
 app.use(convert(session()))
-
+app.use(json())
 
 // reads process.env.DEBUG
 /* istanbul ignore if  */

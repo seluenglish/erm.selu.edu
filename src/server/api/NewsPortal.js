@@ -1,11 +1,19 @@
 let NewsModel= require('../database/models/News');
 
 export function getNews(ctx){
-  let data=JSON.stringify(ctx.request.body)
-  let {title, imgUrl, description} =ctx.request.body
-  console.log('-----test--------')
+
   console.log(ctx.request.body)
-  console.log(ctx.request.body.imgUrl)
+ let data=JSON.parse(ctx.request.body)
+
+
+  // let {title, imgUrl, description} =ctx.request.body
+  console.log('-----test--------')
+  console.log(data)
+
+  console.log(data.title)
+  console.log(data.imgUrl)
+  console.log(data.description)
+
   // NewsModel.create({
   //   title:title,
   //   imgUrl: imgUrl,
