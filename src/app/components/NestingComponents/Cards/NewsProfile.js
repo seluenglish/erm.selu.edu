@@ -2,19 +2,45 @@ import React from 'react';
 import { Button,Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 export class NewsProfile extends React.Component{
+  constructor(props) {
+    super(props);
+    console.log('test------**')
+    if (props.location.state){
+      this.state={
+        dataExist:true,
+        title:props.location.state.title,
+        imgUrl:props.location.state.imgUrl,
+        description:props.location.state.description,
+        backUrl:props.history.location.pathname
+      }
+    } else {
+      this.state={
+        dataExist:false
+      }
+    }
+
+    console.log(props)
+  }
   render() {
     return (
       <div>
-        <Card.Body>
-          <Card.Img variant="top" src="https://media.istockphoto.com/photos/breaking-news-concept-picture-id951045968?k=6&m=951045968&s=612x612&w=0&h=Oyz6r7huasMM4E8QkFa-eGvtSDo-7znAoUSYSZwC_dk=" />
-          <Card.Title>Special title treatment</Card.Title>
-          <Card.Text>
-            With supporting text below as a natural lead-in to additional content.
-          </Card.Text>
-          <Link to={'/news'}>
-            Go Back
-          </Link>
-        </Card.Body>
+        {this.state.dataExist?(
+          <Card.Body>
+            <Card.Img variant="top" src={`${this.state.imgUrl}`} />
+            <Card.Title>{this.state.title}</Card.Title>
+            <Card.Text>
+              {this.state.description}
+            </Card.Text>
+            {this.state.backUrl? <Link to={'/news'}>
+              Go Back
+            </Link>:''}
+
+          </Card.Body>
+          ):(
+            <span>No data</span>
+        )
+        }
+
       </div>
     );
   }

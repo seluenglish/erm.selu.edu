@@ -1,8 +1,8 @@
 let NewsModel= require('../database/models/News');
 const sanitizer = require('sanitizer')
 
-export function getNews(ctx){
-  ctx.body =  (ctx.request.body)
+export async function getNews(ctx){
+  ctx.body = await NewsModel.find({}).then()
 }
 
 export function setNews(ctx){

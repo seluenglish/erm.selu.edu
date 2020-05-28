@@ -70,3 +70,19 @@ https://erm.selu.edu/webpages/legal
     |---|---|---index.js                #This is where 
     |---|---|---NewsPortal              #Controler of news portal located
     |---|---router.js                   # Controllers are registered with the routes
+
+
+#While Defining a route in backend
+###make sure that you define route in following order
+        
+   
+    rootRouter
+        .use(apiRouter.routes())
+        /* render error page when problem found */
+        .get('/getNews', ctx=>getNews(ctx) )
+        .post('/createNews', ctx=>setNews(ctx) )
+
+###Before the following route or else the app will render a page not api        
+        .get('error', '/oops', renderReactApp)
+        /* render react app for all other routes */
+        .get('react', '/(.*)', renderReactApp)

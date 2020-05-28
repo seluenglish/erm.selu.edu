@@ -36,10 +36,11 @@ export async function setRoutes(assets) {
     .use(apiRouter.routes())
     /* render error page when problem found */
 
+    .get('/getNews', ctx=>getNews(ctx) )
+    .post('/createNews', ctx=>setNews(ctx) )
     .get('error', '/oops', renderReactApp)
     /* render react app for all other routes */
     .get('react', '/(.*)', renderReactApp)
-    .post('/createNews', ctx=>setNews(ctx) )
 
 }
 

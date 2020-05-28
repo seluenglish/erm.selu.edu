@@ -1,22 +1,33 @@
 import React from 'react';
 import { Button,Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
+
 export class Thumbnail extends React.Component{
+
+  constructor(props) {
+    super(props);
+    this.state={
+      _id:props.props._id,
+      title:props.props.title,
+      imgUrl:props.props.imgUrl,
+      description:props.props.description
+    }
+  }
   render() {
     return (
       <Card>
-        <Card.Img variant="top" src="https://media.istockphoto.com/photos/breaking-news-concept-picture-id951045968?k=6&m=951045968&s=612x612&w=0&h=Oyz6r7huasMM4E8QkFa-eGvtSDo-7znAoUSYSZwC_dk=" />
+        <Card.Img variant="top" src={`${this.state.imgUrl}`} />
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+          <Card.Title>{this.state.title}</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of
-            the card's content.
+            {this.state.description.replace(/^(.{200}[^\s]*).*/, "$1") }
           </Card.Text>
-          <Button variant="primary">
-              <Link to={'/news/newsOne'}>
+          <Button variant="primary" >
+            <Link to={{ pathname: '/news/newsOne',
+              state:  this.state }}>
                 Read More
-              </Link>
-            </Button>
+            </Link>
+          </Button>
         </Card.Body>
       </Card>
     );
