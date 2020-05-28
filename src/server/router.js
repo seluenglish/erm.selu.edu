@@ -39,7 +39,7 @@ export async function setRoutes(assets) {
     .get('error', '/oops', renderReactApp)
     /* render react app for all other routes */
     .get('react', '/(.*)', renderReactApp)
-    .post('/createNews', ctx=>getNews(ctx) )
+    .post('/createNews', ctx=>setNews(ctx) )
 
 }
 
