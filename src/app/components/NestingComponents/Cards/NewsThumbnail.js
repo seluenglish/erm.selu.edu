@@ -1,12 +1,6 @@
 import React from 'react';
-
-
 import { Button,Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
-
-
-
-
 export class Thumbnail extends React.Component{
   render() {
     return (

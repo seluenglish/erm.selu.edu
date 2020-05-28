@@ -4,13 +4,11 @@ import Row from 'react-bootstrap/Row'
 const axios = require('axios')
 import './form.css'
 
-let afterBackendCall=false;
+
 
 export class PostNews extends React.Component{
-
   constructor(props) {
     super(props);
-
     //creating a state
     this.state={
       show:false,
@@ -22,7 +20,6 @@ export class PostNews extends React.Component{
       descriptionError: null,
     }
   }
-
   handleForm(e) {
     e.preventDefault();
     if (this.state.title && this.state.imgUrl && this.state.description){
@@ -31,33 +28,25 @@ export class PostNews extends React.Component{
         .then(res => {
           this.setState({show:true})
         })
-
-
     } else {
       if (this.state.title==null) this.setState({titleError:'Check the title '})
       if (this.state.imgUrl==null) this.setState({imgUrlError:'Check the image url '})
       if (this.state.description==null) this.setState({descriptionError:'Check the description '})
     }
   }
-
-
   change(e) {
     this.setState({[e.target.name]:e.target.value})
     this.setState({titleError:null,imgUrlError:null,descriptionError:null})
   }
-
   render() {
     return (
       <div>
-
+        {/*Excutes only after user submits the form either submits the form or render form validation error*/}
         {this.state.show?(
-
           <Row>
-
             <Col xs={12}>
               <Toast onClose={() => this.setState({show:false})} show={this.state.show}   autohide>
                 <Toast.Header>
-
                 </Toast.Header>
                 <Alert variant='primary'>
                   Post was successful!
@@ -65,8 +54,6 @@ export class PostNews extends React.Component{
               </Toast>
             </Col>
           </Row>
-
-
         ):('')}
 
         <Form onSubmit={(e)=>this.handleForm(e)}>
@@ -77,19 +64,15 @@ export class PostNews extends React.Component{
               <span className={'validationError'}>{this.state.titleError}</span>
             </Form.Group>
           </Form.Row>
-
           <Form.Label>Image</Form.Label>
           <Form.Row>
-
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.File
-
                 label="Custom file input"
                 lang="en"
                 custom
               />
             </Form.Group>
-
             <Form.Group as={Col} controlId="formGridPassword">
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Control type="text" name="imgUrl" placeholder="Enter image link" onChange={(e)=>this.change(e)} />
@@ -97,27 +80,17 @@ export class PostNews extends React.Component{
               </Form.Group>
             </Form.Group>
           </Form.Row>
-
-
-
           <Form.Label>Post in Detail</Form.Label>
           <Form.Row style={{border:'inset'}}>
             <textarea style={{height:'250px',width:'100%'}} name='description' placeholder={'Write your post description here!'} onChange={(e)=>this.change(e)} />
             <span className={'validationError'}>{this.state.descriptionError}</span>
           </Form.Row>
-
           <br/>
-
-
-
           <Button variant="primary" type="submit">
             Submit
           </Button>
         </Form>
-
       </div>
-
     )
   }
-
 }
