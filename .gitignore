@@ -2,7 +2,7 @@ coverage
 .idea
 .env
 .DS_Store
-/node_modules
+node_modules
 src/static
 dist
 temp
