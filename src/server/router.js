@@ -7,7 +7,7 @@ import setDocument from 'server/middleware/set-document'
 const log = debug('server-router')
 
 
-import {getNews,setNews} from './api/NewsPortal'
+import { deleteNews, editNews, getNews, setNews } from './api/NewsPortal'
 
 
 
@@ -38,6 +38,8 @@ export async function setRoutes(assets) {
 
     .get('/getNews', ctx=>getNews(ctx) )
     .post('/createNews', ctx=>setNews(ctx) )
+    .put('/editNews/:id', ctx=>editNews(ctx))
+    .delete('/deleteNews/:id', ctx=>deleteNews(ctx))
     .get('error', '/oops', renderReactApp)
     /* render react app for all other routes */
     .get('react', '/(.*)', renderReactApp)

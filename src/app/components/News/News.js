@@ -10,6 +10,8 @@ export class News extends React.Component {
     }
   }
 
+
+
   componentDidMount() {
     fetch('/getNews').then((response=>response.json())).then(result=>{
       console.log('what?')
@@ -18,21 +20,48 @@ export class News extends React.Component {
     })
 
   }
-//
-//   this.state.news.map((item=>{
-// <Col >
-// {/*<Thumbnail props={item}/>*/}
-// data
-// </Col>
-// }))
+
   render() {
+    const deleteItem =(id) =>{
+      // let copyState =this.state.news.slice();
+      // copyState.map((item,index)=>{
+      //   if (item._id===id){
+      //     copyState.splice(index ,1);
+      //
+      //     copyState.map((data)=>{
+      //       console.log('---------')
+      //       console.log(data.title)
+      //     })
+      //
+      //     this.setState({news:[]})
+      //     this.state.news.map((data)=>{
+      //       console.log('))))))))))')
+      //       console.log(data.title)
+      //     })
+      //
+      //   }
+      // })
+
+
+
+      this.state.news.map((item,index)=>{
+        if (item._id===id){
+          this.setState({news:this.state.news.splice(index ,1)})
+
+          console.log(this.state.news.length)
+        }
+      })
+
+
+
+    }
     return (
       <Container>
         <Row>
           {this.state.news?
-            this.state.news.map((item)=>(
+            this.state.news.map((item,index)=>(
               <Col xs={12} md={6}>
-                <Thumbnail props={item}/>
+                <Thumbnail props={item} deleteItem ={deleteItem} keys={index}/>
               </Col>
             ))
             :

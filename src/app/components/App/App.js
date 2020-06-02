@@ -97,7 +97,16 @@ export default class App extends React.Component {
               path='/addNews'
               component={PostNews}
             />
-
+            <Route
+              exact
+              path='/editNews'
+              component={News}
+            />
+            <Route
+              exact
+              path='/editPost/:id'
+              component={PostNews}
+            />
             <Route
               exact
               path='/'

@@ -17,3 +17,31 @@ export function setNews(ctx){
   })
   ctx.body =  (ctx.request.body)
 }
+
+export function editNews(ctx){
+
+  NewsModel.findByIdAndUpdate(ctx.params.id,{
+
+    title:sanitizer.sanitize(ctx.request.body.title),
+    imgUrl:sanitizer.sanitize( ctx.request.body.imgUrl),
+    description:sanitizer.sanitize(ctx.request.body.description)
+  }, function (err,response) {
+    if (err){
+      console.log(err)
+    } else {
+      console.log(response)
+    }
+  })
+  ctx.body =  (ctx.request.body)
+}
+export function deleteNews(ctx){
+  let deletion=false;
+  NewsModel.findByIdAndRemove(ctx.params.id, function (err, response) {
+    if (err){
+      console.log(err)
+    } else {
+      deletion=true
+    }
+  })
+  ctx.body =  (deletion)
+}

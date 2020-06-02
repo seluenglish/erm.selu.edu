@@ -8,12 +8,14 @@ import { ASSETS } from 'config/paths'
 import handleError from 'server/middleware/handle-error'
 import json from 'koa-json'
 
+const methodOverride = require('koa-methodoverride')
+
 const app = new Koa()
 const koaBody = require('koa-body')
 const bodyParser = require('koa-bodyparser')
 
 app.keys = [ 'd0n7', '7311', '4ny0n3' ]
-
+app.use(methodOverride())
 app.use(koaBody())
 app.use(bodyParser())
 app.use(compress())

@@ -27,6 +27,7 @@ export const nav = {
   legal: 'Legal',
   news: 'News',
   addNews: 'Post News',
+  editNews: 'Edit News',
 
 }
 

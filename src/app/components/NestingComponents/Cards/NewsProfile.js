@@ -34,7 +34,6 @@ export class NewsProfile extends React.Component{
             {this.state.backUrl? <Link to={'/news'}>
               Go Back
             </Link>:''}
-
           </Card.Body>
           ):(
             <span>No data</span>
