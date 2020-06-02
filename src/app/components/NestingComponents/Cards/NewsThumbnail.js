@@ -20,6 +20,11 @@ export class Thumbnail extends React.Component {
       if (confirm('Are you sure you want to delete?'+ this.props.props.title)) {
       // Save it!
         this.props.deleteItem(this.props.props._id)
+        //this will execute when post is deleted
+        axios.delete(`/deleteNews/${this.props.location.state._id}`)
+          .then(res => {
+            console.log(res)
+          })
       } else {
       // Do nothing!
       }
