@@ -46,11 +46,32 @@ export async function setRoutes(assets) {
     .delete('/deleteNews/:id',ctx=>deleteNews(ctx))
 
 
-    .post('/registerUser',ctx=>registerUser(ctx) )
-    .post('/login', passport.authenticate('local', {
-      successRedirect: '/news',
-      failureRedirect: '/failure'
-    }))
+    .post('/registerUser', ctx=>registerUser(ctx) )
+
+    .post('/login', async (ctx, next) =>{
+      await passport.authenticate('local', async function(err, user, info) {
+        if (err) { return err }
+        if (!user) {
+          ctx.body=false
+        } else {
+          ctx.logIn(user, function (err) {
+            if (err) {
+              console.log('verification failed')
+              ctx.body = false
+            } else {
+              console.log('verified')
+              ctx.body = user
+            }
+          })
+        }
+        await next()
+      })(ctx, next) })
+    // .post('/login', async (ctx, next)=>{
+    //   console.log('00000000')
+    //   await next()
+    // },ctx=>{
+    //   ctx.body=true
+    // })
     .get('error', '/oops', renderReactApp)
     /* render react app for all other routes */
     .get('react', '/(.*)', renderReactApp)

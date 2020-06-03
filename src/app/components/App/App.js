@@ -14,6 +14,7 @@ import LoadingComponent from 'app/components/Loading/Loading'
 import {News} from '../News/News'
 import {NewsProfile} from '../NestingComponents/Cards/NewsProfile'
 import {PostNews} from '../NestingComponents/PostNews/PostNews'
+import { Authentication } from '../AuthenticationForm/authentication'
 
 const log = debug('App.js')
 
@@ -106,6 +107,11 @@ export default class App extends React.Component {
               exact
               path='/editPost/:id'
               component={PostNews}
+            />
+            <Route
+              exact
+              path='/login'
+              component={Authentication}
             />
             <Route
               exact
