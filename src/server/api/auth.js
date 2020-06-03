@@ -20,10 +20,29 @@ User.findOne({ username: 'test' }, function (err, userExist) {
 const LocalStrategy = require('passport-local').Strategy
 
 export async function registerUser(ctx){
+
   try {
-    passport.use(new LocalStrategy(function(username, password, done) {
-      User.findOne({ username: username, password: password }, done);
-    }))
+    console.log(ctx.request.body)
+    console.log(ctx.request.body.username)
+    ctx.body= 'ctx.body'
+    // passport.use(new LocalStrategy(function(username, password, done) {
+    //   User.findOne({ username: ctx.param, password: password }, done);
+    // }))
+  } catch (e) {
+
+  }
+
+}
+
+export async function isLoggedIn(ctx){
+
+  try {
+    console.log(ctx.request.body)
+    console.log(ctx.request.body.username)
+    ctx.body= 'ctx.body'
+    // passport.use(new LocalStrategy(function(username, password, done) {
+    //   User.findOne({ username: ctx.param, password: password }, done);
+    // }))
   } catch (e) {
 
   }

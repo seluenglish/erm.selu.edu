@@ -86,3 +86,6 @@ https://erm.selu.edu/webpages/legal
         .get('error', '/oops', renderReactApp)
         /* render react app for all other routes */
         .get('react', '/(.*)', renderReactApp)
+
+### Get the data in post request:
+    ctx.request.body

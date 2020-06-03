@@ -5,7 +5,8 @@ import setStore from 'server/middleware/set-store'
 import renderApp from 'server/middleware/render-app'
 import setDocument from 'server/middleware/set-document'
 
-const log = debug('server-router')
+const log = debug('server-router'),
+  auth = require('koa-basic-auth')
 
 
 import { deleteNews, editNews, getNews, setNews } from './api/newsPortal'
@@ -33,6 +34,7 @@ export async function setRoutes(assets) {
 
   const { apiRouter, setApiRoutes } = require('server/api')
 
+  const credentials = { name: 'test@test', pass: 'test' }
 
   setApiRoutes()
   require('./api/auth')
@@ -41,15 +43,12 @@ export async function setRoutes(assets) {
     /* render error page when problem found */
 
     .get('/getNews', ctx=>getNews(ctx) )
-    .post('/createNews',ctx=>setNews(ctx) )
+    .post('/createNews', ctx=>setNews(ctx) )
     .put('/editNews/:id', ctx=>editNews(ctx))
-    .delete('/deleteNews/:id',ctx=>deleteNews(ctx))
-
-
-    .post('/registerUser', ctx=>registerUser(ctx) )
-
+    .delete('/deleteNews/:id', ctx=>deleteNews(ctx))
+    .post('/register', ctx=>registerUser(ctx) )
     .post('/login', async (ctx, next) =>{
-      await passport.authenticate('local', async function(err, user, info) {
+      await passport.authenticate('local', async function (err, user, info) {
         if (err) { return err }
         if (!user) {
           ctx.body=false
@@ -66,12 +65,9 @@ export async function setRoutes(assets) {
         }
         await next()
       })(ctx, next) })
-    // .post('/login', async (ctx, next)=>{
-    //   console.log('00000000')
-    //   await next()
-    // },ctx=>{
-    //   ctx.body=true
-    // })
+
+    .get('/isLoggedIn', ctx=>{ctx.body=ctx.session})
+
     .get('error', '/oops', renderReactApp)
     /* render react app for all other routes */
     .get('react', '/(.*)', renderReactApp)

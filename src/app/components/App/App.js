@@ -62,8 +62,15 @@ initializeFontAwesome()
 export default class App extends React.Component {
   constructor(props) {
     super(props)
+    this.state={
+      isAuthenticated:false,
+      username:null
+    }
+  }
+  componentDidMount() {
 
   }
+
   render() {
     return (
       <div className={style.app}>
@@ -97,6 +104,7 @@ export default class App extends React.Component {
               exact
               path='/addNews'
               component={PostNews}
+
             />
             <Route
               exact
