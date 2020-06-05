@@ -5,6 +5,7 @@ import { searchDocumentReducers as searchDocument } from 'app/modules/search-doc
 import { serverUpdateDbReducers as serverUpdateDb } from 'app/modules/server-update-db/server-update-db.reducers'
 import { generalReducers as general } from 'app/modules/general/general.reducers'
 import { isBrowser } from 'app/utils'
+import {isAuth} from '../../reducer/authenticationReducer'
 
 let reducer
 if(isBrowser)
@@ -14,6 +15,7 @@ if(isBrowser)
     serverUpdateDb,
     searchDocument,
     general,
+    isAuth
   })
 else
   reducer = combineReducers({
@@ -21,6 +23,7 @@ else
     searchDocument,
     search,
     general,
+
   })
 
 export default reducer

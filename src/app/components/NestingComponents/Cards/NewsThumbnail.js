@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
-
+import { isAuthenticated } from '../../../../action/authentication'
+import {useDispatch} from 'react-redux'
 let axios = require('axios')
 
 
@@ -12,6 +13,28 @@ export class Thumbnail extends React.Component {
 
   constructor(props) {
     super(props)
+
+    this.state={
+      username:null,
+      isAuthenticated:false
+    }
+  }
+
+
+
+  componentDidMount() {
+
+    fetch('/isLoggedIn').then((response => response.json())).then(result => {
+      console.log('what?')
+      this.setState({
+        username:result.passport.user
+      });
+      if(this.state.username){
+        this.setState({isAuthenticated:true})
+      }
+      console.log(this.state.isAuthenticated)
+    })
+
   }
 
 
@@ -51,7 +74,7 @@ export class Thumbnail extends React.Component {
               </Col>
               <Col>
                 {/*this code executes only if the admin is in /edithNews route*/}
-                {document.location.pathname.indexOf('editNews')>0?(
+                { this.state.isAuthenticated?(
                   <Button variant='warning' >
                     <Link to={{ pathname: `/editPost/${this.props.props._id}`,
                       state:  this.props.props }}>
@@ -62,7 +85,7 @@ export class Thumbnail extends React.Component {
               </Col>
               <Col>
                 {/*this code executes only if the admin is in /edithNews route*/}
-                {document.location.pathname.indexOf('editNews')>0?(
+                { this.state.isAuthenticated?(
                   <Button variant='danger' onClick={()=>decision()}>
                   Delete
                   </Button>

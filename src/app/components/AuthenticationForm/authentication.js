@@ -32,7 +32,7 @@ export class Authentication extends React.Component{
             console.log(res)
             if(res.data.username===this.state.email){
               this.props.history.push({
-                pathname: '/editNews',
+                pathname: '/news',
               })
             }else{
               this.setState({credentialError:'Credential Incorrect'})

@@ -68,7 +68,17 @@ export default class App extends React.Component {
     }
   }
   componentDidMount() {
-
+    fetch('/isLoggedIn').then((response => response.json())).then(result => {
+      console.log('app--------?')
+      this.setState({
+        username:result.passport.user
+      });
+      if(this.state.username){
+        this.setState({isAuthenticated:true})
+      }
+      console.log()
+      console.log(this.state.isAuthenticated)
+    })
   }
 
   render() {
@@ -105,11 +115,6 @@ export default class App extends React.Component {
               path='/addNews'
               component={PostNews}
 
-            />
-            <Route
-              exact
-              path='/editNews'
-              component={News}
             />
             <Route
               exact
