@@ -71,25 +71,27 @@ export async function setRoutes(assets) {
       })(ctx, next) })
 
     .get('/isLoggedIn',async (ctx)=>{
-      let user =await User.findOne({username:ctx.session.passport.user})
-      let session={
-        session:ctx.session,
-        verifiedEmail:user.verified
+      let session;
+      if(ctx.session.passport){
+        let user =await User.findOne({username:ctx.session.passport.user})
+         session={
+          session:ctx.session,
+          verifiedEmail:user.verified
+        }
+      }else{
+        session ={
+          session:null,
+          verifiedEmail:false
+        }
       }
+
       ctx.body=session
     })
     .get('/verify/:username/id/:token',ctx=>verifyEmail(ctx))
 
-    .get('/isAuthenticated',(ctx, next)=>{
-        if (ctx.isAuthenticated()) {
-          tx.redirect('fuck yes')
-        } else {
-          ctx.redirect('/fuck no')
-        }
-    })
     .get('/logout', (ctx)=>{
-      ctx.logout()
-      ctx.redirect('/loggedOut')
+      ctx.session=null
+      ctx.body='done'
     })
 
 

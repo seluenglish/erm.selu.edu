@@ -86,10 +86,24 @@ export class PostNews extends React.Component{
     this.setState({titleError:null,imgUrlError:null,descriptionError:null})
   }
   render() {
+  const logout= async () => {
+    axios.get(`/logout`)
+      .then(res => {
+        this.props.history.push({
+          pathname: '/news',
+        })
+      })
+  }
+
     return (
       <div>
         {this.state.username?(
           <span>
+              <p>
+                <Button variant="warning" size="lg" block onClick={()=>logout()}>
+                  Logout
+                </Button>
+              </p>
           <span>
             {/*Excutes only after user submits the form either submits the form or render form validation error*/}
           {this.state.show?(
@@ -106,12 +120,15 @@ export class PostNews extends React.Component{
               </Row>
             ):('')}
         </span>
-        /*this will make form auto populate on post edit*/
+        {/*this will make form auto populate on post edit*/}
 
             {this.props.location.state?(
               <Form onSubmit={(e)=>this.handleForm(e)}>
+
               <Form.Row>
+
               <Form.Group as={Col} controlId="formGridEmail">
+
               <Form.Label>Title of Post</Form.Label>
               <Form.Control type="text" name="title"  value ={`${this.state.title}`} placeholder={`${this.props.location.state.title}`} onChange={(e)=>this.change(e)} />
               <span className={'validationError'}>{this.state.titleError}</span>
@@ -145,40 +162,45 @@ export class PostNews extends React.Component{
               </Form>
               ):(
               // this will render a complete new form
-              <Form onSubmit={(e)=>this.handleForm(e)}>
-              <Form.Row>
-              <Form.Group as={Col} controlId="formGridEmail">
-              <Form.Label>Title of Post</Form.Label>
-              <Form.Control type="text"  name="title" placeholder="Enter post title" onChange={(e)=>this.change(e)} />
-              <span className={'validationError'}>{this.state.titleError}</span>
-              </Form.Group>
-              </Form.Row>
-              <Form.Label>Image</Form.Label>
-              <Form.Row>
-              <Form.Group as={Col} controlId="formGridEmail">
-              <Form.File
-              label="Custom file input"
-              lang="en"
-              custom
-              />
-              </Form.Group>
-              <Form.Group as={Col} controlId="formGridPassword">
-              <Form.Group as={Col} controlId="formGridEmail">
-              <Form.Control type="text" name="imgUrl" placeholder="Enter image link" onChange={(e)=>this.change(e)} />
-              <span className={'validationError'}>{this.state.imgUrlError}</span>
-              </Form.Group>
-              </Form.Group>
-              </Form.Row>
-              <Form.Label>Post in Detail</Form.Label>
-              <Form.Row style={{border:'inset'}}>
-              <textarea style={{height:'250px',width:'100%'}} name='description' placeholder={'Write your post description here!'} onChange={(e)=>this.change(e)} />
-              <span className={'validationError'}>{this.state.descriptionError}</span>
-              </Form.Row>
-              <br/>
-              <Button variant="primary" type="submit">
-              Submit
-              </Button>
-              </Form>
+
+              <Card>
+               <p>
+                <Form onSubmit={(e)=>this.handleForm(e)}>
+                  <Form.Row>
+                    <Form.Group as={Col} controlId="formGridEmail">
+                      <Form.Label>Title of Post</Form.Label>
+                      <Form.Control type="text"  name="title" placeholder="Enter post title" onChange={(e)=>this.change(e)} />
+                      <span className={'validationError'}>{this.state.titleError}</span>
+                    </Form.Group>
+                  </Form.Row>
+                  <Form.Label>Image</Form.Label>
+                  <Form.Row>
+                    <Form.Group as={Col} controlId="formGridEmail">
+                      <Form.File
+                        label="Custom file input"
+                        lang="en"
+                        custom
+                      />
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formGridPassword">
+                      <Form.Group as={Col} controlId="formGridEmail">
+                        <Form.Control type="text" name="imgUrl" placeholder="Enter image link" onChange={(e)=>this.change(e)} />
+                        <span className={'validationError'}>{this.state.imgUrlError}</span>
+                      </Form.Group>
+                    </Form.Group>
+                  </Form.Row>
+                  <Form.Label>Post in Detail</Form.Label>
+                  <Form.Row style={{border:'inset'}}>
+                    <textarea style={{height:'250px',width:'100%'}} name='description' placeholder={'Write your post description here!'} onChange={(e)=>this.change(e)} />
+                    <span className={'validationError'}>{this.state.descriptionError}</span>
+                  </Form.Row>
+                  <br/>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </Form>
+              </p>
+              </Card>
               )}
         </span>
         ):(
