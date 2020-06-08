@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { Form , Button} from 'react-bootstrap'
+import { Form, Button, Card } from 'react-bootstrap'
 import './authentication.css'
+import { Link } from 'react-router-dom'
 let axios = require('axios')
 
 export class Authentication extends React.Component{
@@ -16,6 +17,7 @@ export class Authentication extends React.Component{
   }
 
   render() {
+
     const handleForm =(e)=>{
       try{
         e.preventDefault();
@@ -32,16 +34,20 @@ export class Authentication extends React.Component{
           const location = window.location.pathname;
 
           if (location.indexOf('register')>0){
+            console.log('registration ')
             axios.post(`/register`,{username:`${this.state.email}`,password:`${this.state.password}`})
               .then(res => {
+                console.log('-----response')
                 console.log(res)
-                // if(res.data.authentication){
-                //   this.props.history.push({
-                //     pathname: '/news',
-                //   })
-                // }else{
-                //   this.setState({credentialError:res.data.message})
-                // }
+                if(res.data.registrationSuccess){
+                  console.log('==pushing state')
+                  this.props.history.push({
+                    pathname: '/login',
+                  })
+                }else{
+                  console.log('==falsing state')
+                  this.setState({credentialError:res.data.message})
+                }
               })
           }else{
             axios.post(`/login`,{username:`${this.state.email}`,password:`${this.state.password}`})
@@ -71,31 +77,63 @@ export class Authentication extends React.Component{
       this.setState({credentialError:null})
     }
 
+    const path=this.props.location.pathname;
 
     return (
 
-      <Form onSubmit={(e)=>{handleForm(e)}} style={{paddingTop:'30px'}}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" name="email" placeholder="Enter email"  onChange={(e)=>changeState(e)}/>
-          <Form.Text className={"formError"}>
-            {this.state.emailError}
-          </Form.Text>
-        </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" name="password" placeholder="Password"  onChange={(e)=>changeState(e)}/>
-          <Form.Text className={"formError"}>
-            {this.state.passwordError}
-          </Form.Text>
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-        <Form.Text className={"formError"}>
-          {this.state.credentialError}
-        </Form.Text>
+
+      <Form onSubmit={(e)=>{handleForm(e)}} style={{paddingTop:'30px'}}>
+
+
+        <Card style={{ width: '18rem' }}>
+          {path.indexOf('login')>0?(
+            <Button variant="warning" size="lg" block>
+              Login
+            </Button>
+          ):(
+            <Button variant="warning" size="lg" block>
+              Registration
+            </Button>
+          )}
+          <Card.Body>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" name="email" placeholder="Enter email"  onChange={(e)=>changeState(e)}/>
+              <Form.Text className={"formError"}>
+                {this.state.emailError}
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" name="password" placeholder="Password"  onChange={(e)=>changeState(e)}/>
+              <Form.Text className={"formError"}>
+                {this.state.passwordError}
+              </Form.Text>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+            <Form.Text className={"formError"}>
+              {this.state.credentialError}
+            </Form.Text>
+          </Card.Body>
+        </Card>
+
+
+        <p style={{textAlign:'center', color:'#0000ff'}} >
+          {path.indexOf('login')>0?(
+            <Link to={'/register'} >Don't Have an account?</Link>
+          ):(
+            <Link to={'/login'} >Already have account?</Link>
+          )}
+
+
+        </p>
+
+
+
       </Form>
     )
   }
