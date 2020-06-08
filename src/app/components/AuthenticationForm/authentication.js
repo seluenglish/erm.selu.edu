@@ -31,7 +31,7 @@ export class Authentication extends React.Component{
 
           const location = window.location.pathname;
 
-          if (location.indexOf('register')){
+          if (location.indexOf('register')>0){
             axios.post(`/register`,{username:`${this.state.email}`,password:`${this.state.password}`})
               .then(res => {
                 console.log(res)
@@ -47,6 +47,7 @@ export class Authentication extends React.Component{
             axios.post(`/login`,{username:`${this.state.email}`,password:`${this.state.password}`})
               .then(res => {
                 if(res.data.username===this.state.email){
+
                   this.props.history.push({
                     pathname: '/news',
                   })

@@ -14,11 +14,8 @@ export async function registerUser(ctx){
     })
     ctx.body='user'
   } catch (e) {
-
   }
-
 }
-
 
 passport.serializeUser(function(user, done) {
   done(null, user._id)
