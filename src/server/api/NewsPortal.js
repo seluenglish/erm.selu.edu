@@ -1,4 +1,4 @@
-let NewsModel= require('../database/models/news');
+let NewsModel= require('../database/models/News');
 const sanitizer = require('sanitizer')
 
 export async function getNews(ctx){
@@ -35,8 +35,6 @@ export function editNews(ctx){
   ctx.body =  (ctx.request.body)
 }
 export function deleteNews(ctx){
-  console.log('------------')
-  console.log(ctx.params.id)
   let deletion=false;
   NewsModel.findByIdAndRemove(ctx.params.id, function (err, response) {
     if (err){
