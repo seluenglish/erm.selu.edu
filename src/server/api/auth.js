@@ -1,48 +1,18 @@
 const passport = require('koa-passport')
 
 const User = require('../database/models/user'),
-  bcrypt = require('bcrypt')
-
-
-User.findOne({ username: 'test' }, function (err, userExist) {
-  if (!userExist) {
-    bcrypt.hash('test', 12)
-      .then(async (hash) => {
-        //password is returned to GQL, it then filter out the password
-        userExist = new User({
-          username: 'test',
-          password: 'test'
-        })
-        userExist.save()
-      });
-  }
-})
-const LocalStrategy = require('passport-local').Strategy
+LocalStrategy = require('passport-local').Strategy
 
 export async function registerUser(ctx){
-
   try {
-    console.log(ctx.request.body)
-    console.log(ctx.request.body.username)
-    ctx.body= 'ctx.body'
-    // passport.use(new LocalStrategy(function(username, password, done) {
-    //   User.findOne({ username: ctx.param, password: password }, done);
-    // }))
-  } catch (e) {
-
-  }
-
-}
-
-export async function isLoggedIn(ctx){
-
-  try {
-    console.log(ctx.request.body)
-    console.log(ctx.request.body.username)
-    ctx.body= 'ctx.body'
-    // passport.use(new LocalStrategy(function(username, password, done) {
-    //   User.findOne({ username: ctx.param, password: password }, done);
-    // }))
+    console.log(ctx.request.body.username )
+    await User.register(new User({ username:ctx.request.body.username }), ctx.request.body.password, async function (err, user) {
+      if (err) {
+      } else {
+        ctx.body=user
+      }
+    })
+    ctx.body='user'
   } catch (e) {
 
   }

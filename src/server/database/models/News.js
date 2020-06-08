@@ -1,5 +1,5 @@
 let mongoose =require('mongoose'),
-  NewsSchema = require('../schemas/News')
+  NewsSchema = require('../schemas/news')
 
 
 module.exports = mongoose.model('NewsModel', NewsSchema,null, { cache: false })
