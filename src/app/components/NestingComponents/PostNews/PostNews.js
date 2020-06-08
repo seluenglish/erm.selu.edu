@@ -41,15 +41,14 @@ export class PostNews extends React.Component{
 
   componentDidMount() {
     fetch('/isLoggedIn').then((response => response.json())).then(result => {
-      this.setState({
-        username:result.passport.user
-      });
-      console.log(this.state.username)
-      if(this.state.username){
-        this.setState({isAuthenticated:true})
+      if(result.verifiedEmail){
+        this.setState({
+          username:result.session.passport.user
+        });
+        if(this.state.username){
+          this.setState({isAuthenticated:true})
+        }
       }
-      console.log(result)
-      console.log(this.state.username)
     })
   }
 

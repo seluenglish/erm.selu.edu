@@ -25,15 +25,15 @@ export class Thumbnail extends React.Component {
   componentDidMount() {
     try{
       fetch('/isLoggedIn').then((response => response.json())).then(result => {
-        console.log('what?')
-        console.log(result)
-        this.setState({
-          username:result.passport.user
-        });
-        if(this.state.username){
-          this.setState({isAuthenticated:true})
+        if(result.verifiedEmail){
+          this.setState({
+            username:result.session.passport.user
+          });
+          if(this.state.username){
+            this.setState({isAuthenticated:true})
+          }
+          console.log(this.state.isAuthenticated)
         }
-        console.log(this.state.isAuthenticated)
       })
     }catch (e) {
 
@@ -45,11 +45,15 @@ export class Thumbnail extends React.Component {
     const decision=()=>{
       if (confirm('Are you sure you want to delete?'+ this.props.props.title)) {
       // Save it!
-        this.props.deleteItem(this.props.props._id)
+
         //this will execute when post is deleted
         axios.delete(`/deleteNews/${this.props.props._id}`)
           .then(res => {
-            console.log(res)
+            if(res.data.deletion){
+              this.props.deleteItem(this.props.props._id)
+            }else{
+              alert(res.data.message)
+            }
           })
       } else {
       // Do nothing!

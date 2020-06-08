@@ -70,8 +70,28 @@ export async function setRoutes(assets) {
         await next()
       })(ctx, next) })
 
-    .get('/isLoggedIn',(ctx)=>ctx.body=ctx.session)
+    .get('/isLoggedIn',async (ctx)=>{
+      let user =await User.findOne({username:ctx.session.passport.user})
+      let session={
+        session:ctx.session,
+        verifiedEmail:user.verified
+      }
+      ctx.body=session
+    })
     .get('/verify/:username/id/:token',ctx=>verifyEmail(ctx))
+
+    .get('/isAuthenticated',(ctx, next)=>{
+        if (ctx.isAuthenticated()) {
+          tx.redirect('fuck yes')
+        } else {
+          ctx.redirect('/fuck no')
+        }
+    })
+    .get('/logout', (ctx)=>{
+      ctx.logout()
+      ctx.redirect('/loggedOut')
+    })
+
 
     .get('error', '/oops', renderReactApp)
     /* render react app for all other routes */
