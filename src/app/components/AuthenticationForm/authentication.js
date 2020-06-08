@@ -17,7 +17,6 @@ export class Authentication extends React.Component{
   }
 
   render() {
-
     const handleForm =(e)=>{
       try{
         e.preventDefault();
@@ -27,12 +26,8 @@ export class Authentication extends React.Component{
         if (this.state.password==null ){
           this.setState({passwordError:'Check your password'})
         }
-
-
         if (this.state.emailError===null && this.state.passwordError===null){
-
           const location = window.location.pathname;
-
           if (location.indexOf('register')>0){
             console.log('registration ')
             axios.post(`/register`,{username:`${this.state.email}`,password:`${this.state.password}`})
@@ -62,13 +57,10 @@ export class Authentication extends React.Component{
                 }
               })
           }
-
         }
       }catch (e) {
         console.log(e)
       }
-
-
     }
     const changeState=(e)=> {
       this.setState({[e.target.name]:e.target.value})
@@ -78,14 +70,8 @@ export class Authentication extends React.Component{
     }
 
     const path=this.props.location.pathname;
-
     return (
-
-
-
       <Form onSubmit={(e)=>{handleForm(e)}} style={{paddingTop:'30px'}}>
-
-
         <Card style={{ width: '18rem' }}>
           {path.indexOf('login')>0?(
             <Button variant="warning" size="lg" block>
@@ -120,23 +106,14 @@ export class Authentication extends React.Component{
             </Form.Text>
           </Card.Body>
         </Card>
-
-
         <p style={{textAlign:'center', color:'#0000ff'}} >
           {path.indexOf('login')>0?(
             <Link to={'/register'} >Don't Have an account?</Link>
           ):(
             <Link to={'/login'} >Already have account?</Link>
           )}
-
-
         </p>
-
-
-
       </Form>
     )
   }
-
-
 }

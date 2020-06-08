@@ -10,7 +10,7 @@ const log = debug('server-router')
 let User = require('./database/models/user')
 
 import { deleteNews, editNews, getNews, setNews } from './api/newsPortal'
-import { registerUser } from './api/auth'
+import { registerUser, verifyEmail } from './api/auth'
 
 
 const passport = require('koa-passport')
@@ -71,6 +71,7 @@ export async function setRoutes(assets) {
       })(ctx, next) })
 
     .get('/isLoggedIn',(ctx)=>ctx.body=ctx.session)
+    .get('/verify/:username/id/:token',ctx=>verifyEmail(ctx))
 
     .get('error', '/oops', renderReactApp)
     /* render react app for all other routes */
