@@ -23,21 +23,18 @@ export class Thumbnail extends React.Component {
 
 
   componentDidMount() {
-    try{
-      fetch('/isLoggedIn').then((response => response.json())).then(result => {
-        console.log('what?')
-        console.log(result)
-        this.setState({
-          username:result.passport.user
-        });
-        if(this.state.username){
-          this.setState({isAuthenticated:true})
-        }
-        console.log(this.state.isAuthenticated)
-      })
-    }catch (e) {
 
-    }
+    fetch('/isLoggedIn').then((response => response.json())).then(result => {
+      console.log('what?')
+      this.setState({
+        username:result.passport.user
+      });
+      if(this.state.username){
+        this.setState({isAuthenticated:true})
+      }
+      console.log(this.state.isAuthenticated)
+    })
+
   }
 
 

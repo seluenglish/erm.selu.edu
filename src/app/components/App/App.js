@@ -67,6 +67,20 @@ export default class App extends React.Component {
       username:null
     }
   }
+  componentDidMount() {
+    fetch('/isLoggedIn').then((response => response.json())).then(result => {
+      console.log('app--------?')
+      this.setState({
+        username:result.passport.user
+      });
+      if(this.state.username){
+        this.setState({isAuthenticated:true})
+      }
+      console.log()
+      console.log(this.state.isAuthenticated)
+    })
+  }
+
   render() {
     return (
       <div className={style.app}>
@@ -112,14 +126,6 @@ export default class App extends React.Component {
               path='/login'
               component={Authentication}
             />
-
-            <Route
-              exact
-              path='/register'
-              component={Authentication}
-            />
-
-
             <Route
               exact
               path='/'

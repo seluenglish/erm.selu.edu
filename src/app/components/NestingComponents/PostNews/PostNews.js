@@ -41,6 +41,7 @@ export class PostNews extends React.Component{
 
   componentDidMount() {
     fetch('/isLoggedIn').then((response => response.json())).then(result => {
+      console.log('what?')
       this.setState({
         username:result.passport.user
       });
@@ -183,20 +184,12 @@ export class PostNews extends React.Component{
               )}
         </span>
         ):(
+          <Link to={'/login'}>
+            <Button link={'/login'}>Login</Button>
+          </Link>
 
-            <Row>
-              <Col>
-                  <Link to={'/login'}>
-                   <Button >Login</Button>
-                 </Link>
-              </Col>
-              <Col>
-                   <Link to={'/register'}>
-                      <Button >Register</Button>
-                    </Link>
-              </Col>
 
-            </Row>
+            // <Redirect to={'/login'}/>
           )}
 
       </div>

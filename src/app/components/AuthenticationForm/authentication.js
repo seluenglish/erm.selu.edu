@@ -17,50 +17,28 @@ export class Authentication extends React.Component{
 
   render() {
     const handleForm =(e)=>{
-      try{
-        e.preventDefault();
-        if (this.state.email==null){
-          this.setState({emailError:'Check your email'})
-        }
-        if (this.state.password==null ){
-          this.setState({passwordError:'Check your password'})
-        }
-
-
-        if (this.state.emailError===null && this.state.passwordError===null){
-
-          const location = window.location.pathname;
-
-          if (location.indexOf('register')){
-            axios.post(`/register`,{username:`${this.state.email}`,password:`${this.state.password}`})
-              .then(res => {
-                console.log(res)
-                // if(res.data.authentication){
-                //   this.props.history.push({
-                //     pathname: '/news',
-                //   })
-                // }else{
-                //   this.setState({credentialError:res.data.message})
-                // }
-              })
-          }else{
-            axios.post(`/login`,{username:`${this.state.email}`,password:`${this.state.password}`})
-              .then(res => {
-                if(res.data.username===this.state.email){
-                  this.props.history.push({
-                    pathname: '/news',
-                  })
-                }else{
-                  this.setState({credentialError:'Credential Incorrect'})
-                }
-              })
-          }
-
-        }
-      }catch (e) {
-        console.log(e)
+      e.preventDefault();
+      if (this.state.email==null){
+        this.setState({emailError:'Check your email'})
+      }
+      if (this.state.password==null ){
+        this.setState({passwordError:'Check your password'})
       }
 
+
+      if (this.state.emailError===null && this.state.passwordError===null){
+        axios.post(`/login`,{username:`${this.state.email}`,password:`${this.state.password}`})
+          .then(res => {
+            console.log(res)
+            if(res.data.username===this.state.email){
+              this.props.history.push({
+                pathname: '/news',
+              })
+            }else{
+              this.setState({credentialError:'Credential Incorrect'})
+            }
+          })
+      }
 
     }
     const changeState=(e)=> {
@@ -69,11 +47,8 @@ export class Authentication extends React.Component{
       this.setState({passwordError:null})
       this.setState({credentialError:null})
     }
-
-
     return (
-
-      <Form onSubmit={(e)=>{handleForm(e)}} style={{paddingTop:'30px'}}>
+      <Form onSubmit={(e)=>{handleForm(e)}}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" name="email" placeholder="Enter email"  onChange={(e)=>changeState(e)}/>
