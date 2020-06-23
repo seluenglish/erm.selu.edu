@@ -49,8 +49,7 @@ https://erm.selu.edu/webpages/legal
            onClick={this.handleMenuClick}>{navCopy.drawings}
        </NavLink>
 
-## To establish a new catch for route
-
+## To establish a new catch for route --App.js 
         <Route
             exact
             path='/addNews'
