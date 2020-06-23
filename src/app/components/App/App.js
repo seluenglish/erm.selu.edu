@@ -15,6 +15,7 @@ import {News} from '../News/News'
 import {NewsProfile} from '../NestingComponents/Cards/NewsProfile'
 import {PostNews} from '../NestingComponents/PostNews/PostNews'
 import { Authentication } from '../AuthenticationForm/authentication'
+import { UserManagement } from '../NestingComponents/UserManagement/UserManagement'
 
 const log = debug('App.js')
 
@@ -118,7 +119,11 @@ export default class App extends React.Component {
               path='/register'
               component={Authentication}
             />
-
+            <Route
+              exact
+              path='/getAllUser'
+              component={UserManagement}
+            />
 
 
             <Route
@@ -167,8 +172,6 @@ export default class App extends React.Component {
             alt='Back to top'
           />
         </ScrollUp>
-
-
         <Footer />
       </div>
     )

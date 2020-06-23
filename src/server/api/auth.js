@@ -10,7 +10,7 @@ import dotenv from 'dotenv'
 export async function registerUser(ctx) {
   dotenv.config()
   try {
-    console.log('hitting register--0')
+
     let c = await User.findOne({ username: ctx.request.body.username })
     if (c) {
 

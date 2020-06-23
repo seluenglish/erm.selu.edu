@@ -163,9 +163,23 @@ export class HeadNavigation extends React.Component {
               <li className='nav-item'>
                 <NavLink
                   exact
+                  to='/getAllUser'
+                  onClick={this.handleMenuClick}
+                  className='nav-link'>{navCopy.cms}</NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink
+                  exact
                   to='/addNews'
                   onClick={this.handleMenuClick}
                   className='nav-link'>{navCopy.addNews}</NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink
+                  exact
+                  to='/map'
+                  onClick={this.handleMenuClick}
+                  className='nav-link'>{navCopy.map}</NavLink>
               </li>
 
             </ul>
