@@ -27,7 +27,7 @@ export const nav = {
   legal: 'Legal',
   news: 'News',
   addNews: 'Post News',
-  map: 'Ruskin Map',
+  map: 'Map',
   cms:'Users'
 
 }

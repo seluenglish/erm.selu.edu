@@ -16,6 +16,7 @@ import {NewsProfile} from '../NestingComponents/Cards/NewsProfile'
 import {PostNews} from '../NestingComponents/PostNews/PostNews'
 import { Authentication } from '../AuthenticationForm/authentication'
 import { UserManagement } from '../NestingComponents/UserManagement/UserManagement'
+import { Maps } from '../NestingComponents/Maps/Maps'
 
 const log = debug('App.js')
 
@@ -124,7 +125,11 @@ export default class App extends React.Component {
               path='/getAllUser'
               component={UserManagement}
             />
-
+            <Route
+              exact
+              path='/map'
+              component={Maps}
+            />
 
             <Route
               exact
