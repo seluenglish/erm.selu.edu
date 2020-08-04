@@ -73,7 +73,7 @@ export class Thumbnail extends React.Component {
             <Row>
               <Col>
                 <Button variant='primary' >
-                  <Link to={{ pathname: '/news/newsOne',
+                  <Link to={{ pathname: `/news/${this.props.props.title}`,
                     state:  this.props.props }}>
                   Read More
                   </Link>

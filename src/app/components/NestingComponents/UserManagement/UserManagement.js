@@ -18,6 +18,7 @@ export class UserManagement extends React.Component {
       fetch('/allUsers').then((response => response.json())).then(result => {
         //to preserve the previous state
         this.setState({ users: result })
+        console.log('-----------')
         console.log(this.state.users)
       })
     } catch (e) {
