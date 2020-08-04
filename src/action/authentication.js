@@ -11,8 +11,8 @@ export const isAuthenticated=()=>{
       //   this.setState({isAuthenticated:true})
       // }
       // console.log(this.state.isAuthenticated)
-      console.log('---------inside redux')
-      console.log(result)
+      // console.log('---------inside redux')
+      // console.log(result)
       // dispatch({
       //   type:IS_AUTHENTICATED,
       //   payload:result.passport

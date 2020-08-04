@@ -18,8 +18,8 @@ export class UserManagement extends React.Component {
       fetch('/allUsers').then((response => response.json())).then(result => {
         //to preserve the previous state
         this.setState({ users: result })
-        console.log('-----------')
-        console.log(this.state.users)
+        //console.log('-----------')
+        //console.log(this.state.users)
       })
     } catch (e) {
     }
@@ -39,7 +39,7 @@ export class UserManagement extends React.Component {
       //send changes to backend
       axios.put(`/setUserPermission/${userId}`, { setAction: action })
         .then(res => {
-          console.log(res)
+          //console.log(res)
         })
     }
     return (

@@ -32,7 +32,7 @@ export class Thumbnail extends React.Component {
           if(this.state.username){
             this.setState({isAuthenticated:true})
           }
-          console.log(this.state.isAuthenticated)
+          // console.log(this.state.isAuthenticated)
         }
       })
     }catch (e) {

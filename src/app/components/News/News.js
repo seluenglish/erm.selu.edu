@@ -14,7 +14,7 @@ export class News extends React.Component {
   }
   componentDidMount() {
     fetch('/getNews').then((response => response.json())).then(result => {
-      console.log('what?')
+
       this.setState({ news: result })
     })
   }

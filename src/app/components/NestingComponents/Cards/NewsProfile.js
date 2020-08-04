@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export class NewsProfile extends React.Component{
   constructor(props) {
     super(props);
-    console.log('test------**')
+    // console.log('test------**')
     if (props.location.state){
       this.state={
         dataExist:true,
@@ -19,7 +19,7 @@ export class NewsProfile extends React.Component{
       }
     }
 
-    console.log(props)
+    // console.log(props)
   }
   render() {
     return (
