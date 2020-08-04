@@ -3,6 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from 'app/composition/root-reducer'
 import { middleware } from 'app/composition/middleware'
 
+
 const log = debug('create-store')
 
 export default (initialState, mware=middleware, browserMode=false) => {

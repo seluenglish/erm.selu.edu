@@ -25,6 +25,10 @@ export const nav = {
   bibliography: 'Bibliography',
   staffAndSupport: 'Staff',
   legal: 'Legal',
+  news: 'News',
+  addNews: 'Post News',
+  map: 'Maps',
+  cms:'Users'
 
 }
 

@@ -7,10 +7,16 @@ import HeadNavigation from 'app/components/HeadNavigation/HeadNavigation'
 import style from './App.module.scss'
 import { isBrowser } from 'app/utils'
 import { initializeFontAwesome } from 'helpers/font-awesome'
-import ScrollUp from 'app/components/ScrollToTopExtension/ScrollToTopExtension';
+import ScrollUp from 'app/components/ScrollToTopExtension/ScrollToTopExtension'
 import scrollIcon from 'assets/up_arrow_round.png'
 import ScrollManagerWrapper from 'app/components/ScrollManager/ScrollManagerWrapper'
 import LoadingComponent from 'app/components/Loading/Loading'
+import {News} from '../News/News'
+import {NewsProfile} from '../NestingComponents/Cards/NewsProfile'
+import {PostNews} from '../NestingComponents/PostNews/PostNews'
+import { Authentication } from '../AuthenticationForm/authentication'
+import { UserManagement } from '../NestingComponents/UserManagement/UserManagement'
+import { Maps } from '../NestingComponents/Maps/Maps'
 
 const log = debug('App.js')
 
@@ -58,7 +64,10 @@ initializeFontAwesome()
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-
+    this.state={
+      isAuthenticated:false,
+      username:null
+    }
   }
   render() {
     return (
@@ -76,13 +85,58 @@ export default class App extends React.Component {
 
         <HeadNavigation />
         {/*<SideNavigation />*/}
-        <main className={style.content}>
+        <main className={style.content} style={{marginTop:'3%'}}>
           <Switch>
+            <Route
+              exact
+              path='/news'
+              component={News}
+            />
+            <Route
+              exact
+              path='/news/:title'
+              component={NewsProfile}
+            />
+
+            <Route
+              exact
+              path='/addNews'
+              component={PostNews}
+
+            />
+            <Route
+              exact
+              path='/editPost/:id'
+              component={PostNews}
+            />
+            <Route
+              exact
+              path='/login'
+              component={Authentication}
+            />
+
+            <Route
+              exact
+              path='/register'
+              component={Authentication}
+            />
+            <Route
+              exact
+              path='/getAllUser'
+              component={UserManagement}
+            />
+            <Route
+              exact
+              path='/map'
+              component={Maps}
+            />
+
             <Route
               exact
               path='/'
               component={LoadableHomeRoute}
             />
+
             <Route
               path='/search'
               component={LoadableSearchRoute}
@@ -98,9 +152,13 @@ export default class App extends React.Component {
             <Route
               component={LoadableSearchDocumentRoute}
             />
+
+
           </Switch>
+
+
         </main>
-        <LoadingComponent />
+
 
         <ScrollUp
           className='d-print-none'
@@ -112,12 +170,13 @@ export default class App extends React.Component {
             transitionDelay: '0s',
             bottom: '25px',
             right: '25px',
-          }}
-        >
-          <img className='d-print-none' src={scrollIcon} alt='Back to top' />
+          }}>
+
+          <img
+            className='d-print-none' src={scrollIcon}
+            alt='Back to top'
+          />
         </ScrollUp>
-
-
         <Footer />
       </div>
     )

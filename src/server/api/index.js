@@ -5,6 +5,7 @@ import search from './search'
 
 const parseBody = koaBody()
 
+
 export const apiRouter = new Router({ prefix: '/api' })
 
 
@@ -13,6 +14,9 @@ export function setApiRoutes() {
   apiRouter.stack.length = 0
 
   apiRouter
+
+
+
     .all('ping', '/ping', parseBody, (ctx) => {
       ctx.response.body = { pong: ctx.request.body }
     })
@@ -33,3 +37,4 @@ export function setApiRoutes() {
       ctx.response.body = { error: STATUS_CODES[ctx.response.status] }
     })
 }
+
