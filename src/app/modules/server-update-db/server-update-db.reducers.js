@@ -1,6 +1,6 @@
 import { isBrowser, typeToReducer, get } from 'app/utils'
 import { END_CONNECTION, ADD_MESSAGE, START_CONNECTION, UPDATE_LOGGER_DIV_ID } from './server-update-db.constants'
-import update from 'immutability-helper';
+import update from 'immutability-helper'
 import ReactDOM from 'react-dom'
 import cx from 'classnames'
 
@@ -33,8 +33,7 @@ export const serverUpdateDbReducers = typeToReducer({
               className={'level'}
               style={{
                 display: level === 'INFO'?'none':'inline-block',
-              }}
-            > [{level}]</span>
+              }}> [{level}]</span>
             <span className={'message'}> {message}</span>
           </div>
         ), htmlDiv)

@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 import { nav as navCopy } from 'app/copy'
 import QuickSearchBox from '../QuickSearchBox/QuickSearchBox'
 import headerIcon from 'assets/site_logo.png'
-import { withRouter} from 'react-router'
-import {hot} from 'react-hot-loader'
+import { withRouter } from 'react-router'
+import { hot } from 'react-hot-loader'
 import $ from 'jquery'
 import { connect } from 'react-redux'
 import * as R from 'ramda'
@@ -51,8 +51,7 @@ export class HeadNavigation extends React.Component {
         <nav className='navbar navbar-expand-md navbar-dark bg-dark fixed-top'>
           <NavLink
             to='/'
-            className='navbar-brand'
-          >
+            className='navbar-brand'>
             <img src={headerIcon} alt='Early Ruskin Manuscripts' />
           </NavLink>
 
@@ -125,63 +124,70 @@ export class HeadNavigation extends React.Component {
                     onClick={this.handleMenuClick}>{navCopy.drawings}</NavLink>
                 </div>
               </li>
-              <li className='nav-item'>
+
+              {/*Thursday, September 17, 2020*/}
+              {/*Prashant Basnet*/}
+              {/*this will have about as a drop down menu*/}
+              {/*for task*/}
+              {/*In the menu bar, create a head "About" with a pull-down menu. On that menu place (in this order) Plan of the Archive, Editorial and Encoding Rationale and Methodology, Staff and Support, Conditions of Use, XML. "Conditions of Use" is the head I'd prefer in place of "Legal" (and I've changed the header in the Legal xml file accordingly), and I'd prefer "Staff and Support" in place of just "Staff".*/}
+              <li className='nav-item dropdown'>
                 <NavLink
-                  exact
-                  to='/xml'
+                  to='/essays/indices_essay'
+                  className='nav-link dropdown-toggle'
+                  aria-expanded='false'
+                  aria-haspopup='true'
+                  id='dropdown01'
                   onClick={this.handleMenuClick}
-                  className='nav-link'>{navCopy.xml}</NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink
-                  exact
-                  to='/notes/bibliography'
-                  onClick={this.handleMenuClick}
-                  className='nav-link'>{navCopy.bibliography}</NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink
-                  exact
-                  to='/webpages/staff'
-                  onClick={this.handleMenuClick}
-                  className='nav-link'>{navCopy.staffAndSupport}</NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink
-                  exact
-                  to='/webpages/legal'
-                  onClick={this.handleMenuClick}
-                  className='nav-link'>{navCopy.legal}</NavLink>
+                  data-toggle='dropdown'>
+                  {navCopy.about}
+                </NavLink>
+                <div
+                  className='dropdown-menu'
+                  aria-labelledby='dropdown01'
+                  aria-expanded='false'>
+                  {/*first dropdown link*/}
+                  <NavLink
+                    to='/notes/plan_of_archive_note'
+                    className='dropdown-item'
+                    onClick={this.handleMenuClick}>{navCopy.plan_of_the_Archive}</NavLink>
+                  {/*2nd dropdown link*/}
+                  <NavLink
+                    to='/notes/editorial_rationale_note'
+                    className='dropdown-item'
+                    onClick={this.handleMenuClick}>{navCopy.editorial_and_Encoding_Rationale_and_Methodology}</NavLink>
+                  {/*3rd dropdown link*/}
+                  <NavLink
+                    to='/webpages/staff'
+                    className='dropdown-item'
+                    onClick={this.handleMenuClick}>{navCopy.staffAndSupport}</NavLink>
+                  {/*4rth dropdown link*/}
+                  <NavLink
+                    to='/webpages/legal'
+                    className='dropdown-item'
+                    onClick={this.handleMenuClick}>{navCopy.legal}</NavLink>
+
+                </div>
               </li>
               <li className='nav-item'>
                 <NavLink
                   exact
                   to='/news'
-                  onClick={this.handleMenuClick}
-                  className='nav-link'>{navCopy.news}</NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink
-                  exact
-                  to='/getAllUser'
-                  onClick={this.handleMenuClick}
-                  className='nav-link'>{navCopy.cms}</NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink
-                  exact
-                  to='/addNews'
-                  onClick={this.handleMenuClick}
-                  className='nav-link'>{navCopy.addNews}</NavLink>
+                  className='nav-link'
+                  onClick={this.handleMenuClick}>
+                  {navCopy.news}
+                </NavLink>
+
               </li>
               {/*<li className='nav-item'>*/}
               {/*  <NavLink*/}
               {/*    exact*/}
-              {/*    to='/map'*/}
-              {/*    onClick={this.handleMenuClick}*/}
-              {/*    className='nav-link'>{navCopy.map}</NavLink>*/}
-              {/*</li>*/}
+              {/*    to='/getAllUser'*/}
+              {/*    className='nav-link'*/}
+              {/*    onClick={this.handleMenuClick}>*/}
+              {/*    {navCopy.news}*/}
+              {/*  </NavLink>*/}
 
+              {/*</li>*/}
             </ul>
 
 

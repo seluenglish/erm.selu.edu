@@ -1,4 +1,4 @@
-import {API_GET_PAGE} from 'app/modules/search-document/search-document.constants'
+import { API_GET_PAGE } from 'app/modules/search-document/search-document.constants'
 import { SERVER_HTML_DIRECTORY, SERVER_SHOWCASE_DIRECTORY } from 'config/constants'
 import { FULFILLED, REJECTED } from 'redux-promise-middleware'
 import { request } from 'app/utils'

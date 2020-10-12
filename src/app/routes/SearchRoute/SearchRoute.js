@@ -60,7 +60,8 @@ class SearchRoute extends React.Component {
             {listItems.map((item, index) => (
               <div key={index}>
                 <SearchItem document={item} />
-              </div>)
+              </div>
+)
             )}
           </div>
         )}

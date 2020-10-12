@@ -22,7 +22,7 @@ const parseData = (data) => {
       title: doc.getElementById('mainTitle').innerText,
     }
 
-  }else {
+  } else {
     result = {
       body: doc.getElementById('mainBody').toString(),
       title: doc.getElementById('mainTitle').textContent,
@@ -59,10 +59,10 @@ export const searchDocumentReducers = typeToReducer({
   [API_GET_PAGE]: {
     [PENDING]: (state) => {
       return update(state, {
-        isPending: {$set: true},
-        error: {$set: false},
+        isPending: { $set: true },
+        error: { $set: false },
         data: {
-          body: {$set: null},
+          body: { $set: null },
         },
       })
     },

@@ -3,7 +3,7 @@ import styles from './SearchItem.module.scss'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { hot } from 'react-hot-loader'
-import { connect } from "react-redux"
+import { connect } from 'react-redux'
 import { showHideSearchItemAllMatches } from 'app/modules/search/search.actions'
 import { getDocumentUrl } from 'helpers/document-helpers'
 import { animateScroll } from 'react-scroll'
@@ -25,7 +25,7 @@ export class SearchItem extends React.Component {
     const newState = !showingAllMatches
 
 
-    if(newState === false) {
+    if (newState === false) {
       const top = this.ref.current.offsetTop
       animateScroll.scrollTo(top, {
         duration: 500,
@@ -37,7 +37,7 @@ export class SearchItem extends React.Component {
   }
 
   render() {
-    const { document} = this.props
+    const { document } = this.props
     const defaultShowMatches = 2
 
     const { uuid } = this
@@ -47,12 +47,14 @@ export class SearchItem extends React.Component {
 
     return (
       <div className={cx('SearchItem', styles.SearchItem)} ref={this.ref}>
-        <a  />
-        {document.title && (<div className='title'>
+
+        {document.title && (
+        <div className='title'>
           <Link to={getDocumentUrl(document)}>
             <strong>{document.title}</strong>
           </Link>
-        </div>)}
+        </div>
+)}
 
 
         <div className='docTypeContainer'>

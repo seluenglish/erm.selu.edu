@@ -1,10 +1,10 @@
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import DocumentMeta from 'react-helmet'
-import {hot} from 'react-hot-loader'
-import {SERVER_XML_DIRECTORY} from 'config/constants'
+import { hot } from 'react-hot-loader'
+import { SERVER_XML_DIRECTORY } from 'config/constants'
 
 
-@connect(null, {  })
+@connect(null, { })
 class XmlRoute extends React.Component {
 
   render() {

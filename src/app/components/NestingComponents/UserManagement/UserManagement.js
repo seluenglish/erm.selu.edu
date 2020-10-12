@@ -3,7 +3,8 @@ import { Button, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-let axios = require('axios')
+
+import axios from 'axios'
 
 export class UserManagement extends React.Component {
   constructor(props) {
@@ -28,11 +29,12 @@ export class UserManagement extends React.Component {
     //this takes user id and setting it's permission to ?
     const handlePermissionChange = (userId, action) => {
       //clone it because you should not directly mutate state
-      let cloneCurrentUserArray = [ ...this.state.users ]
-      cloneCurrentUserArray.map((user) => {
-        if (user._id === userId) {
-          user.verified = action
-        }
+      const { users }=this.state
+     const cloneCurrentUserArray=users.map((user) => {
+       return {
+         ...user,
+         verified:user.id===userId?action:false,
+       }
       })
       //update local UI
       this.setState({ users: cloneCurrentUserArray })
@@ -73,17 +75,17 @@ export class UserManagement extends React.Component {
             {this.state.users.length > 0 ? (
               this.state.users.map((user, index) => {
                 return (
-                  <p>
+                  <p key={user.username}>
                     <Row>
                       <Col>
-                        <Button variant="primary">{user.username}</Button>
+                        <Button variant='primary'>{user.username}</Button>
                       </Col>
                       <Col>
-                        <Button variant="success"> {user.verified.toString()}</Button>
+                        <Button variant='success'> {user.verified.toString()}</Button>
                       </Col>
                       <Col>
                         {/*sends userId and action value, action value is set !originalValue*/}
-                        <Button variant="danger" onClick={(e) => handlePermissionChange(user._id, !user.verified)}>
+                        <Button variant='danger' onClick={(e) => handlePermissionChange(user._id, !user.verified)}>
                           {/*to display boolean value */}
                           Set to {(!user.verified).toString()}
                         </Button>

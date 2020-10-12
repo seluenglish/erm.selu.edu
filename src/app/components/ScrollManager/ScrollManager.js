@@ -1,8 +1,8 @@
 import React from 'react'
 import requestAnimationFrame from 'raf'
-import {hot} from "react-hot-loader"
-import {connect} from 'react-redux'
-import {getSearchDocument} from "app/modules/search-document/search-document.selectors"
+import { hot } from 'react-hot-loader'
+import { connect } from 'react-redux'
+import { getSearchDocument } from 'app/modules/search-document/search-document.selectors'
 
 export const memoryStore = {
   _data: new Map(),
@@ -18,7 +18,7 @@ export const memoryStore = {
       return
     }
     return this._data.set(key, data)
-  }
+  },
 }
 
 /**

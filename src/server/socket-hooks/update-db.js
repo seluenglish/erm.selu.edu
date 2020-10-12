@@ -11,8 +11,8 @@ import { Document, Name, DateModel } from 'server/database/models'
 import path from 'path'
 import mongoose from 'mongoose'
 import _ from 'lodash'
-import {LOG_INFO, LOG_DEBUG, LOG_WARNING, LOG_ERROR, LOG_FATAL, LOG_LEVELS} from 'server/serverHelpers/logging'
-import {createValidator} from 'server/serverHelpers/xml-document-validator'
+import { LOG_INFO, LOG_DEBUG, LOG_ERROR } from 'server/serverHelpers/logging'
+import { createValidator } from 'server/serverHelpers/xml-document-validator'
 
 
 const ObjectId = mongoose.Types.ObjectId
@@ -108,7 +108,7 @@ export default async function updateDb(payload, client) {
         if (updateSearchDb) {
 
           if (data.dates.length) {
-            const thisDates = data.dates.map(x => new DateModel({_id: ObjectId(), ...x}))
+            const thisDates = data.dates.map(x => new DateModel({ _id: ObjectId(), ...x }))
             doc.dates = thisDates
 
             allDates = allDates.concat(thisDates)
@@ -120,7 +120,7 @@ export default async function updateDb(payload, client) {
           // document title is in itself a name
           namesInThisDoc.unshift({
             text: data.title,
-            type: 'docTitle'
+            type: 'docTitle',
           })
           namesInThisDoc.forEach(n => {
             let nameObj = allNames.find(x => {

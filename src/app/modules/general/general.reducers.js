@@ -1,4 +1,4 @@
-import { typeToReducer,} from 'app/utils'
+import { typeToReducer } from 'app/utils'
 import {
   SHOW_NAVBAR,
   HIDE_NAVBAR,

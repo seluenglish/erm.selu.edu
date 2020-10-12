@@ -116,9 +116,9 @@ export function getFileTypeSearchOptions() {
 }
 
 export function getNameTypeSearchOptions() {
-  if(!searchNameTypeOptions.length){
+  if (!searchNameTypeOptions.length) {
     NAME_TYPES.forEach(nameType => {
-      searchNameTypeOptions.push({value: nameType.type, label: firstLetterCapital(nameType.type)})
+      searchNameTypeOptions.push({ value: nameType.type, label: firstLetterCapital(nameType.type) })
     })
   }
 
@@ -126,13 +126,13 @@ export function getNameTypeSearchOptions() {
 }
 
 export function getNameSubTypeSearchOptions(nameType) {
-  if(!searchNameSubTypeOptions[nameType]) {
+  if (!searchNameSubTypeOptions[nameType]) {
 
     searchNameSubTypeOptions[nameType] = []
 
     const item = NAME_TYPES.find(x => x.type === nameType)
     item.subTypes.forEach(nameSubType => {
-      searchNameSubTypeOptions[nameType].push({value: nameSubType.type, label: firstLetterCapital(nameSubType.type)})
+      searchNameSubTypeOptions[nameType].push({ value: nameSubType.type, label: firstLetterCapital(nameSubType.type) })
     })
   }
 

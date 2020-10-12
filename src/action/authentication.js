@@ -1,4 +1,4 @@
-import {IS_AUTHENTICATED} from './types'
+import { IS_AUTHENTICATED } from './types'
 
 export const isAuthenticated=()=>{
   return (dispatch)=>{

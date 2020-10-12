@@ -7,7 +7,7 @@ import { isWitnessPath } from 'helpers/showcase-helper'
 export const apiGetDocument = (url) => {
   if (isWitnessPath(url)) {
 
-    return null;
+    return null
   }
   return {
     type: API_GET_PAGE,

@@ -1,6 +1,6 @@
-let mongoose =require('mongoose'),
-  userSchema = require('../schemas/user'),
-  passportLocalMongoose =require('passport-local-mongoose')
+import mongoose from 'mongoose'
+import UserSchema from 'server/database/schemas/user'
+import passportLocalMongoose from 'passport-local-mongoose'
 
-userSchema.plugin(passportLocalMongoose)
-module.exports = mongoose.model('userModel', userSchema,null, { cache: false })
+UserSchema.plugin(passportLocalMongoose)
+export default mongoose.model('userModel', UserSchema, null, { cache: false })
