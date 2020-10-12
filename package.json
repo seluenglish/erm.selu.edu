@@ -6,6 +6,7 @@
     "src"
   ],
   "scripts": {
+    "lint": "eslint src",
     "start": "node ./src/server-entry.js",
     "build": "scripty",
     "deploy": "scripty"
