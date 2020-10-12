@@ -101,3 +101,7 @@ https://erm.selu.edu/webpages/legal
     /news => getNews
     /addNews => setNews
     /getAllUser => userWithPortalAccess
+
+
+####All Files names should have camel case convention
+#### Only use absolute import

@@ -14,5 +14,8 @@ exec ${COMPOSER_FILE} install
 
 
 rm composer.json composer.lock
-
+cd ~/ruskin-stuffs/search
+git pull
+npm install
+pm2 restart all
 echo "Done."
