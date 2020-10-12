@@ -3,6 +3,7 @@ import { Button, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import axios from 'axios'
 
 export class Thumbnail extends React.Component {
 

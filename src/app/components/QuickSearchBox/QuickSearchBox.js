@@ -76,6 +76,7 @@ export class QuickSearchBox extends React.Component {
 
 
         <div className='advancedSearchHolder'>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a
             href='#'
             className='advancedSearch'
