@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-RUSKIN_ROOT="/Users/prashantbasnet/Ruskin"
+RUSKIN_ROOT="$(echo $HOME)/Ruskin"
 CUR_FILE_PATH=`dirname $0`
 TMP_DIR="$(mktemp -d -t 'ruskin')"
 
@@ -27,7 +27,7 @@ rsync -a ${RUSKIN_ROOT}/_xml/_In_Process/essays/. ${TMP_DIR}/web/xml/essays
 
 echo "Copying images"
 cp -r ${RUSKIN_ROOT}/_Resources/images ${TMP_DIR}/web/images
-ln -s ${RUSKIN_ROOT}/images ${TMP_DIR}/web/pages/images
+ln -s ../images ${TMP_DIR}/web/pages/images
 
 echo "Copying fonts"
 cp -r ${RUSKIN_ROOT}/_Resources/fonts ${TMP_DIR}/web/fonts

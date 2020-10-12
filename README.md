@@ -95,3 +95,9 @@ https://erm.selu.edu/webpages/legal
                          </body>
                      </text>
                  </TEI>
+
+###Route 
+
+    /news => getNews
+    /addNews => setNews
+    /getAllUser => userWithPortalAccess

@@ -23,12 +23,16 @@ export const nav = {
   drawings: 'Drawings',
   xml: 'XML',
   bibliography: 'Bibliography',
-  staffAndSupport: 'Staff',
-  legal: 'Legal',
+  staffAndSupport: 'Staff and Support',
+  legal: 'Conditions of Use',
   news: 'News',
   addNews: 'Post News',
   map: 'Maps',
-  cms:'Users'
+  cms:'Users',
+  about:'About',
+  plan_of_the_Archive:'Plan of the Archive',
+  editorial_and_Encoding_Rationale_and_Methodology:'Editorial and Encoding Rationale and Methodology'
+
 
 }
 
