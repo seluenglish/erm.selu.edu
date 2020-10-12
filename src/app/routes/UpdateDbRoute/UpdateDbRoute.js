@@ -1,6 +1,6 @@
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import DocumentMeta from 'react-helmet'
-import {hot} from 'react-hot-loader'
+import { hot } from 'react-hot-loader'
 import UpdateDbForm from 'app/components/UpdateDbForm/UpdateDbForm'
 import { request } from 'app/utils'
 import { startConnection, updateLoggerDivId } from 'app/modules/server-update-db/server-update-db.actions'

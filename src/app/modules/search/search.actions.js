@@ -47,7 +47,7 @@ export const apiSearch = (formData) => {
   ReactGA.event({
     category: 'search',
     action: API_SEARCH,
-    label: JSON.stringify(formData)
+    label: JSON.stringify(formData),
   })
 
   return {

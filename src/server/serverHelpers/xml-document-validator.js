@@ -1,4 +1,4 @@
-import {LOG_LEVELS, LOG_FATAL, LOG_ERROR, LOG_WARNING, LOG_INFO} from './logging'
+import { LOG_LEVELS, LOG_FATAL, LOG_ERROR, LOG_WARNING, LOG_INFO } from './logging'
 
 export const createValidator = (log) => {
   const validateDoc = (xmlData, doc) => {
@@ -25,7 +25,7 @@ export const createValidator = (log) => {
       return false
     }
 
-    if(doc.type === 'glosses' && !doc.subType) {
+    if (doc.type === 'glosses' && !doc.subType) {
       log([ LOG_WARNING, 'gloss does not specify type.' ])
 
     }

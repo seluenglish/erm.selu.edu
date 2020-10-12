@@ -1,7 +1,9 @@
-let NewsModel = require('../database/models/news')
-const sanitizer = require('sanitizer')
-let User = require('../database/models/user')
+import { NewsModel } from 'server/database/models/news'
+import { User } from 'server/database/models/user'
 import dotenv from 'dotenv'
+
+const sanitizer = require('sanitizer')
+
 dotenv.config()
 
 export async function getAllUsers(ctx) {
@@ -12,7 +14,7 @@ export async function getAllUsers(ctx) {
       let allUsers = await User.find()
       //returns all the user except super user
       ctx.body = await allUsers.filter((item) => {
-        if (item.username != process.env.responsiblePerson) {
+        if (item.username !== process.env.responsiblePerson) {
           return item
         }
       })

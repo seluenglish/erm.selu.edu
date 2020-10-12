@@ -1,8 +1,9 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import { Thumbnail } from '../NestingComponents/Cards/NewsThumbnail'
+import { Thumbnail } from 'app/components/NestingComponents/Cards/NewsThumbnail'
 
-import { isAuthenticated } from '../../../action/authentication'
+//import { Thumbnail } from '../NestingComponents/Cards/NewsThumbnail'
+
 
 export class News extends React.Component {
   constructor(props) {
@@ -20,7 +21,8 @@ export class News extends React.Component {
   }
   render() {
     const deleteSingleNews = (id) => {
-      let newsData = this.state.news.filter((item) => {
+      const { news } =this.state
+      let newsData = news.filter((item) => {
         if (item._id !== id) return item
       })
       this.setState({ news: newsData })
@@ -30,7 +32,9 @@ export class News extends React.Component {
         <Row>
           {this.state.news
             ? this.state.news.map((item, index) => (
-              <Col xs={12} md={6}>
+              <Col
+                xs={12} md={6}
+                key={item._id}>
                 {/*<button onClick={()=>deleteSingleNews(item._id)}>{item.title}</button>*/}
                 <Thumbnail
                   props={item}

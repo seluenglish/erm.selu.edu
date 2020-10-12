@@ -18,7 +18,7 @@ export const Document = mongoose.model('Document', {
   url: String,
   keywords: [ { type: String } ],
   names: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Name' } ],
-  dates: [ { type: mongoose.Schema.Types.ObjectId, ref:'DateModel' } ]
+  dates: [ { type: mongoose.Schema.Types.ObjectId, ref:'DateModel' } ],
 }, null, { cache: false })
 
 

@@ -7,6 +7,7 @@ import setDocument from 'server/middleware/set-document'
 import { deleteNews, editNews, getNews, setNews } from './api/newsPortal'
 import { registerUser, verifyEmail } from './api/auth'
 import { getAllUsers, setUserPermission } from './api/usersPortal'
+
 const log = debug('server-router')
 let User = require('./database/models/user')
 const passport = require('koa-passport')

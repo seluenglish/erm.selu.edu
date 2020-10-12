@@ -8,7 +8,7 @@ import {
   ADD_DB_UPDATE_MESSAGE,
   SHOW_HIDE_SEARCH_ITEM_ALL_MATCHES,
 } from './search.constants'
-import {pendingReducer, rejectedReducer} from 'app/utils/common-reducers'
+import { pendingReducer, rejectedReducer } from 'app/utils/common-reducers'
 import update from 'immutability-helper'
 import ReactGA from 'react-ga'
 

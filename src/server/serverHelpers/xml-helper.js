@@ -6,7 +6,7 @@ import cheerio from 'cheerio'
 import { getKeywordsForText } from 'helpers/keyword-helper'
 import { parseDate } from './date-helper'
 import moment from 'moment'
-import {cleanName} from './search'
+import { cleanName } from './search'
 
 const dateStringBeforeLength = 30
 const dateStringAfterLength = 30

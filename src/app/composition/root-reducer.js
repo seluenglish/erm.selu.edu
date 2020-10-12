@@ -5,17 +5,17 @@ import { searchDocumentReducers as searchDocument } from 'app/modules/search-doc
 import { serverUpdateDbReducers as serverUpdateDb } from 'app/modules/server-update-db/server-update-db.reducers'
 import { generalReducers as general } from 'app/modules/general/general.reducers'
 import { isBrowser } from 'app/utils'
-import {isAuth} from '../../reducer/authenticationReducer'
+import { isAuth } from '../../reducer/authenticationReducer'
 
 let reducer
-if(isBrowser)
+if (isBrowser)
   reducer = combineReducers({
     routing,
     search,
     serverUpdateDb,
     searchDocument,
     general,
-    isAuth
+    isAuth,
   })
 else
   reducer = combineReducers({

@@ -25,9 +25,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 app.use(compress())
 app.use(favicon(`${ASSETS}/favicon.ico`))

@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom'
 import { nav as navCopy } from 'app/copy'
 import QuickSearchBox from '../QuickSearchBox/QuickSearchBox'
 import headerIcon from 'assets/site_logo.png'
-import { withRouter} from 'react-router'
-import {hot} from 'react-hot-loader'
+import { withRouter } from 'react-router'
+import { hot } from 'react-hot-loader'
 import $ from 'jquery'
 import { connect } from 'react-redux'
 import * as R from 'ramda'
@@ -51,8 +51,7 @@ export class HeadNavigation extends React.Component {
         <nav className='navbar navbar-expand-md navbar-dark bg-dark fixed-top'>
           <NavLink
             to='/'
-            className='navbar-brand'
-          >
+            className='navbar-brand'>
             <img src={headerIcon} alt='Early Ruskin Manuscripts' />
           </NavLink>
 

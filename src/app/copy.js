@@ -31,7 +31,7 @@ export const nav = {
   cms:'Users',
   about:'About',
   plan_of_the_Archive:'Plan of the Archive',
-  editorial_and_Encoding_Rationale_and_Methodology:'Editorial and Encoding Rationale and Methodology'
+  editorial_and_Encoding_Rationale_and_Methodology:'Editorial and Encoding Rationale and Methodology',
 
 
 }

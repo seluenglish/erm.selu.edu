@@ -3,11 +3,6 @@ import { Button, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Modal from 'react-bootstrap/Modal'
-import { isAuthenticated } from '../../../../action/authentication'
-import {useDispatch} from 'react-redux'
-let axios = require('axios')
-
 
 export class Thumbnail extends React.Component {
 
@@ -16,26 +11,25 @@ export class Thumbnail extends React.Component {
 
     this.state={
       username:null,
-      isAuthenticated:false
+      isAuthenticated:false,
     }
   }
 
 
-
   componentDidMount() {
-    try{
+    try {
       fetch('/isLoggedIn').then((response => response.json())).then(result => {
-        if(result.verifiedEmail){
+        if (result.verifiedEmail) {
           this.setState({
-            username:result.session.passport.user
-          });
-          if(this.state.username){
-            this.setState({isAuthenticated:true})
+            username:result.session.passport.user,
+          })
+          if (this.state.username) {
+            this.setState({ isAuthenticated:true })
           }
           // console.log(this.state.isAuthenticated)
         }
       })
-    }catch (e) {
+    } catch (e) {
 
     }
   }
@@ -49,9 +43,9 @@ export class Thumbnail extends React.Component {
         //this will execute when post is deleted
         axios.delete(`/deleteNews/${this.props.props._id}`)
           .then(res => {
-            if(res.data.deletion){
+            if (res.data.deletion) {
               this.props.deleteItem(this.props.props._id)
-            }else{
+            } else {
               alert(res.data.message)
             }
           })
@@ -75,7 +69,7 @@ export class Thumbnail extends React.Component {
                 <Button variant='primary' >
                   <Link to={{ pathname: `/news/${this.props.props.title}`,
                     state:  this.props.props }}>
-                  Read More
+                    Read More
                   </Link>
                 </Button>
               </Col>
@@ -85,7 +79,7 @@ export class Thumbnail extends React.Component {
                   <Button variant='warning' >
                     <Link to={{ pathname: `/editPost/${this.props.props._id}`,
                       state:  this.props.props }}>
-                    Edit Post
+                      Edit Post
                     </Link>
                   </Button>
                 ):('')}
@@ -94,7 +88,7 @@ export class Thumbnail extends React.Component {
                 {/*this code executes only if the admin is in /edithNews route*/}
                 { this.state.isAuthenticated?(
                   <Button variant='danger' onClick={()=>decision()}>
-                  Delete
+                    Delete
                   </Button>
                 ):('')}
               </Col>

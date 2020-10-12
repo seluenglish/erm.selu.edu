@@ -77,7 +77,7 @@ export class QuickSearchBox extends React.Component {
 
         <div className='advancedSearchHolder'>
           <a
-            href=''
+            href='#'
             className='advancedSearch'
             onClick={this.handleAdvancedClick}>
             Advanced Search</a>

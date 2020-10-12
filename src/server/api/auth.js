@@ -1,11 +1,11 @@
-const passport = require('koa-passport')
+import { User } from 'server/database/models/user'
+import dotenv from 'dotenv'
 
-const User = require('../database/models/user'),
-  LocalStrategy = require('passport-local').Strategy,
+const passport = require('koa-passport')
+let LocalStrategy = require('passport-local').Strategy,
   jwt = require('jsonwebtoken'),
   nodeMailer = require('nodemailer')
 
-import dotenv from 'dotenv'
 
 export async function registerUser(ctx) {
   dotenv.config()

@@ -1,13 +1,13 @@
 import DocumentMeta from 'react-helmet'
-import {replace, push} from 'react-router-redux'
-import {browserHistory} from 'react-router'
-import {hot} from 'react-hot-loader'
-import {notFoundRoute} from 'app/copy'
-import {Redirect} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {getSearchDocument, getError, getIsPending} from 'app/modules/search-document/search-document.selectors'
-import {apiGetDocument} from 'app/modules/search-document/search-document.actions'
-import {SERVER_SHOWCASE_DIRECTORY} from 'config/constants'
+import { replace, push } from 'react-router-redux'
+import { browserHistory } from 'react-router'
+import { hot } from 'react-hot-loader'
+import { notFoundRoute } from 'app/copy'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getSearchDocument, getError, getIsPending } from 'app/modules/search-document/search-document.selectors'
+import { apiGetDocument } from 'app/modules/search-document/search-document.actions'
+import { SERVER_SHOWCASE_DIRECTORY } from 'config/constants'
 import cx from 'classnames'
 import * as R from 'ramda'
 import { isWitnessPath } from 'helpers/showcase-helper'
@@ -17,7 +17,7 @@ import { redirectShowcaseElem } from 'app/utils/showcase'
   searchDocument: getSearchDocument(state),
   error: getError(state),
   isPending: getIsPending(state),
-}), {push, apiGetDocument})
+}), { push, apiGetDocument })
 class SearchDocumentRoute extends React.Component {
   constructor(props) {
     super(props)
@@ -39,7 +39,7 @@ class SearchDocumentRoute extends React.Component {
 
   shouldComponentUpdate(nextProps) {
 
-    const {props} = this
+    const { props } = this
 
 
     // different data
@@ -51,7 +51,7 @@ class SearchDocumentRoute extends React.Component {
     const picker = R.pick([ 'pathname', 'search', 'state' ])
 
     // if location change is only hash change, return false
-    return !R.equals(picker(props.location), picker(nextProps.location));
+    return !R.equals(picker(props.location), picker(nextProps.location))
 
   }
 
@@ -104,7 +104,7 @@ class SearchDocumentRoute extends React.Component {
   }
 
   handleMainBodyLinkClick(e, targetThis) {
-    const {push} = this.props
+    const { push } = this.props
 
     e.preventDefault()
 
@@ -132,8 +132,8 @@ class SearchDocumentRoute extends React.Component {
   }
 
   async getDocument() {
-    const {pathname} = this.props.location
-    let {hash} = window.location
+    const { pathname } = this.props.location
+    let { hash } = window.location
 
     if (isWitnessPath(pathname)) {
       return redirectShowcaseElem(pathname, hash)
@@ -144,7 +144,7 @@ class SearchDocumentRoute extends React.Component {
 
   render() {
     const data = this.props.searchDocument
-    const {error, isPending} = this.props
+    const { error, isPending } = this.props
     const body = data ? data.body : null
     const title = data ? data.title : 'Loading...'
 
@@ -158,7 +158,8 @@ class SearchDocumentRoute extends React.Component {
         <div
           className='mainBody'
           ref={this.gotNewMainBodyRef.bind(this)}
-          dangerouslySetInnerHTML={body}/>
+          dangerouslySetInnerHTML={body}
+        />
 
 
       </section>

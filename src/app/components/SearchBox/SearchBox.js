@@ -75,7 +75,9 @@ const InnerForm = (form) => {
   }
 
   return (
-    <Form className='d-print-none' style={styles} onSubmit={handleSubmit}>
+    <Form
+      className='d-print-none' style={styles}
+      onSubmit={handleSubmit}>
       <fieldset>
         <legend>Advanced Search</legend>
         <div className='container-fluid'>
@@ -101,7 +103,7 @@ const InnerForm = (form) => {
                 />
                 &nbsp;Search full text of documents</label>
 
-              <div className={'error text-danger'} style={{visibility: (errorMsg || customErrorMessage) ? 'visible' : 'hidden' }}>
+              <div className={'error text-danger'} style={{ visibility: (errorMsg || customErrorMessage) ? 'visible' : 'hidden' }}>
                 {errorMsg && errorMsg.length > 0 && errorMsg}
                 {errorMsg && errorMsg.length > 0 && customErrorMessage && <br />}
                 {customErrorMessage && customErrorMessage}
@@ -139,8 +141,7 @@ const InnerForm = (form) => {
                   name='type'
                   id='type'
                   onChange={handleNameTypeChange}
-                  disabled={fullTextChecked}
-                >
+                  disabled={fullTextChecked}>
                   <option value='all'>All</option>
                   {nameTypeSearchOptions.map((option, i) => (
                     <option value={option.value} key={i}>{option.label}</option>
@@ -187,7 +188,7 @@ const InnerForm = (form) => {
   updateSearchParams,
 })
 export class SearchBox extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.validate = this.validate.bind(this)

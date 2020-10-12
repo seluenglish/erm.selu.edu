@@ -11,14 +11,14 @@ import ScrollUp from 'app/components/ScrollToTopExtension/ScrollToTopExtension'
 import scrollIcon from 'assets/up_arrow_round.png'
 import ScrollManagerWrapper from 'app/components/ScrollManager/ScrollManagerWrapper'
 import LoadingComponent from 'app/components/Loading/Loading'
-import {News} from '../News/News'
-import {NewsProfile} from '../NestingComponents/Cards/NewsProfile'
-import {PostNews} from '../NestingComponents/PostNews/PostNews'
-import { Authentication } from '../AuthenticationForm/authentication'
-import { UserManagement } from '../NestingComponents/UserManagement/UserManagement'
-import { Maps } from '../NestingComponents/Maps/Maps'
+import { News } from 'app/components/News/News'
+import { NewsProfile } from 'app/components/NestingComponents/Cards/NewsProfile'
+import { PostNews } from 'app/components/NestingComponents/PostNews/PostNews'
+import { Authentication } from 'app/components/AuthenticationForm/authentication'
+import { UserManagement } from 'app/components/NestingComponents/UserManagement/UserManagement'
+import { Maps } from 'app/components/NestingComponents/Maps/Maps'
 
-const log = debug('App.js')
+ const log = debug('App.js')
 
 const LoadingPage = ({ pastDelay }) => (
   pastDelay ? <div>{appCopy.loading}</div> : null
@@ -66,7 +66,7 @@ export default class App extends React.Component {
     super(props)
     this.state={
       isAuthenticated:false,
-      username:null
+      username:null,
     }
   }
   render() {
@@ -85,7 +85,7 @@ export default class App extends React.Component {
 
         <HeadNavigation />
         {/*<SideNavigation />*/}
-        <main className={style.content} style={{marginTop:'3%'}}>
+        <main className={style.content} style={{ marginTop:'3%' }}>
           <Switch>
             <Route
               exact

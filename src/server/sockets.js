@@ -30,7 +30,7 @@ export default function sockets(server) {
       ...action,
     })
 
-    applyIncomingSocketHooks(action, socket).then((res) => {
+    applyIncomingSocketHooks(action, socket).then(() => {
     }).catch((err) => {
       console.log('error', err)
     })
