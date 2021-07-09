@@ -14,7 +14,6 @@ export const nav = {
   private: `Private`,
   search: `Search`,
   indices: `Indices`,
-  bibliography: `Bibliography`,
   works: 'Works',
   manuscripts: 'Manuscripts',
   corpora: 'Corpora',

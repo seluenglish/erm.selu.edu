@@ -122,7 +122,7 @@ export class HeadNavigation extends React.Component {
                     to='/essays/indices_essay#DRAWINGS'
                     className='dropdown-item'
                     onClick={this.handleMenuClick}>{navCopy.drawings}</NavLink>
-                  <NavLink
+                    <NavLink
                     to='/essays/indices_essay#Bibliography'
                     className='dropdown-item'
                     onClick={this.handleMenuClick}>{navCopy.bibliography}</NavLink>
