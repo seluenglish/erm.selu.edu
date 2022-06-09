@@ -110,7 +110,7 @@
     "mongoose": "^5.4.16",
     "node-env-file": "~0.1.8",
     "node-prune": "^1.0.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "nodemailer": "^6.4.8",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
