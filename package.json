@@ -106,7 +106,7 @@
     "lodash": "^4.17.11",
     "mini-css-extract-plugin": "^0.4.0",
     "moment": "^2.22.2",
-    "moment-timezone": "^0.5.23",
+    "moment-timezone": "^0.5.35",
     "mongoose": "^5.4.16",
     "node-env-file": "~0.1.8",
     "node-prune": "^1.0.2",
